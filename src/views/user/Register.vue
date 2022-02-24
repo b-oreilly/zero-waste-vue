@@ -5,7 +5,16 @@
                 <v-card flat>
                     <h1>Signup</h1>
                     <v-form ref="form" v-model="valid" lazy-validation>
-                        <v-text-field v-model="form.name" :counter="25" :rules="nameRules" label="Name" required>
+                        <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules" label="First Name"
+                            required>
+                        </v-text-field>
+
+                        <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules" label="Last Name"
+                            required>
+                        </v-text-field>
+
+                        <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username"
+                            required>
                         </v-text-field>
 
                         <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required></v-text-field>
@@ -41,14 +50,20 @@
         name: "Home",
         data: () => ({
             form: {
-                name: "",
+                first_name: "",
+                last_name: "",
+                username: "",
                 email: "",
                 password: "",
             },
             valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
-                v => (v && v.length >= 4) || 'Name must be at least 4 characters',
+                v => (v && v.length >= 3) || 'Name must be at least 3 characters',
+            ],
+            userNameRules: [
+                v => !!v || 'Username is required',
+                v => (v && v.length >= 5) || 'Username must be at least 5 characters',
             ],
             emailRules: [
                 v => !!v || 'Email required',

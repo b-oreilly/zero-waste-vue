@@ -16,6 +16,7 @@ const routes = [{
     // which is lazy-loaded when the route is visited.
     component: () => import( /* webpackChunkName: "about" */ '@/views/AboutView.vue')
   },
+  // User routes
   {
     path: "/login",
     name: "login",
@@ -25,6 +26,11 @@ const routes = [{
     path: "/register",
     name: "register",
     component: () => import("@/views/user/Register")
+  },
+  {
+    path: "/account",
+    name: "account",
+    component: () => import("@/views/user/Account")
   },
   // Items
   {
@@ -37,7 +43,11 @@ const routes = [{
     name: "viewSingleItem",
     component: () => import('./views/items/ViewSingleItem.vue')
   },
-
+  {
+    path: "/items/add",
+    name: "addItem",
+    component: () => import('./views/items/AddItem.vue')
+  },
 
 ]
 

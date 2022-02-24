@@ -114,16 +114,17 @@
   router-link,
   toolbar-title,
   a {
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
-    font-weight: 400 !important;
+    /* font-weight: 400 !important; */
     color: #000 !important;
     text-transform: uppercase;
-    
+
   }
 
   v-btn {
     text-transform: none;
-    
+
   }
 
   .v-btn:before,

@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div v-else>
-                        <!-- <h2>Welcome, {{ response.data.name }}.</h2> -->
+                        <!-- <h2>Welcome, {{ user.first_name[0] }}.</h2> -->
                         <h2>You are logged in.</h2>
                     </div>
                 </v-card>

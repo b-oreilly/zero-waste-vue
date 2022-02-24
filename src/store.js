@@ -9,7 +9,6 @@ export default new Vuex.Store({
   state: {
     loggedIn: false
   },
-  getters: {},
   mutations: {
     SET_USER_STATUS(state, loggedIn) {
       state.loggedIn = loggedIn
@@ -30,7 +29,7 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
           console.log(error.response.data)
-          router.push('/login');
+          router.push('/home');
         })
     },
     logout(context) {
@@ -55,7 +54,24 @@ export default new Vuex.Store({
           console.log(error.response.data.message)
           router.push('/register').catch(() => {});
         })
+    },
+    addItem() {
+      axios
+        .post(`/items`, {
+          title: this.form.name,
+          description: this.form.description,
+          category: this.form.category,
+          price: this.form.price
+        })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+          console.log(error.response.data.message)
+          router.push('/items').catch(() => {});
+        })
     }
   },
-  modules: {}
+  getters: {}
 })
