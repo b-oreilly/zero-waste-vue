@@ -13,6 +13,12 @@ a {
 
 /* Login/Register */
 
+
+.v-messages__message{
+    color: #F71735;
+}
+
+
 .nav {
     height: 100% !important;
     width: 100%;

@@ -41,12 +41,15 @@ export default new Vuex.Store({
     register(context, credentials) {
       axios
         .post(`/register`, {
-          name: credentials.name,
+          first_name: credentials.first_name,
+          last_name: credentials.last_name,
           email: credentials.email,
+          username: credentials.username,
           password: credentials.password
         })
         .then(response => {
           console.log(response.token)
+          console.log(response.data)
           localStorage.setItem('token', response.data.token)
           context.commit('SET_USER_STATUS', true)
         })
