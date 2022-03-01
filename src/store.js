@@ -23,13 +23,14 @@ export default new Vuex.Store({
         })
         .then(response => {
           console.log(response.data)
+          this.user = response.data
           localStorage.setItem('token', response.data.token)
           context.commit('SET_USER_STATUS', true)
         })
         .catch(error => {
           console.log(error)
           console.log(error.response.data)
-          router.push('/home');
+          // router.push('/login');
         })
     },
     logout(context) {

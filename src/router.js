@@ -28,7 +28,7 @@ const routes = [{
     component: () => import("@/views/user/Register")
   },
   {
-    path: "/account",
+    path: "/account/:id",
     name: "account",
     component: () => import("@/views/user/Account")
   },
@@ -48,6 +48,17 @@ const routes = [{
     name: "addItem",
     component: () => import('./views/items/AddItem.vue')
   },
+  {
+    path: "/items/add",
+    name: "addItem",
+    component: () => import('./views/items/AddItem.vue')
+  },
+  // 404
+  {
+    path: "*",
+    name: "notFound",
+    component: () => import('./views/PageNotFound.vue')
+  }
 
 ]
 

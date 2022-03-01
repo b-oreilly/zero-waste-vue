@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div v-else>
-                        <!-- <h2>Welcome, {{ user.first_name[0] }}.</h2> -->
+                        <!-- <h2>Welcome, {{ user.first_name }}.</h2> -->
                         <h2>You are logged in.</h2>
                     </div>
                 </v-card>
@@ -45,6 +45,7 @@
         },
         data() {
             return {
+                user: [],
                 form: {
                     email: "admin@zero-waste.com",
                     password: "secret",
@@ -69,7 +70,7 @@
             },
             reset() {
                 this.$refs.form.reset()
-            },
+            }
             // userDetails() {
             //     let token = localStorage.getItem('token');
 

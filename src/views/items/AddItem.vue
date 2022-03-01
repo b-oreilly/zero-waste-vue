@@ -28,10 +28,6 @@
                         </v-btn>
 
                     </v-form>
-                    <br>
-                    <h3>Already have an account?<br>
-                        <router-link to="login">Login</router-link>
-                    </h3>
                 </v-card>
             </template>
         </v-col>

@@ -8,11 +8,11 @@
       </router-link>
       <v-spacer />
       <!-- mobile menu button -->
-      <span class="hidden-sm-and-up">
+      <!-- <span class="hidden-sm-and-up">
         <v-btn text @click.stop="drawer = !drawer">
           <v-icon>mdi-menu</v-icon>
         </v-btn>
-      </span>
+      </span> -->
       <!-- desktop & tablet menu -->
       <v-toolbar-items class="hidden-xs-only">
         <div v-if="$store.state.loggedIn" class="nav">
@@ -31,10 +31,10 @@
         </div>
         <v-btn v-if="$store.state.loggedIn" depressed rounded id="logout" @click="logout()">Logout</v-btn>
       </v-toolbar-items>
-
-      <!-- mobile menu -->
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" absolute temporary right>
+
+    <!-- mobile menu -->
+    <!-- <v-navigation-drawer v-model="drawer" absolute temporary right>
       <v-list>
         <v-list-item v-if="!$store.state.loggedIn" to="/">
           <v-icon>mdi-home</v-icon>&nbsp;
@@ -68,7 +68,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
   </div>
 </template>
 
@@ -110,29 +110,9 @@
 </script>
 
 
-<style scoped>
-  router-link,
-  toolbar-title,
-  a {
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-    /* font-weight: 400 !important; */
-    color: #000 !important;
-    text-transform: uppercase;
+<style>
 
-  }
-
-  v-btn {
-    text-transform: none;
-
-  }
-
-  .v-btn:before,
-  .v-btn:active {
-    font-weight: bold !important;
-    /* background-color: currentColor; */
-  }
-
+/* 
   #login {
     background-color: #fff;
     font-size: 12px;
@@ -152,7 +132,7 @@
   }
 
   #logout {
-    background-color: #004FFF;
+    background-color: #153AB0;
     color: #fff !important;
     border-radius: 25px;
     height: 45px !important;
@@ -198,5 +178,5 @@
     width: 100%;
     margin-top: 15px;
     margin-right: 10px;
-  }
+  } */
 </style>

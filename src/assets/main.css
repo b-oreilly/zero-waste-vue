@@ -1,6 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@600&family=Roboto:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@600&family=Roboto+Mono&family=Roboto:wght@300;400;700;900&display=swap');
+
+router-link,
+toolbar-title,
+a {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    /* font-weight: 400 !important; */
+    color: #000 !important;
+    text-transform: uppercase;
+
+}
 
 /* Login/Register */
+
+.nav {
+    height: 100% !important;
+    width: 100%;
+    margin-top: 15px;
+    margin-right: 10px;
+}
 
 .edit {
     background-color: rgb(107, 107, 107);
@@ -16,14 +34,30 @@
     color: #fff !important;
 }
 
-.login {
-    background-color: #004FFF;
+  #login {
+      background-color: #fff;
+      font-size: 12px;
+      border-radius: 25px;
+      height: 45px !important;
+      margin-top: 10px;
+      margin-right: 10px;
+      margin-left: 10px;
+  }
+
+#signup {
+    background-color: #20E25F;
     color: #fff !important;
+    border-radius: 25px;
+    height: 45px !important;
+    margin-top: 10px;
 }
 
-.signup {
-    background-color: #EB6F99;
+#logout {
+    background-color: #153AB0;
     color: #fff !important;
+    border-radius: 25px;
+    height: 45px !important;
+    margin-top: 10px;
 }
 
 .delete {
@@ -48,6 +82,50 @@
     .reset {
         width: 100%;
     }
+}
+
+#login-sm {
+    background-color: #fff;
+    border-radius: 25px;
+    height: 45px !important;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#signup-sm {
+    background-color: #EB6F99;
+    color: #fff !important;
+    border-radius: 25px;
+    height: 45px !important;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#logout-sm {
+    background-color: #153AB0;
+    color: #fff !important;
+    border-radius: 25px;
+    height: 45px !important;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+v-btn {
+    text-transform: none;
+}
+
+.v-btn:before,
+.v-btn:active {
+    font-weight: bold !important;
+    /* background-color: currentColor; */
 }
 
 /* Item */
