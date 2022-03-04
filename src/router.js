@@ -48,19 +48,25 @@ const routes = [{
     name: "addItem",
     component: () => import('./views/items/AddItem.vue')
   },
+  // {
+  //   path: "/items/add",
+  //   name: "addItem",
+  //   component: () => import('./views/items/AddItem.vue')
+  // },
+
+  // 404 Page not found
   {
-    path: "/items/add",
-    name: "addItem",
-    component: () => import('./views/items/AddItem.vue')
-  },
-  // 404
-  {
-    path: "*",
-    name: "notFound",
+    path: '*',
+    beforeEnter: (to, from, next) => {
+      next('/404')
+    }
+  }, {
+    path: '/404',
+    name: '404',
     component: () => import('./views/PageNotFound.vue')
   }
-
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

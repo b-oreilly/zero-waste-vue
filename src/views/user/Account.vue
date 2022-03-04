@@ -22,23 +22,14 @@
 
     export default {
         name: 'userAccount',
-        users: {},
         data() {
             return {
-            //     headings: [{
-            //             key: 'title',
-            //             sortable: true
-            //         },
-            //         {
-            //             key: 'description'
-            //         },
-                // ],
                 user: {},
                 users: []
             }
         },
         mounted() {
-            axios.get('/users')
+            axios.get('/users/:id')
                 .then(response => {
                     this.users = response.data
                     console.log(response.data)

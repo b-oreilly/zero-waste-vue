@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <Navbar />
     <router-view />
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -38,16 +38,16 @@
     color: #252525;
   }
 
-  nav {
-    padding: 30px;
+  // nav {
+  //   padding: 30px;
 
-    a {
-      font-weight: bold;
-      color: #2c3e50;
+  //   a {
+  //     font-weight: bold;
+  //     color: #2c3e50;
 
-      &.router-link-exact-active {
-        color: #42b983;
-      }
-    }
-  }
+  //     &.router-link-exact-active {
+  //       color: #42b983;
+  //     }
+  //   }
+  // }
 </style>

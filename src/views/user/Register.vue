@@ -89,7 +89,9 @@
                 this.$refs.form.reset()
             },
             register() {
-                this.$store.dispatch('register', this.form)
+                if (this.$refs.form.validate()) {
+                    this.$store.dispatch('register', this.form)
+                }
             }
         }
     };
@@ -98,7 +100,7 @@
 <style scoped>
     a {
         text-decoration: none;
-        color: #004FFF !important;
+        color: #153AB0 !important;
         font-weight: bold;
     }
 </style>

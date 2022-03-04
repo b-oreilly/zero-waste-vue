@@ -3,8 +3,8 @@
         <div>
             <br>
             <h1>Items</h1><br>
-            <v-btn rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
-
+            <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
+            <br>
             <!-- <b-table responsive variant="dark" striped hover :items="items" :fields="headings">
                 <template #cell(name)="data">
                     {{ data.value.title }}]
@@ -69,5 +69,4 @@
         text-decoration: none;
         color: black;
     }
-    
 </style>

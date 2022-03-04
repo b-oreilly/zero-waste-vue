@@ -6,10 +6,12 @@
                     <div v-if="!$store.state.loggedIn">
                         <h1>Login</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
-                            <v-text-field class="input" v-model="form.email" label="Email" :rules="emailRules" required>
+                            <v-text-field class="input" v-model="form.email" label="Email" :rules="emailRules"
+                                :error-messages="emailError" required>
                             </v-text-field>
                             <v-text-field type="password" v-model="form.password" :counter="40" label="Password"
-                                autocomplete="on" :rules="passwordRules" required></v-text-field>
+                                autocomplete="on" :rules="passwordRules" :error-messages="passwordError" required>
+                            </v-text-field>
                             <v-btn rounded text :disabled="!valid" class="mr-4 login" @click="login()">
                                 Log in
                             </v-btn>
@@ -66,7 +68,9 @@
         },
         methods: {
             login() {
-                this.$store.dispatch('login', this.form)
+                if (this.$refs.form.validate()) {
+                    this.$store.dispatch('login', this.form)
+                }
             },
             reset() {
                 this.$refs.form.reset()
@@ -91,7 +95,7 @@
 <style scoped>
     a {
         text-decoration: none;
-        color: #EB6F99 !important;
+        color: #20E25F !important;
         font-weight: bold;
     }
 </style>

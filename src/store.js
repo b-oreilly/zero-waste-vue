@@ -30,6 +30,12 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
           console.log(error.response.data)
+          if (error.response.status == 401) {
+            this.passwordError = 'Invalid password is'
+          }
+          if (error.response.status == 404) {
+            this.usernameError = 'User not found'
+          }
           // router.push('/login');
         })
     },
@@ -65,6 +71,7 @@ export default new Vuex.Store({
           title: this.form.name,
           description: this.form.description,
           category: this.form.category,
+          quality: this.form.quality,
           price: this.form.price
         })
         .then(response => {
