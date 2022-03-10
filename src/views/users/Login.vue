@@ -2,16 +2,24 @@
     <v-container>
         <v-col>
             <template>
-                <v-card flat>
+                <v-card flat class="pt-2 pb-2">
                     <div v-if="!$store.state.loggedIn">
                         <h1>Login</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-text-field class="input" v-model="form.email" label="Email" :rules="emailRules"
                                 :error-messages="emailError" required>
                             </v-text-field>
-                            <v-text-field type="password" v-model="form.password" :counter="40" label="Password"
-                                autocomplete="on" :rules="passwordRules" :error-messages="passwordError" required>
+                            <v-text-field :type="showPassword ? 'text' : 'password'" v-model="form.password"
+                                :counter="40" label="Password" autocomplete="on" :rules="passwordRules" required
+                                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                @click:append="showPassword = !showPassword">
                             </v-text-field>
+                            <div v-if="this.passwordError">
+                                <!-- <div v-if="error" class="alert alert-danger" role="alert">
+                                    {{error}}
+                                </div> -->
+                                <p variant="warning">You have entered an invalid username or password.</p>
+                            </div>
                             <v-btn rounded text :disabled="!valid" class="mr-4 login" @click="login()">
                                 Log in
                             </v-btn>
@@ -47,6 +55,7 @@
         },
         data() {
             return {
+                error: [],
                 user: [],
                 form: {
                     email: "admin@zero-waste.com",
@@ -60,7 +69,9 @@
                 passwordRules: [
                     v => !!v || 'Password required',
                     v => (v && v.length >= 6) || 'Password must be at least 6 characters'
-                ]
+                ],
+                showPassword: false,
+                passwordError: false
             }
         },
         computed: {
@@ -70,6 +81,9 @@
             login() {
                 if (this.$refs.form.validate()) {
                     this.$store.dispatch('login', this.form)
+                }
+                if (error.response.status == 401) {
+                    this.passwordError = true
                 }
             },
             reset() {

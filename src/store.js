@@ -31,12 +31,9 @@ export default new Vuex.Store({
           console.log(error)
           console.log(error.response.data)
           if (error.response.status == 401) {
-            this.passwordError = 'Invalid password is'
+            this.passwordError = 'Incorrect email/password.'
+            // alert('Incorrect email/password.')
           }
-          if (error.response.status == 404) {
-            this.usernameError = 'User not found'
-          }
-          // router.push('/login');
         })
     },
     logout(context) {

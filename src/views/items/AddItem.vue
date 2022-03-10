@@ -25,6 +25,9 @@
                             <v-text-field v-model="form.price" :rules="priceRules" label="Price" required>
                             </v-text-field>
 
+                            <v-file-input v-model="form.price" :rules="photoRules" multiple label="Item photo(s)">
+                            </v-file-input>
+
                             <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
                                 Add
                             </v-btn>
@@ -71,15 +74,20 @@
             priceRules: [
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
+            ],
+            photoRules: [
+                v => !!v || 'Item photo is required'
             ]
         }),
         methods: {
             reset() {
                 this.$refs.form.reset()
-            },
-            addItem() {
-                this.$store.dispatch('addItem', this.form)
             }
+            // addItem() {
+            //     if (this.$refs.form.validate()) {
+            //         this.$store.dispatch('addItem', this.form)
+            //     }
+            //}
         }
     };
 </script>

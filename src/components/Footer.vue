@@ -15,5 +15,7 @@
 <style>
   v-footer {
     display: inline-block;
+    position: relative;
+    padding-top: 100px !important;
   }
 </style>

@@ -20,17 +20,27 @@ const routes = [{
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/user/Login")
+    component: () => import("@/views/users/Login")
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("@/views/user/Register")
+    component: () => import("@/views/users/Register")
   },
   {
     path: "/account/:id",
-    name: "account",
-    component: () => import("@/views/user/Account")
+    name: "UserDashboard",
+    component: () => import('./views/users/UserDashboard.vue')
+  },
+  {
+    path: "/account/edit",
+    name: "editAccount",
+    component: () => import("@/views/users/EditAccount")
+  },
+  {
+    path: "/user/:id",
+    name: "viewUser",
+    component: () => import('./views/users/ViewUser.vue')
   },
   // Items
   {
@@ -48,11 +58,27 @@ const routes = [{
     name: "addItem",
     component: () => import('./views/items/AddItem.vue')
   },
-  // {
-  //   path: "/items/add",
-  //   name: "addItem",
-  //   component: () => import('./views/items/AddItem.vue')
-  // },
+  {
+    path: "/items/edit",
+    name: "editItem",
+    component: () => import('./views/items/EditItem.vue')
+  },
+
+  // Categories
+
+  {
+    path: "/items/category/:id",
+    name: "viewCategory",
+    component: () => import('./views/categories/ViewCategory.vue')
+  },
+
+  // Qualities
+
+  {
+    path: "/items/quality/:id",
+    name: "viewQuality",
+    component: () => import('./views/qualities/ViewQuality.vue')
+  },
 
   // 404 Page not found
   {

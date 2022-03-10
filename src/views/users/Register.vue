@@ -6,13 +6,18 @@
                     <div v-if="!$store.state.loggedIn">
                         <h1>Signup</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
-                            <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules" label="First Name"
-                                required>
-                            </v-text-field>
-
-                            <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules" label="Last Name"
-                                required>
-                            </v-text-field>
+                            <v-row>
+                                <v-col>
+                                <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules"
+                                    label="First Name" required>
+                                </v-text-field>
+                                </v-col>
+                                <v-col>
+                                <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules"
+                                    label="Last Name" required>
+                                </v-text-field>
+                                </v-col>
+                            </v-row>
 
                             <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username"
                                 required>
@@ -41,6 +46,9 @@
                     <div v-else>
                         <!-- <h2>Welcome, {{ user.first_name }}.</h2> -->
                         <h2>You have registered sucessfully!</h2>
+                        <h3>
+                        <!-- <router-link to="account/:_id">View your account</router-link> -->
+                        </h3>
                     </div>
                 </v-card>
             </template>

@@ -130,7 +130,7 @@ v-btn {
     border: #000;
 }
 
-.itemTitle,
-.itemBody {
+.item-title,
+.item-body {
     text-transform: capitalize;
 }

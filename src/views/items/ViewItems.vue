@@ -1,33 +1,29 @@
 <template>
     <v-container>
-        <div>
+        <div class="card-group">
             <br>
             <h1>Items</h1><br>
-            <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
-            <br>
-            <!-- <b-table responsive variant="dark" striped hover :items="items" :fields="headings">
-                <template #cell(name)="data">
-                    {{ data.value.title }}]
-                </template>
-                <template #cell(capital)="data">
-                    {{ data.value.description }}
-                </template>
-            </b-table> -->
-            <v-row>
-                <v-card flat bg-variant="dark" v-for="item in items" :key="item._id">
-                    <!-- :img-src="gif.images.fixed_width.url" :img-alt="gif.title" -->
-                    <v-card-title>
-                        <router-link class="itemTitle" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                            {{ item.title }}
-                        </router-link>
-                        <!-- {{ item.title }} -->
-                    </v-card-title>
-                    <v-card-text v-if="item.categoryID.name">
-                        <!-- <router-link :to="{ name: 'viewCategory', params: { id:categoryID._id }}"> -->
-                        {{ item.categoryID.name }}
-                        <!-- </router-link> -->
-                    </v-card-text>
-                </v-card>
+            <!-- <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br> -->
+            <v-row no-gutters>
+                <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                    <v-card class="pt-3 ma-2" flat>
+                        <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                        <v-else>
+                            <v-img src="https://picsum.photos/400/300?random" />
+                        </v-else>
+                        <v-card-title style="word-break: break-word">
+                            <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                                {{ item.title }}
+                            </router-link>
+                            <!-- {{ item.title }} -->
+                        </v-card-title>
+                        <v-card-text v-if="item.categoryID.name">
+                            <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
+                                <p> {{ item.categoryID.name }} </p>
+                            </router-link>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
             </v-row>
         </div>
     </v-container>
@@ -41,14 +37,6 @@
         components: {},
         data() {
             return {
-                headings: [{
-                        key: 'title',
-                        sortable: true
-                    },
-                    {
-                        key: 'description'
-                    },
-                ],
                 item: {},
                 items: []
             }
@@ -68,5 +56,13 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    p {
+        text-align: left;
+    }
+
+    .card-group {
+        padding-bottom: 50px;
     }
 </style>
