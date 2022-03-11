@@ -1,59 +1,72 @@
 <template>
-    <v-app>
-        <v-container>
-            <v-col>
-                <template>
-                    <v-card flat>
-                        <h1>List your Item</h1>
-                        <v-form ref="form" v-model="valid" lazy-validation>
-                            <v-text-field v-model="form.title" :counter="25" :rules="titleRules" label="Item title"
-                                required>
-                            </v-text-field>
+    <v-container>
+        <v-col>
+            <v-row no-gutters>
+                <v-col cols=2>
+                    <div class="d-flex justify-start">
+                        <GoBack />
+                    </div>
+                </v-col>
+                <div class="d-flex justify-center col">
+                    <h1>List your Item</h1>
+                </div>
+                <v-col cols=2>
+                </v-col>
+            </v-row>
+            <v-card flat>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                    <v-text-field v-model="form.title" :counter="25" :rules="titleRules" label="Item title" required>
+                    </v-text-field>
 
-                            <v-text-field v-model="form.description" :counter="250" :rules="descriptionRules"
-                                label="Item Description" required>
-                            </v-text-field>
+                    <v-text-field v-model="form.description" :counter="250" :rules="descriptionRules"
+                        label="Item Description" required>
+                    </v-text-field>
 
-                            <v-text-field v-model="form.category" :counter="25" :rules="categoryRules" label="Category"
-                                required>
-                            </v-text-field>
+                    <v-select v-model="form.category" :category="categories" label="Category" :rules="categoryRules"
+                        required>
+                    </v-select>
 
-                            <v-text-field v-model="form.quality" :counter="25" :rules="qualityRules" label="Quality"
-                                required>
-                            </v-text-field>
+                    <v-select v-model="form.quality" :quality="qualities" label="Quality" :rules="qualityRules"
+                        required>
+                    </v-select>
 
-                            <v-text-field v-model="form.price" :rules="priceRules" label="Price" required>
-                            </v-text-field>
+                    <v-text-field v-model="form.price" :rules="priceRules" label="Price" required>
+                    </v-text-field>
 
-                            <v-file-input v-model="form.price" :rules="photoRules" multiple label="Item photo(s)">
-                            </v-file-input>
+                    <v-file-input v-model="form.price" :rules="photoRules" multiple label="Item photo(s)">
+                    </v-file-input>
 
-                            <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
+                    <!-- <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
                                 Add
-                            </v-btn>
+                            </v-btn> -->
 
-                            <v-btn rounded text class="mr-4 reset" @click="reset">
-                                Reset Form
-                            </v-btn>
-
-                        </v-form>
-                    </v-card>
-                </template>
-            </v-col>
-        </v-container>
-    </v-app>
+                    <v-btn rounded text class="mr-4 reset" @click="reset">
+                        Reset Form
+                    </v-btn>
+                </v-form>
+            </v-card>
+        </v-col>
+    </v-container>
 </template>
 
 <script>
+    import GoBack from '@/components/GoBack'
+
     export default {
         name: "addItem",
+        components: {
+            GoBack
+        },
         data: () => ({
             form: {
                 title: "",
                 description: "",
                 category: "",
+                quality: "",
                 price: ""
             },
+            categories: ["Food", "Clothes", "Funriture", "Electronics", "Tools", "Toys"],
+            qualities: ["Brand new", "Like new", "Lightly used", "Used", "Heavily used"],
             valid: true,
             titleRules: [
                 v => !!v || 'Title is required',

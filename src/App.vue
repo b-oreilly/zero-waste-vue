@@ -46,8 +46,8 @@
       color: #252525;
       text-decoration: none;
 
-      &.router-link-exact-active {
-        color: #42b983;
-      }
+      // &.router-link-exact-active {
+      //   color: #42b983;
+      // }
     }
 </style>

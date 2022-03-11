@@ -1,47 +1,51 @@
 <template>
     <v-container>
-        <v-col>
-            <v-row no-gutters>
-                <v-col cols=2>
-                    <div class="d-flex justify-start">
-                        <GoBack />
+        <div class="card-group">
+
+            <v-col>
+                <v-row no-gutters>
+                    <v-col cols=2>
+                        <div class="d-flex justify-start">
+                            <GoBack />
+                        </div>
+                    </v-col>
+                    <div class="d-flex justify-center col">
+                        <h2 class="mainItemTitle">{{ category.name }}</h2>
                     </div>
-                </v-col>
-                <div class="d-flex justify-center col">
-                    <h2 class="mainItemTitle">{{ category.name }}</h2>
-                </div>
-                <v-col cols=2>
-                </v-col>
-            </v-row>
-            <br>
-            <!-- <v-row no-gutters>
-                <v-col v-for="n in 3" :key="n" cols="12" sm="4">
-                    <v-card class="pa-2" outlined tile>
-                        One of three columns
-                    </v-card>
-                </v-col>
-            </v-row> -->
-            <v-row>
-                <v-card flat class="overflow-hidden pa-6" style="max-width: 1080px;">
-                    <div class="itemBody">
-
-                        <v-col>
-                            <!--  -->
-
-
-                    
-                        </v-col>
-
-
-                        <!-- <v-row>
+                    <v-col cols=2>
+                    </v-col>
+                </v-row>
+                <br>
+                <v-row no-gutters>
+                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                        <v-card class="pt-3 ma-2" flat>
+                            <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                            <v-else>
+                                <v-img src="https://picsum.photos/400/300?random" />
+                            </v-else>
+                            <v-card-title style="word-break: break-word">
+                                <router-link class="item-title"
+                                    :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                                    {{ item.title }}
+                                </router-link>
+                                <!-- {{ item.title }} -->
+                            </v-card-title>
+                            <v-card-text v-if="item.categoryID.name">
+                                <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
+                                    <p> {{ item.categoryID.name }} </p>
+                                </router-link>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
+                <!-- <v-row>
                     <v-btn text rounded :to="{ name: 'editItem', params: { id: this.$route.params.id}}"
                         variant="warning">Edit</v-btn>
                     <v-btn text rounded class="delete" @click="deleteData()">Delete</v-btn>
                 </v-row> -->
-                    </div>
-                </v-card>
-            </v-row>
-        </v-col>
+
+            </v-col>
+        </div>
     </v-container>
 </template>
 
@@ -50,20 +54,31 @@
     import GoBack from '@/components/GoBack'
 
     export default {
-        name: "viewSingleItem",
+        name: "ViewCategory",
         components: {
             GoBack
         },
         data() {
             return {
-                category: {}
+                items: [],
+                item: {},
+                category: []
             }
         },
         mounted() {
-            this.getData();
+            this.getItemCategory();
+            this.getCategory();
         },
         methods: {
-            getData() {
+            getItemCategory() {
+                axios.get(`/items/category/${this.$route.params.id}`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.items = response.data
+                    })
+                    .catch(error => console.log(error))
+            },
+            getCategory() {
                 axios.get(`/categories/${this.$route.params.id}`)
                     .then(response => {
                         console.log(response.data)
@@ -96,5 +111,9 @@
 
     .mainItemTitle {
         vertical-align: middle;
+    }
+
+    .card-group {
+        padding-bottom: 50px;
     }
 </style>

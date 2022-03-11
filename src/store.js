@@ -25,14 +25,16 @@ export default new Vuex.Store({
           console.log(response.data)
           this.user = response.data
           localStorage.setItem('token', response.data.token)
+          // sessionStorage.setItem('userDetails', response)
           context.commit('SET_USER_STATUS', true)
+          // router.push('/account');
         })
         .catch(error => {
           console.log(error)
           console.log(error.response.data)
           if (error.response.status == 401) {
             this.passwordError = 'Incorrect email/password.'
-            // alert('Incorrect email/password.')
+            alert('Incorrect email/password.')
           }
         })
     },
@@ -62,24 +64,24 @@ export default new Vuex.Store({
           router.push('/register').catch(() => {});
         })
     },
-    addItem() {
-      axios
-        .post(`/items`, {
-          title: this.form.name,
-          description: this.form.description,
-          category: this.form.category,
-          quality: this.form.quality,
-          price: this.form.price
-        })
-        .then(response => {
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error)
-          console.log(error.response.data.message)
-          router.push('/items').catch(() => {});
-        })
-    }
+    // addItem() {
+    //   axios
+    //     .post(`/items`, {
+    //       title: this.form.name,
+    //       description: this.form.description,
+    //       category: this.form.category,
+    //       quality: this.form.quality,
+    //       price: this.form.price
+    //     })
+    //     .then(response => {
+    //       console.log(response.data)
+    //     })
+    //     .catch(error => {
+    //       console.log(error)
+    //       console.log(error.response.data.message)
+    //       router.push('/items').catch(() => {});
+    //     })
+    // }
   },
   getters: {}
 })

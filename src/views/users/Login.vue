@@ -33,7 +33,7 @@
                         </h3>
                     </div>
                     <div v-else>
-                        <!-- <h2>Welcome, {{ user.first_name }}.</h2> -->
+                        <h2>Welcome, {{ user.first_name }}.</h2>
                         <h2>You are logged in.</h2>
                     </div>
                 </v-card>
@@ -55,7 +55,7 @@
         },
         data() {
             return {
-                error: [],
+                // error: [],
                 user: [],
                 form: {
                     email: "admin@zero-waste.com",
@@ -64,7 +64,7 @@
                 valid: true,
                 emailRules: [
                     v => !!v || 'Email required',
-                    v => /.+@.+\..+/.test(v) || 'Email must be valid',
+                    v => /.+@.+\..+/.test(v) || 'Email must be valid'
                 ],
                 passwordRules: [
                     v => !!v || 'Password required',
@@ -82,9 +82,9 @@
                 if (this.$refs.form.validate()) {
                     this.$store.dispatch('login', this.form)
                 }
-                if (error.response.status == 401) {
-                    this.passwordError = true
-                }
+                // if (error.response.status == 401) {
+                //     this.passwordError = true
+                // }
             },
             reset() {
                 this.$refs.form.reset()

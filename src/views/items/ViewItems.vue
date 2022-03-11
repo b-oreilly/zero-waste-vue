@@ -3,7 +3,7 @@
         <div class="card-group">
             <br>
             <h1>Items</h1><br>
-            <!-- <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br> -->
+            <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
                     <v-card class="pt-3 ma-2" flat>
@@ -58,7 +58,7 @@
         color: black;
     }
 
-    p {
+    .card {
         text-align: left;
     }
 
