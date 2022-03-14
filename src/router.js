@@ -29,8 +29,8 @@ const routes = [{
   },
   {
     path: "/account",
-    name: "UserDashboard",
-    component: () => import('./views/users/UserDashboard.vue')
+    name: "Dashboard",
+    component: () => import('./views/users/Dashboard.vue')
   },
   {
     path: "/account/edit",

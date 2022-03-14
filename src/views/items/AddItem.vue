@@ -8,7 +8,7 @@
                     </div>
                 </v-col>
                 <div class="d-flex justify-center col">
-                    <h1>List your Item</h1>
+                    <h2>List your Item</h2>
                 </div>
                 <v-col cols=2>
                 </v-col>

@@ -19,28 +19,31 @@
 </template>
 
 <script>
-    import axios from '@/config'
+    // import axios from '@/config'
 
     export default {
         name: 'userAccount',
         data() {
             return {
-                user: {},
-                users: []
+                // user: {},
+                // users: []
             }
         },
         mounted()  {
-            this.getUserDashboard();
+            // this.getUserDashboard();
+            if (localStorage.getItem("currentUser")) {
+                this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            }
         },
         methods: {
-            getUserDashboard() {
-                axios.get(`/users/${this.$route.params.id}`)
-                    .then((response) => {
-                        console.log(response.data)
-                        this.user = response.data
-                    })
-                    .catch(error => console.log(error))
-            }
+            // getUserDashboard() {
+            //     axios.get(`/users/${this.$route.params.id}`)
+            //         .then((response) => {
+            //             console.log(response.data)
+            //             this.user = response.data
+            //         })
+            //         .catch(error => console.log(error))
+            // }
         }
     };
 </script>

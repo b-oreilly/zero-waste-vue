@@ -6,10 +6,16 @@
     color: #e71430;
 } */
 
+.v-input__slot,
+#search {
+    height: 40px !important;
+    /* height: 15px !important; */
+}
+
 .nav {
     height: 100% !important;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-right: 10px;
 }
 
@@ -27,28 +33,26 @@
     color: #fff !important;
 }
 
-  #login {
-      background-color:#EBEBEB;
-      font-size: 12px;
-      border-radius: 25px;
-      height: 45px !important;
-      margin-right: 10px;
-      margin-left: 10px;
-  }
+#login {
+    background-color: #EBEBEB;
+    font-size: 14px;
+    border-radius: 25px;
+    height: 40px !important;
+    width: 100px !important;
+}
 
 #signup {
     background-color: #20E25F;
     color: #fff !important;
     border-radius: 25px;
-    height: 45px !important;
-    margin-top: 10px;
+    height: 40px !important;
 }
 
 #logout {
     background-color: #153AB0;
     color: #fff !important;
     border-radius: 25px;
-    height: 45px !important;
+    height: 40px !important;
 }
 
 .delete {

@@ -2,7 +2,7 @@
     <v-container>
         <v-col>
             <template>
-                <v-card flat>
+                <v-card flat class="pt-2 pb-2">
                     <div v-if="!$store.state.loggedIn">
                         <h1>Signup</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>

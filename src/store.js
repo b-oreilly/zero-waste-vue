@@ -7,11 +7,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedIn: false
+    loggedIn: false,
+    token: null,
+    user: null
   },
   mutations: {
-    SET_USER_STATUS(state, loggedIn) {
+    SET_STATUS(state, loggedIn) {
       state.loggedIn = loggedIn
+    },
+    SET_TOKEN(state, token) {
+      state.token = token
+    },
+    SET_USER(state, user) {
+      state.user = user
     }
   },
   actions: {
@@ -23,10 +31,9 @@ export default new Vuex.Store({
         })
         .then(response => {
           console.log(response.data)
-          this.user = response.data
           localStorage.setItem('token', response.data.token)
-          // sessionStorage.setItem('userDetails', response)
-          context.commit('SET_USER_STATUS', true)
+          context.commit('SET_TOKEN', response.data.token)
+          context.commit('SET_STATUS', true)
           // router.push('/account');
         })
         .catch(error => {
@@ -40,8 +47,10 @@ export default new Vuex.Store({
     },
     logout(context) {
       localStorage.removeItem('token')
-      context.commit('SET_USER_STATUS', false)
-      router.push('/login').catch(() => {});
+      context.commit('SET_TOKEN', null)
+      context.commit('SET_STATUS', false)
+      // context.commit('SET_USER', null)
+      router.push('/').catch(() => {});
     },
     register(context, credentials) {
       axios
@@ -56,7 +65,9 @@ export default new Vuex.Store({
           console.log(response.token)
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
-          context.commit('SET_USER_STATUS', true)
+          context.commit('SET_TOKEN', response.data.token)
+          context.commit('SET_STATUS', true)
+          context.commit('SET_USER', response.data)
         })
         .catch(error => {
           console.log(error)
@@ -83,5 +94,9 @@ export default new Vuex.Store({
     //     })
     // }
   },
-  getters: {}
+  getters: {
+    user(state) {
+      return state.user
+    }
+  }
 })

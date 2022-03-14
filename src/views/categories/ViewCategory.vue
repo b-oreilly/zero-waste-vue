@@ -1,7 +1,6 @@
 <template>
     <v-container>
         <div class="card-group">
-
             <v-col>
                 <v-row no-gutters>
                     <v-col cols=2>
