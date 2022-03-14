@@ -2,7 +2,7 @@
     <v-container>
         <div>
             <br>
-            <h1>Hi, {{ user.first_name }}</h1><br>
+            <!-- <h1>Hi, {{ user.first_name }}</h1><br> -->
 
             <v-card bg-variant="dark">
                 <v-card-title>Account Details</v-card-title>
@@ -11,7 +11,7 @@
                         <router-link :to="{ name: 'account', params: { id:user._id }}">{{ user.first_name }}
                         </router-link>
                     </v-card-title> -->
-                <v-card-text>{{ user.first_name }} {{ user.last_name }} </v-card-text>
+                <v-card-text> {{ $store.state.user.first_name }} </v-card-text>
 
             </v-card>
         </div>
@@ -22,29 +22,7 @@
     // import axios from '@/config'
 
     export default {
-        name: 'userAccount',
-        data() {
-            return {
-                // user: {},
-                // users: []
-            }
-        },
-        mounted()  {
-            // this.getUserDashboard();
-            if (localStorage.getItem("currentUser")) {
-                this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
-            }
-        },
-        methods: {
-            // getUserDashboard() {
-            //     axios.get(`/users/${this.$route.params.id}`)
-            //         .then((response) => {
-            //             console.log(response.data)
-            //             this.user = response.data
-            //         })
-            //         .catch(error => console.log(error))
-            // }
-        }
+        name: 'Dashboard'
     };
 </script>
 

@@ -36,9 +36,9 @@
                     <v-file-input v-model="form.price" :rules="photoRules" multiple label="Item photo(s)">
                     </v-file-input>
 
-                    <!-- <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
-                                Add
-                            </v-btn> -->
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
+                        Add
+                    </v-btn>
 
                     <v-btn rounded text class="mr-4 reset" @click="reset">
                         Reset Form
@@ -95,12 +95,12 @@
         methods: {
             reset() {
                 this.$refs.form.reset()
+            },
+            addItem() {
+                if (this.$refs.form.validate()) {
+                    this.$store.dispatch('addItem', this.form)
+                }
             }
-            // addItem() {
-            //     if (this.$refs.form.validate()) {
-            //         this.$store.dispatch('addItem', this.form)
-            //     }
-            //}
         }
     };
 </script>

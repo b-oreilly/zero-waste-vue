@@ -8,14 +8,14 @@
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-row>
                                 <v-col>
-                                <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules"
-                                    label="First Name" required>
-                                </v-text-field>
+                                    <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules"
+                                        label="First Name" required>
+                                    </v-text-field>
                                 </v-col>
                                 <v-col>
-                                <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules"
-                                    label="Last Name" required>
-                                </v-text-field>
+                                    <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules"
+                                        label="Last Name" required>
+                                    </v-text-field>
                                 </v-col>
                             </v-row>
 
@@ -29,6 +29,12 @@
                             <v-text-field type="password" v-model="form.password" :counter="40" :rules="passwordRules"
                                 label="Password" autocomplete="on" required></v-text-field>
 
+                            <v-text-field type="number" v-model="form.longitude" :counter="40" :rules="locationRules"
+                                label="Location" autocomplete="on" required></v-text-field>
+
+                            <v-text-field type="number" v-model="form.latitude" :counter="40" :rules="locationRules"
+                                label="Location" autocomplete="on" required></v-text-field>
+
                             <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="register()">
                                 Sign up
                             </v-btn>
@@ -39,15 +45,17 @@
 
                         </v-form>
                         <br>
+                        <div class="footer-offset">
                         <h3>Already have an account?<br>
-                            <router-link to="login">Login</router-link>
+                            <router-link to="/login">Login</router-link>
                         </h3>
+                        </div>
                     </div>
                     <div v-else>
                         <!-- <h2>Welcome, {{ user.first_name }}.</h2> -->
                         <h2>You have registered sucessfully!</h2>
                         <h3>
-                        <!-- <router-link to="account/:_id">View your account</router-link> -->
+                            <!-- <router-link to="account/:_id">View your account</router-link> -->
                         </h3>
                     </div>
                 </v-card>
@@ -110,5 +118,9 @@
         text-decoration: none;
         color: #153AB0 !important;
         font-weight: bold;
+    }
+
+    v-card {
+        padding-bottom: 50px !important;
     }
 </style>

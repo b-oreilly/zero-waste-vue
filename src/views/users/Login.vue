@@ -14,12 +14,12 @@
                                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                 @click:append="showPassword = !showPassword">
                             </v-text-field>
-                            <div v-if="this.passwordError">
+                            <!-- <div v-if="this.passwordError"> -->
                                 <!-- <div v-if="error" class="alert alert-danger" role="alert">
                                     {{error}}
                                 </div> -->
-                                <p variant="warning">You have entered an invalid username or password.</p>
-                            </div>
+                                <!-- <p variant="warning">You have entered an invalid username or password.</p>
+                            </div> -->
                             <v-btn rounded text :disabled="!valid" class="mr-4 login" @click="login()">
                                 Log in
                             </v-btn>
@@ -29,11 +29,11 @@
                             </v-btn>
                         </v-form><br>
                         <h3>Don't have an account?<br>
-                            <router-link to="register">Signup</router-link>
+                            <router-link to="/register">Signup</router-link>
                         </h3>
                     </div>
                     <div v-else>
-                        <h2>Welcome, {{ user.first_name }}.</h2>
+                        <h2>Welcome, {{ $store.state.user.first_name }}.</h2>
                         <h2>You are logged in.</h2>
                     </div>
                 </v-card>
@@ -89,19 +89,6 @@
             reset() {
                 this.$refs.form.reset()
             }
-            // userDetails() {
-            //     let token = localStorage.getItem('token');
-
-            //     axios
-            //         .get(`/user`, {
-            //             headers: {
-            //                 Authorization: "Bearer " + token
-            //             }
-            //         })
-            //         .then(response => {
-            //             console.log(response.data)
-            //         })
-            // }
         }
     };
 </script>

@@ -16,14 +16,9 @@
       Navbar,
       Footer
     },
-    data() {
-      return {
-
-      }
-    },
     created() {
-      localStorage.getItem('token') ? this.$store.commit('SET_USER_STATUS', true) : this.$store.commit(
-        'SET_USER_STATUS', false)
+      localStorage.getItem('token') &&  localStorage.getItem('user') ? this.$store.commit('SET_STATUS', true) && this.$store.commit('SET_TOKEN', 'token') : this.$store.commit(
+        'SET_STATUS', false)
     }
   }
 </script>
@@ -41,13 +36,13 @@
   // nav {
   //   padding: 30px;
 
-    a {
-      font-weight: bold;
-      color: #252525;
-      text-decoration: none;
+  a {
+    font-weight: bold;
+    color: #252525;
+    text-decoration: none;
 
-      // &.router-link-exact-active {
-      //   color: #42b983;
-      // }
-    }
+    // &.router-link-exact-active {
+    //   color: #42b983;
+    // }
+  }
 </style>

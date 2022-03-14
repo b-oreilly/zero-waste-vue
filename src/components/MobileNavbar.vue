@@ -33,7 +33,7 @@
 
             <!-- Mobile menu - logged in user -->
             <div v-if="$store.state.loggedIn">
-              <v-list-item to="userDashboard">
+              <v-list-item to="/account">
                 Account
               </v-list-item>
             </div>

@@ -49,11 +49,6 @@ const routes = [{
     component: () => import('./views/items/ViewItems.vue')
   },
   {
-    path: "/items/:id",
-    name: "viewSingleItem",
-    component: () => import('./views/items/ViewSingleItem.vue')
-  },
-  {
     path: "/items/add",
     name: "addItem",
     component: () => import('./views/items/AddItem.vue')
@@ -62,6 +57,11 @@ const routes = [{
     path: "/items/edit",
     name: "editItem",
     component: () => import('./views/items/EditItem.vue')
+  },
+  {
+    path: "/items/:id",
+    name: "viewSingleItem",
+    component: () => import('./views/items/ViewSingleItem.vue')
   },
 
   // Categories

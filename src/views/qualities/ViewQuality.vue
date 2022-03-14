@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <div class="card-group">
+        <div class="footer-offset">
             <v-col>
                 <v-row no-gutters>
                     <v-col cols=2>
@@ -112,7 +112,4 @@
         vertical-align: middle;
     }
 
-    .card-group {
-        padding-bottom: 50px;
-    }
 </style>

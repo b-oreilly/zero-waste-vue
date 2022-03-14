@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <div class="card-group">
+        <div class="footer-offset">
             <br>
             <h1>Items</h1><br>
             <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
@@ -62,7 +62,4 @@
         text-align: left;
     }
 
-    .card-group {
-        padding-bottom: 50px;
-    }
 </style>

@@ -22,7 +22,7 @@
                         <v-img src="https://picsum.photos/400/300?random" />
                     </v-else>
                 </v-col>
-                <v-card md=6 sm=12 flat class="overflow-hidden">
+                <v-card md=6 sm=12 flat class="overflow-hidden footer-offset">
                     <div class="itemBody">
 
                         <v-col>
@@ -52,8 +52,8 @@
 
 
                                 <div v-if="!$store.state.loggedIn">
-                                    <p>Please <router-link to="login">Login</router-link>
-                                        or <router-link to="register">Signup</router-link>
+                                    <p>Please <router-link to="/login">Login</router-link>
+                                        or <router-link to="/register">Signup</router-link>
                                         to contact this user.</p>
                                 </div>
                                 <div v-else>

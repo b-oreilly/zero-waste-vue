@@ -32,8 +32,11 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('user', JSON.stringify(response.data.user))
+          // localStorage.setItem('user', response.data.user)
           context.commit('SET_TOKEN', response.data.token)
           context.commit('SET_STATUS', true)
+          context.commit('SET_USER', response.data.user)
           // router.push('/account');
         })
         .catch(error => {
@@ -47,9 +50,10 @@ export default new Vuex.Store({
     },
     logout(context) {
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
       context.commit('SET_TOKEN', null)
       context.commit('SET_STATUS', false)
-      // context.commit('SET_USER', null)
+      context.commit('SET_USER', null)
       router.push('/').catch(() => {});
     },
     register(context, credentials) {
@@ -67,7 +71,7 @@ export default new Vuex.Store({
           localStorage.setItem('token', response.data.token)
           context.commit('SET_TOKEN', response.data.token)
           context.commit('SET_STATUS', true)
-          context.commit('SET_USER', response.data)
+          context.commit('SET_USER_DATA', response.data)
         })
         .catch(error => {
           console.log(error)
@@ -75,24 +79,24 @@ export default new Vuex.Store({
           router.push('/register').catch(() => {});
         })
     },
-    // addItem() {
-    //   axios
-    //     .post(`/items`, {
-    //       title: this.form.name,
-    //       description: this.form.description,
-    //       category: this.form.category,
-    //       quality: this.form.quality,
-    //       price: this.form.price
-    //     })
-    //     .then(response => {
-    //       console.log(response.data)
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //       console.log(error.response.data.message)
-    //       router.push('/items').catch(() => {});
-    //     })
-    // }
+    addItem() {
+      axios
+        .post(`/items`, {
+          title: this.form.name,
+          description: this.form.description,
+          category: this.form.category,
+          quality: this.form.quality,
+          price: this.form.price
+        })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+          console.log(error.response.data.message)
+          router.push('/items').catch(() => {});
+        })
+    }
   },
   getters: {
     user(state) {

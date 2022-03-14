@@ -14,13 +14,8 @@
       <v-col class="d-flex justify-space-around">
         <v-toolbar-items>
           <div class="nav-items">
-            <v-toolbar-item>
-              <v-btn text to="items">Items</v-btn>
-            </v-toolbar-item>
-            <v-toolbar-item>
-              <v-btn text to="about">About</v-btn>
-            </v-toolbar-item>
-
+              <v-btn text to="/items">Items</v-btn>
+              <v-btn text to="/about">About</v-btn>
           </div>
         </v-toolbar-items>
       </v-col>
@@ -42,7 +37,7 @@
               </template>
 
               <v-list text>
-                <v-list-item to="account">
+                <v-list-item to="/account">
                   <v-list-item-title class="itemTitle">
                     Account
                   </v-list-item-title>

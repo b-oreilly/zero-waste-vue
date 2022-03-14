@@ -6,6 +6,10 @@
     color: #e71430;
 } */
 
+.footer-offset {
+    padding-bottom: 50px;
+}
+
 .v-input__slot,
 #search {
     height: 40px !important;
@@ -137,4 +141,22 @@ v-btn {
 .item-title,
 .item-body {
     text-transform: capitalize;
+}
+
+v-img {
+    max-width: auto;
+    /* height: 100px !important; */
+}
+
+.itemTitle,
+.itemBody {
+    text-transform: capitalize;
+}
+
+p {
+    text-align: left;
+}
+
+.mainItemTitle {
+    vertical-align: middle;
 }
