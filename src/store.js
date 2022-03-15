@@ -75,24 +75,24 @@ export default new Vuex.Store({
           router.push('/register').catch(() => {});
         })
     },
-    // addItem() {
-    //   axios
-    //     .post(`/items`, {
-    //       title: this.form.name,
-    //       description: this.form.description,
-    //       category: this.form.category,
-    //       quality: this.form.quality,
-    //       price: this.form.price
-    //     })
-    //     .then(response => {
-    //       console.log(response.data)
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //       console.log(error.response.data.message)
-    //       router.push('/items').catch(() => {});
-    //     })
-    // }
+    addItem() {
+      axios
+        .post(`/items`, {
+          title: this.form.title,
+          description: this.form.description,
+          categoryID: this.form.category,
+          qualityID: this.form.quality,
+          price: this.form.price
+        })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+          console.log(error.response.data.message)
+          router.push('/items').catch(() => {});
+        })
+    }
   },
   getters: {
     user(state) {
