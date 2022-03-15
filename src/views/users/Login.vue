@@ -33,7 +33,7 @@
                         </h3>
                     </div>
                     <div v-else>
-                        <h2>Welcome, {{ $store.state.user.first_name }}.</h2>
+                        <h2>Welcome, {{ user.first_name }}.</h2>
                         <h2>You are logged in.</h2>
                     </div>
                 </v-card>
@@ -77,17 +77,22 @@
         computed: {
             ...mapState(["loggedIn"])
         },
+        mounted(){
+            this.getUserDetails();
+        },
         methods: {
             login() {
                 if (this.$refs.form.validate()) {
                     this.$store.dispatch('login', this.form)
                 }
-                // if (error.response.status == 401) {
-                //     this.passwordError = true
-                // }
             },
             reset() {
                 this.$refs.form.reset()
+            },
+            getUserDetails() {
+                if (localStorage.getItem("user")) {
+                    this.user = JSON.parse(localStorage.getItem("user"))
+                }
             }
         }
     };
