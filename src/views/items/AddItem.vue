@@ -22,18 +22,19 @@
                         label="Item Description" required>
                     </v-text-field>
 
-                    <v-select v-model="form.category" :category="categories" label="Category" :rules="categoryRules"
+                    <v-select v-model="form.category" :items="categories" label="Category" :rules="categoryRules"
                         required>
                     </v-select>
 
-                    <v-select v-model="form.quality" :quality="qualities" label="Quality" :rules="qualityRules"
+                    <v-select v-model="form.quality" :items="qualities" label="Quality" :rules="qualityRules"
                         required>
                     </v-select>
 
-                    <v-text-field v-model="form.price" :rules="priceRules" label="Price" required>
+                    <v-text-field v-model="form.price" :rules="priceRules" label="Price" type="number" required
+                        prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
-                    <v-file-input v-model="form.price" :rules="photoRules" multiple label="Item photo(s)">
+                    <v-file-input v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
                     </v-file-input>
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
@@ -65,7 +66,7 @@
                 quality: "",
                 price: ""
             },
-            categories: ["Food", "Clothes", "Funriture", "Electronics", "Tools", "Toys"],
+            categories: ["Food", "Clothes", "Funiture", "Electronics", "Tools", "Toys"],
             qualities: ["Brand new", "Like new", "Lightly used", "Used", "Heavily used"],
             valid: true,
             titleRules: [
@@ -88,9 +89,9 @@
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
             ],
-            photoRules: [
-                v => !!v || 'Item photo is required'
-            ]
+            // photoRules: [
+            //     v => !!v || 'Item photo is required'
+            // ]
         }),
         methods: {
             reset() {

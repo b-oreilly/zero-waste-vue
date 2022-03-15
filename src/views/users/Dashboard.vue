@@ -11,7 +11,7 @@
                         <router-link :to="{ name: 'account', params: { id:user._id }}">{{ user.first_name }}
                         </router-link>
                     </v-card-title> -->
-                <v-card-text> {{ $store.state.user.first_name }} </v-card-text>
+                <v-card-text> {{ user.first_name }} </v-card-text>
 
             </v-card>
         </div>
@@ -22,8 +22,23 @@
     // import axios from '@/config'
 
     export default {
-        name: 'Dashboard'
-    };
+        name: 'Dashboard',
+        data() {
+            return {
+                user: {}
+            }
+        },
+        mounted(){
+            this.getUserDetails();
+        },
+        methods: {
+            getUserDetails() {
+                if (localStorage.getItem("user")) {
+                    this.user = JSON.parse(localStorage.getItem("user"))
+                }
+            }
+        }
+    }
 </script>
 
 <style>

@@ -7,19 +7,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedIn: false,
-    token: null,
-    user: null
+    loggedIn: false
   },
   mutations: {
     SET_STATUS(state, loggedIn) {
       state.loggedIn = loggedIn
-    },
-    SET_TOKEN(state, token) {
-      state.token = token
-    },
-    SET_USER(state, user) {
-      state.user = user
     }
   },
   actions: {
@@ -33,11 +25,8 @@ export default new Vuex.Store({
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('user', JSON.stringify(response.data.user))
-          // localStorage.setItem('user', response.data.user)
-          context.commit('SET_TOKEN', response.data.token)
           context.commit('SET_STATUS', true)
-          context.commit('SET_USER', response.data.user)
-          // router.push('/account');
+          router.push('/account');
         })
         .catch(error => {
           console.log(error)
@@ -51,9 +40,7 @@ export default new Vuex.Store({
     logout(context) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      context.commit('SET_TOKEN', null)
       context.commit('SET_STATUS', false)
-      context.commit('SET_USER', null)
       router.push('/').catch(() => {});
     },
     register(context, credentials) {
@@ -69,9 +56,8 @@ export default new Vuex.Store({
           console.log(response.token)
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
-          context.commit('SET_TOKEN', response.data.token)
+          localStorage.setItem('user', JSON.stringify(response.data.user))
           context.commit('SET_STATUS', true)
-          context.commit('SET_USER_DATA', response.data)
         })
         .catch(error => {
           console.log(error)
@@ -82,10 +68,10 @@ export default new Vuex.Store({
     addItem() {
       axios
         .post(`/items`, {
-          title: this.form.name,
+          title: this.form.title,
           description: this.form.description,
-          category: this.form.category,
-          quality: this.form.quality,
+          categoryID: this.form.category,
+          qualityID: this.form.quality,
           price: this.form.price
         })
         .then(response => {
@@ -98,9 +84,5 @@ export default new Vuex.Store({
         })
     }
   },
-  getters: {
-    user(state) {
-      return state.user
-    }
-  }
+  getters: {}
 })

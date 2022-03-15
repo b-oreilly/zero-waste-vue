@@ -82,9 +82,6 @@
                 if (this.$refs.form.validate()) {
                     this.$store.dispatch('login', this.form)
                 }
-                // if (error.response.status == 401) {
-                //     this.passwordError = true
-                // }
             },
             reset() {
                 this.$refs.form.reset()
