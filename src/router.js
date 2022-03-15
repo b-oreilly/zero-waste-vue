@@ -54,6 +54,11 @@ const routes = [{
     component: () => import('./views/items/AddItem.vue')
   },
   {
+    path: "/items/:id",
+    name: "viewSingleItem",
+    component: () => import('./views/items/ViewSingleItem.vue')
+  },
+  {
     path: "/items/edit",
     name: "editItem",
     component: () => import('./views/items/EditItem.vue')
