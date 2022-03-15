@@ -6,6 +6,7 @@
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-col>
+      
       <v-col class="d-flex justify-space-around">
         <router-link to="/">
           <v-toolbar-title id="title">
@@ -83,19 +84,8 @@
     computed: {
       ...mapState(['loggedIn'])
     },
-    mounted() {
-      // this.getUserDashboard()
-    },
     methods: {
-      ...mapActions(['logout']),
-      //   getUserDashboard() {
-      //     axios.get(`/users`)
-      //       .then((response) => {
-      //         console.log(response.data)
-      //         this.user = response.data
-      //       })
-      //       .catch(error => console.log(error))
-      //   }
+      ...mapActions(['logout'])
     }
   })
 </script>

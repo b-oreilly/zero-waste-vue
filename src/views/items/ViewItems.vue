@@ -15,9 +15,8 @@
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                 {{ item.title }}
                             </router-link>
-                            <!-- {{ item.title }} -->
                         </v-card-title>
-                        <v-card-text v-if="item.categoryID.name">
+                        <v-card-text v-if="item.categoryID">
                             <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
                                 <p> {{ item.categoryID.name }} </p>
                             </router-link>

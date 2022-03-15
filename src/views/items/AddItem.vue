@@ -15,7 +15,7 @@
             </v-row>
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-text-field name="title" v-model="form.title" :counter="25" :rules="titleRules" label="title"
+                    <v-text-field name="title" v-model="form.title" :counter="25" :rules="titleRules" label="Title"
                         required>
                     </v-text-field>
 
@@ -23,19 +23,19 @@
                         label="Item Description" required>
                     </v-text-field>
 
-                    <v-select name="categoryID" v-model="form.category" :items="categories" item-text="name"
+                    <v-autocomplete name="categoryID" v-model="form.category" :items="categories" item-text="name"
                         item-value="_id" label="Category" :rules="categoryRules" required>
-                    </v-select>
+                    </v-autocomplete>
 
-                    <v-select name="qualityID" v-model="form.quality" :items="qualities" item-text="name"
+                    <v-autocomplete name="qualityID" v-model="form.quality" :items="qualities" item-text="name"
                         item-value="_id" label="Quality" :rules="qualityRules" required>
-                    </v-select>
+                    </v-autocomplete>
 
                     <v-text-field name="price" v-model="form.price" :rules="priceRules" label="Price" required
                         prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
-                    <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
+                    <v-file-input name="photo" v-model="form.photo" multiple label="Item photo(s)">
                     </v-file-input>
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
@@ -92,8 +92,6 @@
                     name: 'Toys'
                 }
             ],
-
-            // ["Food", "Clothes", "Furniture", "Electronics", "Tools", "Toys"],
             qualities: [{
                     _id: "620a7695289821c7777850f1",
                     name: 'Brand New/Unused'

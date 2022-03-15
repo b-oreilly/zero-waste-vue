@@ -24,42 +24,14 @@
     },
     data() {
       return {
-        drawer: false,
-        // siteItems: [{
-        //     title: 'About',
-        //     link: '/about',
-        //   },
-        //   {
-        //     title: 'Items',
-        //     link: '/items',
-        //   }
-        // ],
-        // userItems: [{
-        //   title: 'Account',
-        //   link: '/account/:id',
-        // },
-        // {
-        //   title: 'Your items',
-        //   link: '/items',
-        // }]
+        drawer: false
       }
     },
     computed: {
       ...mapState(['loggedIn'])
     },
-    mounted() {
-      // this.getUserDashboard()
-    },
     methods: {
-      ...mapActions(['logout']),
-      //   getUserDashboard() {
-      //     axios.get(`/users`)
-      //       .then((response) => {
-      //         console.log(response.data)
-      //         this.user = response.data
-      //       })
-      //       .catch(error => console.log(error))
-      //   }
+      ...mapActions(['logout'])
     }
   })
 </script>

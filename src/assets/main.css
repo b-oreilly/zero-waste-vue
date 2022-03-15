@@ -68,7 +68,8 @@
 
 .signup,
 .login,
-.reset {
+.reset,
+.save {
     height: 45px !important;
     margin-top: 10px;
     width: 25%;

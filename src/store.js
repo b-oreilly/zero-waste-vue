@@ -70,6 +70,7 @@ export default new Vuex.Store({
         .post(`/items`, {
           title: this.form.title,
           description: this.form.description,
+          userID: localStorage.getItem("user"._id),
           categoryID: this.form.category,
           qualityID: this.form.quality,
           price: this.form.price
