@@ -15,51 +15,32 @@
             </v-row>
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-text-field name="title" v-model="form.title" :counter="25" :rules="titleRules" label="title" required>
+                    <v-text-field name="title" v-model="form.title" :counter="25" :rules="titleRules" label="title"
+                        required>
                     </v-text-field>
 
                     <v-text-field name="description" v-model="form.description" :counter="250" :rules="descriptionRules"
                         label="Item Description" required>
                     </v-text-field>
 
-<<<<<<< HEAD
-                    <v-select v-model="form.category" :items="categories" label="Category" :rules="categoryRules"
-                        required>
+                    <v-select name="categoryID" v-model="form.category" :items="categories" item-text="name"
+                        item-value="_id" label="Category" :rules="categoryRules" required>
                     </v-select>
 
-                    <v-select v-model="form.quality" :items="qualities" label="Quality" :rules="qualityRules"
-                        required>
+                    <v-select name="qualityID" v-model="form.quality" :items="qualities" item-text="name"
+                        item-value="_id" label="Quality" :rules="qualityRules" required>
                     </v-select>
 
-                    <v-text-field v-model="form.price" :rules="priceRules" label="Price" type="number" required
+                    <v-text-field name="price" v-model="form.price" :rules="priceRules" label="Price" required
                         prepend-icon="mdi-currency-eur">
-                    </v-text-field>
-
-                    <v-file-input v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input>
-
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
-                        Add
-                    </v-btn>
-=======
-                    <v-select name="categoryID" v-model="form.category" :items="categories" item-text="name" item-value="_id" label="Category" :rules="categoryRules"
-                        required>
-                    </v-select>
-
-                    <v-select name="qualityID" v-model="form.quality" :items="qualities" item-text="name" item-value="_id" label="Quality" :rules="qualityRules"
-                        required>
-                    </v-select>
-
-                    <v-text-field name="price" v-model="form.price" :rules="priceRules" label="Price" required>
                     </v-text-field>
 
                     <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
                     </v-file-input>
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
-                                Add
-                            </v-btn>
->>>>>>> origin/AddItem
+                        Add
+                    </v-btn>
 
                     <v-btn rounded text class="mr-4 reset" @click="reset">
                         Reset Form
@@ -86,29 +67,55 @@
                 quality: "",
                 price: ""
             },
-<<<<<<< HEAD
-            categories: ["Food", "Clothes", "Funiture", "Electronics", "Tools", "Toys"],
-            qualities: ["Brand new", "Like new", "Lightly used", "Used", "Heavily used"],
-=======
-            categories: [
-                { _id: "620a6acaff3f5cebc8370121", name: 'Food' },
-                { _id: "620a6ae3ff3f5cebc8370123", name: 'Clothes' },
-                { _id: "620a6af1ff3f5cebc8370125", name: 'Furniture' },
-                { _id: "620a6b04ff3f5cebc8370127", name: 'Electronics' },
-                { _id: "620a7a0fded499a220f386d1", name: 'Tools' },
-                { _id: "620a7ca7178dada11844dbad", name: 'Toys' }
-            ],
-            
-            // ["Food", "Clothes", "Furniture", "Electronics", "Tools", "Toys"],
-            qualities: [
-                { _id: "620a7695289821c7777850f1", name: 'Brand New/Unused' },
-                { _id: "620a768b289821c7777850ef", name: 'Like new' },
-                { _id: "620a765a289821c7777850ed", name: 'Lightly used' },
-                { _id: "620a763b289821c7777850eb", name: 'Used' },
-                { _id: "620a762b289821c7777850e9", name: 'Heavily Used' }
+            categories: [{
+                    _id: "620a6acaff3f5cebc8370121",
+                    name: 'Food'
+                },
+                {
+                    _id: "620a6ae3ff3f5cebc8370123",
+                    name: 'Clothes'
+                },
+                {
+                    _id: "620a6af1ff3f5cebc8370125",
+                    name: 'Furniture'
+                },
+                {
+                    _id: "620a6b04ff3f5cebc8370127",
+                    name: 'Electronics'
+                },
+                {
+                    _id: "620a7a0fded499a220f386d1",
+                    name: 'Tools'
+                },
+                {
+                    _id: "620a7ca7178dada11844dbad",
+                    name: 'Toys'
+                }
             ],
 
->>>>>>> origin/AddItem
+            // ["Food", "Clothes", "Furniture", "Electronics", "Tools", "Toys"],
+            qualities: [{
+                    _id: "620a7695289821c7777850f1",
+                    name: 'Brand New/Unused'
+                },
+                {
+                    _id: "620a768b289821c7777850ef",
+                    name: 'Like new'
+                },
+                {
+                    _id: "620a765a289821c7777850ed",
+                    name: 'Lightly used'
+                },
+                {
+                    _id: "620a763b289821c7777850eb",
+                    name: 'Used'
+                },
+                {
+                    _id: "620a762b289821c7777850e9",
+                    name: 'Heavily Used'
+                }
+            ],
+
             valid: true,
             titleRules: [
                 v => !!v || 'Title is required',

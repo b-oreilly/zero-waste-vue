@@ -82,14 +82,6 @@ export default new Vuex.Store({
           console.log(error.response.data.message)
           router.push('/items').catch(() => {});
         })
-<<<<<<< HEAD
-=======
-    }
-  },
-  getters: {
-    user(state) {
-      return state.user
->>>>>>> origin/AddItem
     }
   },
   getters: {}
