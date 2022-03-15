@@ -56,6 +56,7 @@ export default new Vuex.Store({
           console.log(response.token)
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('user', JSON.stringify(response.data.user))
           context.commit('SET_STATUS', true)
         })
         .catch(error => {
@@ -67,10 +68,10 @@ export default new Vuex.Store({
     addItem() {
       axios
         .post(`/items`, {
-          title: this.form.name,
+          title: this.form.title,
           description: this.form.description,
-          category: this.form.category,
-          quality: this.form.quality,
+          categoryID: this.form.category,
+          qualityID: this.form.quality,
           price: this.form.price
         })
         .then(response => {
