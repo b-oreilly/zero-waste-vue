@@ -15,26 +15,30 @@
             </v-row>
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-text-field name="title" v-model="form.title" :counter="25" :rules="titleRules" label="title" required>
+                    <v-text-field id="title" name="title" v-model="form.title" :counter="25" :rules="titleRules" label="title" required>
                     </v-text-field>
 
-                    <v-text-field name="description" v-model="form.description" :counter="250" :rules="descriptionRules"
+                    <v-text-field id="description" name="description" v-model="form.description" :counter="250" :rules="descriptionRules"
                         label="Item Description" required>
                     </v-text-field>
 
-                    <v-select name="categoryID" v-model="form.category" :items="categories" item-text="name" item-value="_id" label="Category" :rules="categoryRules"
+                    <v-select id="categoryID" name="categoryID" v-model="form.categoryID" :items="categories" item-text="name" item-value="_id" label="Category" :rules="categoryRules"
                         required>
                     </v-select>
 
-                    <v-select name="qualityID" v-model="form.quality" :items="qualities" item-text="name" item-value="_id" label="Quality" :rules="qualityRules"
+                    <v-select id="qualityID" name="qualityID" v-model="form.qualityID" :items="qualities" item-text="name" item-value="_id" label="Quality" :rules="qualityRules"
                         required>
                     </v-select>
 
-                    <v-text-field name="price" v-model="form.price" :rules="priceRules" label="Price" required>
+                    <v-text-field id="userID" name="userID" v-model="form.user" label="User"
+                        required>
                     </v-text-field>
 
-                    <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input>
+                    <v-text-field id="price" name="price" v-model="form.price" :rules="priceRules" label="Price" required>
+                    </v-text-field>
+
+                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
+                    </v-file-input> -->
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
                                 Add
@@ -51,6 +55,8 @@
 
 <script>
     import GoBack from '@/components/GoBack'
+    import axios from '@/config'
+
 
     export default {
         name: "addItem",
@@ -63,6 +69,7 @@
                 description: "",
                 category: "",
                 quality: "",
+                user: "",
                 price: ""
             },
             categories: [
@@ -112,10 +119,37 @@
             reset() {
                 this.$refs.form.reset()
             },
+            // addItem() {
+            //     if (this.$refs.form.validate()) {
+            //         this.$store.dispatch('addItem', this.form)
+            //     }
+            // },
             addItem() {
-                if (this.$refs.form.validate()) {
-                    this.$store.dispatch('addItem', this.form)
-                }
+                let token = localStorage.getItem('token')
+
+                axios
+                    .post(`/items`, {
+                        title: this.form.title,
+                        description: this.form.description,
+                        categoryID: this.form.categoryID,
+                        qualityID: this.form.qualityID,
+                        userID: this.form.user,
+                        price: this.form.price
+                    }, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    .then(response => {
+                        console.log(response.data)
+                        this.$router.push({
+                            name: "addItem"
+                    })
+                    })
+                    .catch(err => { 
+                        console.log(err)
+                        console.log(err.response.data)
+                    })
             }
         }
     };
