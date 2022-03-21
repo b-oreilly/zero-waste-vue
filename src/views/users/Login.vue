@@ -7,7 +7,7 @@
                         <h1>Login</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-text-field class="input" v-model="form.email" label="Email" :rules="emailRules"
-                                :error-messages="emailError" required>
+                                required autocomplete="email">
                             </v-text-field>
                             <v-text-field :type="showPassword ? 'text' : 'password'" v-model="form.password"
                                 :counter="40" label="Password" autocomplete="on" :rules="passwordRules" required

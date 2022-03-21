@@ -6,12 +6,12 @@
             <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
-                    <v-card class="pt-3 ma-2" flat>
+                    <v-card flat class="pt-3 ma-2">
                         <v-img v-if="item.photo">{{ item.photo }}</v-img>
-                        <v-else>
+                        <span v-else>
                             <v-img src="https://picsum.photos/400/300?random" />
-                        </v-else>
-                        <v-card-title style="word-break: break-word">
+                        </span>
+                        <v-card-title style="word-break: break-word" align="left">
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                 {{ item.title }}
                             </router-link>
@@ -60,5 +60,4 @@
     .card {
         text-align: left;
     }
-
 </style>

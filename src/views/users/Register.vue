@@ -23,11 +23,14 @@
                                 required>
                             </v-text-field>
 
-                            <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required>
+                            <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
                             </v-text-field>
 
                             <v-text-field type="password" v-model="form.password" :counter="40" :rules="passwordRules"
                                 label="Password" autocomplete="on" required></v-text-field>
+
+                            <!-- LOCATION PICKER  -->
+                            <v-text-field prepend-inner-icon="mdi-map-marker"></v-text-field>
 
                             <v-text-field type="number" v-model="form.longitude" :counter="40" :rules="locationRules"
                                 label="Location" autocomplete="on" required></v-text-field>
@@ -46,9 +49,9 @@
                         </v-form>
                         <br>
                         <div class="footer-offset">
-                        <h3>Already have an account?<br>
-                            <router-link to="/login">Login</router-link>
-                        </h3>
+                            <h3>Already have an account?<br>
+                                <router-link to="/login">Login</router-link>
+                            </h3>
                         </div>
                     </div>
                     <div v-else>

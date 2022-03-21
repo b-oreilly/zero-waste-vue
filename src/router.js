@@ -38,6 +38,11 @@ const routes = [{
     component: () => import("@/views/users/EditAccount")
   },
   {
+    path: "/items/user/:id",
+    name: "viewUserItems",
+    component: () => import('./views/users/UserItems.vue')
+  },
+  {
     path: "/user/:id",
     name: "viewUser",
     component: () => import('./views/users/ViewUser.vue')

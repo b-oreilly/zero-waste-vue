@@ -18,9 +18,9 @@
 
                 <v-col md=6 sm=12>
                     <v-img class="overflow-hidden responsive p-0" v-if="item.photo">{{ item.photo }}</v-img>
-                    <v-else>
+                    <span v-else>
                         <v-img src="https://picsum.photos/400/300?random" />
-                    </v-else>
+                    </span>
                 </v-col>
                 <v-card md=6 sm=12 flat class="overflow-hidden footer-offset">
                     <div class="itemBody">
@@ -63,7 +63,7 @@
                                 </div>
 
 
-                                <p>Date Posted/Updated: {{ new Date(item.updatedAt).toLocaleString() }}</p>
+                                <p>Date Posted/Updated: <br> {{ new Date(item.updatedAt).toLocaleString() }}</p>
 
                                 <!-- <p v-if="item.categoryID">Category: {{ item.category.name}}</p> -->
                                 <!-- <p>???? {{item.categoryID}}</p> -->

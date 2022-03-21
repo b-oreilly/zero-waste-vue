@@ -24,6 +24,7 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('userID', response.data.userID)
           localStorage.setItem('user', JSON.stringify(response.data.user))
           context.commit('SET_STATUS', true)
           router.push('/account');
@@ -39,6 +40,7 @@ export default new Vuex.Store({
     },
     logout(context) {
       localStorage.removeItem('token')
+      localStorage.removeItem('userID')
       localStorage.removeItem('user')
       context.commit('SET_STATUS', false)
       router.push('/').catch(() => {});
@@ -56,6 +58,7 @@ export default new Vuex.Store({
           console.log(response.token)
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('userID', response.data.userID)
           localStorage.setItem('user', JSON.stringify(response.data.user))
           context.commit('SET_STATUS', true)
         })
@@ -64,26 +67,7 @@ export default new Vuex.Store({
           console.log(error.response.data.message)
           router.push('/register').catch(() => {});
         })
-    },
-    // addItem({}, form) {
-    //   axios
-    //     .post(`/items`, {
-    //       title: form.title,
-    //       description: form.description,
-    //       categoryID: form.categoryID,
-    //       qualityID: form.qualityID,
-    //       userID: form.user,
-    //       price: form.price
-    //     })
-    //     .then(response => {
-    //       console.log(response.data)
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //       console.log(error.response.data.message)
-    //       router.push('/items').catch(() => {});
-    //     })
-    // }
+    }
   },
   getters: {}
 })

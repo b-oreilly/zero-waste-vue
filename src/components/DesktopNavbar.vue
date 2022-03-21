@@ -13,9 +13,9 @@
       <!-- Center - Nav items -->
       <v-col class="d-flex justify-space-around">
         <v-toolbar-items>
-          <div class="nav-items">
-              <v-btn text to="/items">Items</v-btn>
-              <v-btn text to="/about">About</v-btn>
+          <div>
+            <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/items">Items</v-btn>
+            <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/about">About</v-btn>
           </div>
         </v-toolbar-items>
       </v-col>
@@ -42,6 +42,16 @@
                     Account
                   </v-list-item-title>
                 </v-list-item>
+                <!-- <router-link :to="{ name: 'viewUser', params: { id:item.userID._id }}">
+                  <p v-if="item.userID.username"> {{ item.userID.username }}</p>
+                </router-link> -->
+                <v-list-item>
+                  <v-list-item-title class="itemTitle">
+                    <router-link :to="{ name: 'viewUserItems', params: { id: user._id }}">
+                      Your Items
+                    </router-link>
+                  </v-list-item-title>
+                </v-list-item>
                 <v-list-item class="justify-center">
                   <v-btn depressed rounded id="logout" @click="logout()">Logout</v-btn>
                 </v-list-item>
@@ -66,49 +76,38 @@
   } from 'vuex'
 
   export default ({
-    components: {
-      // SearchBar
-    },
     data() {
       return {
-        drawer: false,
-        // siteItems: [{
-        //     title: 'About',
-        //     link: '/about',
-        //   },
-        //   {
-        //     title: 'Items',
-        //     link: '/items',
-        //   }
-        // ],
-        // userItems: [{
-        //   title: 'Account',
-        //   link: '/account/:id',
-        // },
-        // {
-        //   title: 'Your items',
-        //   link: '/items',
-        // }]
+        user: {}
       }
+    },
+    components: {
+      // SearchBar
     },
     computed: {
       ...mapState(['loggedIn'])
     },
     mounted() {
-      // this.getUserDashboard()
+      this.getUserDetails();
+      // this.getUserItems();
     },
     methods: {
       ...mapActions(['logout']),
-      //   getUserDashboard() {
-      //     axios.get(`/users`)
-      //       .then((response) => {
-      //         console.log(response.data)
-      //         this.user = response.data
-      //       })
-      //       .catch(error => console.log(error))
-      //   }
+      getUserDetails() {
+        if (localStorage.getItem("user")) {
+          this.user = JSON.parse(localStorage.getItem("user"))
+        }
+      },
+      // getUserItems() {
+      //   axios.get(`/items/user/${this.$route.params.id}`)
+      //     .then((response) => {
+      //       console.log(response.data)
+      //       // this.user = response.data
+      //     })
+      //     .catch(error => console.log(error))
+      // }
     }
-  })
+  });
 </script>
 
 
@@ -149,5 +148,37 @@
 
   .v-list {
     padding: 0px !important;
+  }
+
+  /* #nav-item:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0px !important;
+    content: "";
+    display: block;
+    height: 1.5px;
+    left: 0%;
+    position: absolute;
+    background: #000;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+
+  #nav-item:hover:after {
+    width: 100%;
+    left: 0;
+  } */
+
+
+  .nav-item {
+    border: solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+
+  #nav-item:before {
+    display: none;
   }
 </style>

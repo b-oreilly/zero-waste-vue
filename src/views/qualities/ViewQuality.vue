@@ -1,6 +1,11 @@
 <template>
     <v-container>
         <div class="footer-offset">
+            <v-row no-gutters>
+                <div class="d-flex justify-center col">
+                    <h1 class="mainItemTitle">Quality</h1>
+                </div>
+            </v-row>
             <v-col>
                 <v-row no-gutters>
                     <v-col cols=2>
@@ -111,5 +116,4 @@
     .mainItemTitle {
         vertical-align: middle;
     }
-
 </style>
