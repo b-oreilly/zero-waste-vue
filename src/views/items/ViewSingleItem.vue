@@ -105,7 +105,6 @@
         },
         data() {
             return {
-                // userID: this.localStorage.getItem('userID'),
                 item: {},
                 user: {}
             }

@@ -37,6 +37,22 @@ const routes = [{
     name: "editAccount",
     component: () => import("@/views/users/EditAccount")
   },
+
+  // Messages
+
+  {
+    path: "/user/messages",
+    name: "messages",
+    component: () => import('./views/messages/Messages.vue')
+  },
+  {
+    path: "/user/messages/create",
+    name: "createMessage",
+    component: () => import('./views/messages/CreateMessage.vue')
+  },
+
+  // User Items
+
   {
     path: "/items/user/:id",
     name: "viewUserItems",
@@ -47,7 +63,9 @@ const routes = [{
     name: "viewUser",
     component: () => import('./views/users/ViewUser.vue')
   },
+
   // Items
+
   {
     path: "/items",
     name: "viewItems",
