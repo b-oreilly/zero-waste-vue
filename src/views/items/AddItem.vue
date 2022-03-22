@@ -23,16 +23,16 @@
                         :rules="descriptionRules" label="Description" full-width rows="2" row-height="20" required>
                     </v-textarea>
 
-                    <v-select id="categoryID" name="categoryID" v-model="form.categoryID" :items="categories"
+                    <v-autocomplete id="categoryID" name="categoryID" v-model="form.categoryID" :items="categories"
                         item-text="name" item-value="_id" label="Category" :rules="categoryRules" required>
-                    </v-select>
+                    </v-autocomplete>
 
-                    <v-select id="qualityID" name="qualityID" v-model="form.qualityID" :items="qualities"
+                    <v-autocomplete id="qualityID" name="qualityID" v-model="form.qualityID" :items="qualities"
                         item-text="name" item-value="_id" label="Quality" :rules="qualityRules" required>
-                    </v-select>
+                    </v-autocomplete>
 
                     <v-text-field id="price" name="price" v-model="form.price" :rules="priceRules" label="Price"
-                        required>
+                        required prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
                     <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">

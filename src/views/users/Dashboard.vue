@@ -101,7 +101,6 @@
                                         <v-icon>mdi-star</v-icon>
                                         <v-icon>mdi-star</v-icon>
                                         <v-icon>mdi-star</v-icon>
-                                        <v-icon>mdi-star</v-icon>
                                     </p>
                                     <v-card-subtitle style="word-break: break-word" align="left" v-if="review.message">
                                         "{{ review.message }}"

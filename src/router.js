@@ -64,14 +64,14 @@ const routes = [{
     component: () => import('./views/items/ViewSingleItem.vue')
   },
   {
-    path: "/items/edit",
-    name: "editItem",
-    component: () => import('./views/items/EditItem.vue')
-  },
-  {
     path: "/items/:id",
     name: "viewSingleItem",
     component: () => import('./views/items/ViewSingleItem.vue')
+  },
+  {
+    path: "/items/edit/:id",
+    name: "editItem",
+    component: () => import('./views/items/EditItem.vue')
   },
 
   // Categories

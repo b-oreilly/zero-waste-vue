@@ -11,6 +11,11 @@
                     <h2 class="mainItemTitle">Item</h2>
                 </div>
                 <v-col cols=2>
+                    <div v-if="item.userID._id == user._id">
+                        <v-btn text rounded :to="{ name: 'editItem', params: { id: this.$route.params.id }}">
+                            Edit
+                        </v-btn>
+                    </div>
                 </v-col>
             </v-row>
             <br>
@@ -100,14 +105,22 @@
         },
         data() {
             return {
-                item: {}
+                // userID: this.localStorage.getItem('userID'),
+                item: {},
+                user: {}
             }
         },
         mounted() {
-            this.getData();
+            this.getItemData();
+            this.getUserDetails();
         },
         methods: {
-            getData() {
+            getUserDetails() {
+                if (localStorage.getItem("user")) {
+                    this.user = JSON.parse(localStorage.getItem("user"))
+                }
+            },
+            getItemData() {
                 axios.get(`/items/${this.$route.params.id}`)
                     .then(response => {
                         console.log(response.data)
