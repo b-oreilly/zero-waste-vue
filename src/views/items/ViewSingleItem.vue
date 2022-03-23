@@ -27,10 +27,10 @@
                         <v-img src="https://picsum.photos/400/300?random" />
                     </span>
                 </v-col>
-                <v-card md=6 sm=12 flat class="overflow-hidden footer-offset">
-                    <div class="itemBody">
+                <v-col md=6 sm=12>
+                    <v-card flat class="overflow-hidden footer-offset">
+                        <div class="itemBody">
 
-                        <v-col>
                             <v-card-title class="pt-0">
                                 <h2> {{ item.title }} </h2>
                             </v-card-title>
@@ -67,28 +67,55 @@
                                     </router-link>
                                 </div>
 
+                                <p>Date posted: <br> {{ new Date(item.createdAt).toLocaleString() }}</p>
+                                <p v-if="item.updatedAt !== item.createdAt">
+                                    Updated at:<br>
+                                    {{ new Date(item.updatedAt).toLocaleString() }}</p>
+                                <p v-else></p>
 
-                                <p>Date Posted/Updated: <br> {{ new Date(item.updatedAt).toLocaleString() }}</p>
+                                <div v-if="item.userID._id !== user._id">
+                                    <v-btn elevation=0 rounded @click="dialog = !dialog" color="pink">Interested?
+                                    </v-btn>
+                                    <v-dialog v-model="dialog" max-width="500px">
+                                        <v-card>
+                                            <v-form ref="form" v-model="valid" lazy-validation>
+                                                <v-card-title style="word-break: break-word" align="left">Register your
+                                                    interest, watch or claim this item.</v-card-title>
+                                                    
+                                                <v-card-text>
+                                                    <v-select v-model="form.interactionID" :items="interactions"
+                                                        :rules="selectRules" item-text="name" item-value="_id" label="Select">
+                                                    </v-select>
+                                                </v-card-text>
 
-                                <!-- <p v-if="item.categoryID">Category: {{ item.category.name}}</p> -->
-                                <!-- <p>???? {{item.categoryID}}</p> -->
-                                <!-- <p> {{ Object.values(item.categoryID)[1] }} </p> -->
-
+                                                <v-card-actions>
+                                                    <v-spacer></v-spacer>
+                                                    <div class="pb-2">
+                                                        <v-btn rounded elevation=0 color="primary" :disabled="!valid"
+                                                            @click="userInteraction(), dialog = false">
+                                                            Submit
+                                                        </v-btn>
+                                                    </div>
+                                                </v-card-actions>
+                                            </v-form>
+                                        </v-card>
+                                    </v-dialog>
+                                </div>
 
                                 <!-- <p v-if="item.claimed">Claimed</p> -->
 
 
                             </v-card-text>
-                        </v-col>
 
 
-                        <!-- <v-row>
-                    <v-btn text rounded :to="{ name: 'editItem', params: { id: this.$route.params.id}}"
-                        variant="warning">Edit</v-btn>
-                    <v-btn text rounded class="delete" @click="deleteData()">Delete</v-btn>
-                </v-row> -->
-                    </div>
-                </v-card>
+                        </div>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <v-row class="d-flex justify-end col">
+                <div v-if="item.userID._id == user._id">
+                    <v-btn text rounded class="delete" variant="warning" @click="deleteItem()">Delete</v-btn>
+                </div>
             </v-row>
         </v-col>
     </v-container>
@@ -105,9 +132,35 @@
         },
         data() {
             return {
-                // userID: this.localStorage.getItem('userID'),
                 item: {},
-                user: {}
+                user: {},
+                dialog: false,
+                form: {
+                    userID: "",
+                    itemID: "",
+                    interactionID: ""
+                },
+                interactions: [{
+                        _id: "6213c3086ca2465ab2530533",
+                        name: 'Save'
+                    },
+                    {
+                        _id: "6213c32a6ca2465ab2530536",
+                        name: 'Claim'
+                    },
+                    {
+                        _id: "6213c3306ca2465ab2530538",
+                        name: 'Watch'
+                    },
+                    {
+                        _id: "6213c3446ca2465ab253053a",
+                        name: 'Mark as Interested'
+                    },
+                ],
+                valid: true,
+                selectRules: [
+                    v => !!v || 'Selection required',
+                ],
             }
         },
         mounted() {
@@ -128,15 +181,8 @@
                     })
                     .catch(error => console.log(error))
             },
-            deleteData() {
-                let token = localStorage.getItem('token')
-
-                axios.delete(`/items/${this.$route.params.id}`, {
-                        headers: {
-                            "Accepted": `application/json`,
-                            "Authorization": `Bearer ${token}`
-                        }
-                    })
+            deleteItem() {
+                axios.delete(`/items/${this.$route.params.id}`)
                     .then(response => {
                         console.log(response.data)
                         this.$router.push({
@@ -149,6 +195,26 @@
                         console.log(error.response.data)
                     })
 
+            },
+            userInteraction() {
+                if (this.$refs.form.validate()) {
+                    axios
+                        .post(`/user_interactions`, {
+                            userID: this.user._id,
+                            itemID: this.item._id,
+                            interactionID: this.form.interactionID
+                        })
+                        .then(response => {
+                            console.log(response.data)
+                            this.$router.push({
+                                name: "viewsSingleItem"
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            console.log(err.response.data)
+                        })
+                }
             },
         }
     };

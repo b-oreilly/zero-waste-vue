@@ -53,7 +53,7 @@
                   </v-list-item-title>
                 </v-list-item>
                 <v-list-item class="justify-center">
-                  <v-btn depressed rounded id="logout" @click="logout()">Logout</v-btn>
+                  <v-btn depressed rounded id="logout" class="mb-3" @click="logout()">Logout</v-btn>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -146,9 +146,9 @@
     border-bottom-left-radius: 30px;
   }
 
-  .v-list {
+  /* .v-list {
     padding: 0px !important;
-  }
+  } */
 
   /* #nav-item:after {
     background: none repeat scroll 0 0 transparent;

@@ -33,9 +33,9 @@ const routes = [{
     component: () => import('./views/users/Dashboard.vue')
   },
   {
-    path: "/account/edit",
+    path: "/account/edit/:id",
     name: "editAccount",
-    component: () => import("@/views/users/EditAccount")
+    component: () => import("@/views/users/EditAccount.vue")
   },
   {
     path: "/items/user/:id",

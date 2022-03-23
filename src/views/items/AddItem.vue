@@ -19,6 +19,7 @@
                         label="Item Title" required>
                     </v-text-field>
 
+                    <!-- Validation colour not working on label -->
                     <v-textarea id="description" name="description" v-model="form.description" :counter="250"
                         :rules="descriptionRules" label="Description" full-width rows="2" row-height="20" required>
                     </v-textarea>
@@ -116,7 +117,6 @@
                     name: 'Heavily Used'
                 }
             ],
-
             valid: true,
             titleRules: [
                 v => !!v || 'Title is required',
@@ -156,7 +156,6 @@
             },
             addItem() {
                 let token = localStorage.getItem('token')
-                // let userID = localStorage.getItem('userID')
 
                 if (this.$refs.form.validate()) {
                     axios

@@ -64,7 +64,56 @@
                     </v-row>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col>
+                    <div class="d-flex justify-center col">
+                        <h3>Your Saved/Watching/Claimed List</h3>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-divider />
+            <v-row no-gutters>
+                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in filteredInteractions"
+                    :key="interaction._id">
 
+                    <v-card-text v-if="interaction.interactionID.interactionName == 'Claim'">Claimed</v-card-text>
+                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Watch'">Watching</v-card-text>
+                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Save'">Saved</v-card-text>
+                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Interested'">Interested
+                    </v-card-text>
+
+                    <v-card flat class="pt-3 ma-2">
+                        <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                        <span v-else>
+                            <v-img src="https://picsum.photos/400/300?random" />
+                        </span>
+                        <router-link class="item-title"
+                            :to="{ name: 'viewSingleItem', params: { id:interaction.itemID._id }}">
+                            {{ interaction.itemID.title }}
+                        </router-link>
+                        <br>
+                        <v-card-text>
+                            <router-link class="item-title"
+                                :to="{ name: 'viewUser', params: { id: interaction.itemID.userID._id }}">
+                                {{ interaction.itemID.userID.username }}
+                            </router-link>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <div v-if="filteredInteractions == 0">
+                <v-row>
+                    <v-col>
+                        <div class="d-flex justify-center col">
+                            <p>
+                                No item interactions.
+                            </p>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+
+            <!-- Reviews -->
             <v-row>
                 <v-col>
                     <div class="d-flex justify-center col">
@@ -119,12 +168,6 @@
                     </div>
                 </v-col>
             </v-row>
-            <!-- :img-src="gif.images.fixed_width.url" :img-alt="gif.title" -->
-            <!-- <v-card-title>
-                        <router-link :to="{ name: 'account', params: { id:user._id }}">{{ user.first_name }}
-                        </router-link>
-                    </v-card-title> -->
-
         </v-card>
     </v-container>
 </template>
@@ -144,13 +187,20 @@
                 item: {},
                 items: [],
                 review: {},
-                reviews: []
+                reviews: [],
+                interactions: [],
+                interaction: {}
             }
         },
         computed: {
             filteredItems: function () {
                 return this.items.filter(item => {
                     return item.userID._id == localStorage.getItem('userID')
+                })
+            },
+            filteredInteractions: function () {
+                return this.interactions.filter(interaction => {
+                    return interaction.userID._id == localStorage.getItem('userID')
                 })
             }
         },
@@ -165,14 +215,31 @@
                 .then(response => {
                     this.reviews = response.data
                 })
-                .catch(error => console.log(error)),
-                this.getUserDetails();
+                .catch(error => console.log(error))
+
+            this.getUserDetails();
+            this.getUserInteraction();
         },
         methods: {
             getUserDetails() {
                 if (localStorage.getItem("user")) {
                     this.user = JSON.parse(localStorage.getItem("user"))
                 }
+            },
+            getUserInteraction() {
+                axios
+                    .get(`/user_interactions`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.interactions = response.data
+                        // this.$router.push({
+                        //     name: "viewItems"
+                        // })
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        console.log(err.response.data)
+                    })
             }
         }
     }
