@@ -2,25 +2,25 @@
     <v-container>
         <div class="footer-offset">
             <br>
-            <h1>Items</h1><br>
+            <h1>Item Categories</h1><br>
             <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
             <v-row no-gutters>
-                <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                <v-col class="v-card-columns" v-for="category in categories" :key="category._id" cols="12" sm="3">
                     <v-card flat class="pt-3 ma-2">
-                        <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                        <v-img v-if="category.photo">{{ category.photo }}</v-img>
                         <span v-else>
                             <v-img src="https://picsum.photos/400/300?random" />
                         </span>
                         <v-card-title style="word-break: break-word" align="left">
-                            <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                                {{ item.title }}
+                            <router-link class="item-title" :to="{ name: 'viewCategory', params: { id: category._id }}">
+                                {{ category.name }}
                             </router-link>
                         </v-card-title>
-                        <v-card-text v-if="item.categoryID">
-                            <router-link :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
+                        <!-- <v-card-text v-if="item.categoryID">
+                            <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
                                 <p> {{ item.categoryID.name }} </p>
                             </router-link>
-                        </v-card-text>
+                        </v-card-text> -->
                     </v-card>
                 </v-col>
             </v-row>
@@ -32,18 +32,18 @@
     import axios from '@/config'
 
     export default {
-        name: 'viewItems',
+        name: 'allCategories',
         components: {},
         data() {
             return {
-                item: {},
-                items: []
+                category: {},
+                categories: []
             }
         },
         mounted() {
-            axios.get('/items')
+            axios.get('/categories')
                 .then(response => {
-                    this.items = response.data
+                    this.categories = response.data
                     console.log(response.data)
                 })
                 .catch(error => console.log(error))

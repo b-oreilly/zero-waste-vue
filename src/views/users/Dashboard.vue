@@ -11,7 +11,7 @@
                     <h2>Account Details</h2>
                 </div>
                 <v-col cols=2>
-                    <v-btn text rounded :to="{ name: 'editAccount', params: { id: this.$route.params.id }}">Edit</v-btn>
+                    <v-btn text rounded :to="{ name: 'editAccount', params: { id: this.user._id }}">Edit</v-btn>
                 </v-col>
             </v-row>
             <v-row class="mt-4">
@@ -88,7 +88,7 @@
                             <v-img src="https://picsum.photos/400/300?random" />
                         </span>
                         <router-link class="item-title"
-                            :to="{ name: 'viewSingleItem', params: { id:interaction.itemID._id }}">
+                            :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
                             {{ interaction.itemID.title }}
                         </router-link>
                         <br>
@@ -192,6 +192,45 @@
                 interaction: {}
             }
         },
+        mounted() {
+            this.getItems();
+            this.getUserDetails();
+            this.getUserReviews();
+            this.getUserInteractions();
+        },
+        methods: {
+            getUserDetails() {
+                if (localStorage.getItem("user")) {
+                    this.user = JSON.parse(localStorage.getItem("user"))
+                }
+            },
+            getUserInteractions() {
+                axios
+                    .get(`/user_interactions`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.interactions = response.data
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        console.log(err.response.data)
+                    })
+            },
+            getItems() {
+                axios.get('/items')
+                    .then(response => {
+                        this.items = response.data
+                    })
+                    .catch(error => console.log(error))
+            },
+            getUserReviews() {
+                axios.get('/reviews')
+                    .then(response => {
+                        this.reviews = response.data
+                    })
+                    .catch(error => console.log(error))
+            }
+        },
         computed: {
             filteredItems: function () {
                 return this.items.filter(item => {
@@ -200,46 +239,8 @@
             },
             filteredInteractions: function () {
                 return this.interactions.filter(interaction => {
-                    return interaction.userID._id == localStorage.getItem('userID')
+                    return interaction.userID._id == this.user._id
                 })
-            }
-        },
-        mounted() {
-            axios.get('/items')
-                .then(response => {
-                    this.items = response.data
-                })
-                .catch(error => console.log(error)),
-
-                axios.get('/reviews')
-                .then(response => {
-                    this.reviews = response.data
-                })
-                .catch(error => console.log(error))
-
-            this.getUserDetails();
-            this.getUserInteraction();
-        },
-        methods: {
-            getUserDetails() {
-                if (localStorage.getItem("user")) {
-                    this.user = JSON.parse(localStorage.getItem("user"))
-                }
-            },
-            getUserInteraction() {
-                axios
-                    .get(`/user_interactions`)
-                    .then(response => {
-                        console.log(response.data)
-                        this.interactions = response.data
-                        // this.$router.push({
-                        //     name: "viewItems"
-                        // })
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        console.log(err.response.data)
-                    })
             }
         }
     }

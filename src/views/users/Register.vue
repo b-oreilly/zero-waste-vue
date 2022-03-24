@@ -8,35 +8,32 @@
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-row>
                                 <v-col>
-                                    <v-text-field v-model="form.first_name" :counter="25" :rules="nameRules"
-                                        label="First Name" required>
+                                    <v-text-field v-model="form.first_name" :rules="nameRules"
+                                        label="First Name" required autocapitalize="on">
                                     </v-text-field>
                                 </v-col>
                                 <v-col>
-                                    <v-text-field v-model="form.last_name" :counter="25" :rules="nameRules"
-                                        label="Last Name" required>
+                                    <v-text-field v-model="form.last_name" :rules="nameRules"
+                                        label="Last Name" required autocapitalize="on">
                                     </v-text-field>
                                 </v-col>
                             </v-row>
 
-                            <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username"
-                                required>
+                            <v-text-field v-model="form.username" :rules="usernameRules" label="Username"
+                                required autocapitalize="none">
                             </v-text-field>
 
-                            <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
+                            <v-autocomplete prepend-inner-icon="mdi-map-marker" v-model="form.locationID"
+                                :rules="locationRules" :items="locations" item-text="name" item-value="_id"
+                                spellcheck="false">
+                            </v-autocomplete>
+
+                            <v-text-field v-model="form.email" :rules="emailRules" label="Email" required
+                                autocomplete="email" autocapitalize="none">
                             </v-text-field>
 
-                            <v-text-field type="password" v-model="form.password" :counter="40" :rules="passwordRules"
+                            <v-text-field type="password" v-model="form.password" :rules="passwordRules"
                                 label="Password" autocomplete="on" required></v-text-field>
-
-                            <!-- LOCATION PICKER  -->
-                            <v-text-field prepend-inner-icon="mdi-map-marker"></v-text-field>
-
-                            <v-text-field type="number" v-model="form.longitude" :counter="40" :rules="locationRules"
-                                label="Location" autocomplete="on" required></v-text-field>
-
-                            <v-text-field type="number" v-model="form.latitude" :counter="40" :rules="locationRules"
-                                label="Location" autocomplete="on" required></v-text-field>
 
                             <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="register()">
                                 Sign up
@@ -80,14 +77,15 @@
                 last_name: "",
                 username: "",
                 email: "",
-                password: "",
+                locationID: "",
+                password: ""
             },
             valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
                 v => (v && v.length >= 3) || 'Name must be at least 3 characters',
             ],
-            userNameRules: [
+            usernameRules: [
                 v => !!v || 'Username is required',
                 v => (v && v.length >= 5) || 'Username must be at least 5 characters',
             ],
@@ -95,10 +93,17 @@
                 v => !!v || 'Email required',
                 v => /.+@.+\..+/.test(v) || 'Email must be valid',
             ],
+            locationRules: [
+                v => !!v || 'Please select a location'
+            ],
             passwordRules: [
                 v => !!v || 'Password required',
                 v => (v && v.length >= 6) || 'Password must be at least 6 characters',
-            ]
+            ],
+            locations: [{
+                name: 'Sandymount',
+                _id: "6238cfeec7c53eb903b2dd87"
+            }]
         }),
         computed: {
             ...mapState(["loggedIn"])

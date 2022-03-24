@@ -30,7 +30,7 @@
                                 <!-- {{ item.title }} -->
                             </v-card-title>
                             <v-card-text v-if="item.qualityID.name">
-                                <router-link :to="{ name: 'viewQuality', params: { id: item.qualityID._id }}">
+                                <router-link :to="{ name: 'viewSingleQuality', params: { id: item.qualityID._id }}">
                                     <p> {{ item.qualityID.name }} </p>
                                 </router-link>
                             </v-card-text>

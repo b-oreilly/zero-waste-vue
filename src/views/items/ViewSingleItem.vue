@@ -41,11 +41,11 @@
 
                                 <v-divider /><br>
 
-                                <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
+                                <router-link :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
                                     <p> {{ item.categoryID.name }} </p>
                                 </router-link>
 
-                                <router-link :to="{ name: 'viewQuality', params: { id: item.qualityID._id }}">
+                                <router-link :to="{ name: 'viewSingleQuality', params: { id: item.qualityID._id }}">
                                     <p> {{ item.qualityID.name }} </p>
                                 </router-link>
 

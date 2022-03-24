@@ -32,29 +32,18 @@
                     <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
                     </v-text-field>
 
+                    <v-autocomplete prepend-inner-icon="mdi-map-marker" v-model="form.locationID" :rules="locationRules"
+                        :items="locations" item-text="name" item-value="_id"></v-autocomplete>
+
                     <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
                     </v-text-field>
-
-                    <v-text-field type="password" v-model="form.password" :rules="passwordRules" label="Password"
-                        autocomplete="on" required></v-text-field>
-
-                    <!-- <v-text-field prepend-inner-icon="mdi-map-marker"></v-text-field> -->
-
-                    <v-text-field type="number" v-model="form.longitude" :counter="40" :rules="locationRules"
-                        label="Location" autocomplete="on" required></v-text-field>
-
-                    <v-text-field type="number" v-model="form.latitude" :counter="40" :rules="locationRules"
-                        label="Location" autocomplete="on" required></v-text-field>
-
-                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input> -->
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
                         Edit
                     </v-btn>
 
                     <v-btn rounded text class="mr-4 reset" @click="reset">
-                        Reset Form
+                        Reset
                     </v-btn>
                 </v-form>
             </v-card>
@@ -77,10 +66,8 @@
                     first_name: "",
                     last_name: "",
                     username: "",
-                    longitude: "",
-                    latitude: "",
+                    locationID: "",
                     email: "",
-                    password: "",
                 },
                 valid: true,
                 nameRules: [
@@ -100,37 +87,12 @@
                     v => (v && v.length >= 6) || 'Password must be at least 6 characters',
                 ],
                 locationRules: [
-                    v => !!v || 'Location required'
+                    v => !!v || 'Select a location'
                 ],
-                // hasSaved: false,
-                // isEditing: null,
-                // model: null,
-                // states: [{
-                //         name: 'Dún Laoghaire',
-                //         lat: 1,
-                //         long: 2
-                //     },
-                //     {
-                //         name: 'Blackrock',
-                //         lat: 1,
-                //         long: 2
-                //     },
-                //     {
-                //         name: 'Monkstown',
-                //         lat: 1,
-                //         long: 2
-                //     },
-                //     {
-                //         name: 'Shankill',
-                //         lat: 1,
-                //         long: 2
-                //     },
-                //     {
-                //         name: 'Bray',
-                //         lat: 1,
-                //         long: 2
-                //     },
-                // ],
+                locations: [{
+                    name: 'Sandymount',
+                    _id: "6238cfeec7c53eb903b2dd87"
+                }]
             }
         },
         mounted() {
@@ -138,18 +100,6 @@
             this.getAccountDetails();
         },
         methods: {
-            // customFilter(item, queryText) {
-            //     const textOne = item.name.toLowerCase()
-            //     const textTwo = item.abbr.toLowerCase()
-            //     const searchText = queryText.toLowerCase()
-
-            //     return textOne.indexOf(searchText) > -1 ||
-            //         textTwo.indexOf(searchText) > -1
-            // },
-            // save() {
-            //     this.isEditing = !this.isEditing
-            //     this.hasSaved = true
-            // },
             getUserDetails() {
                 if (localStorage.getItem("user")) {
                     this.user = JSON.parse(localStorage.getItem("user"))
@@ -159,14 +109,13 @@
                 this.$refs.form.reset()
             },
             getAccountDetails() {
-                axios.get(`/users/${localStorage.getItem("userID")}`)
+                axios.get(`/users/${ this.user._id }`)
                     .then(response => {
                         this.user = response.data
                         this.$set(this.form, 'first_name', this.user.first_name)
                         this.$set(this.form, 'last_name', this.user.last_name)
                         this.$set(this.form, 'username', this.user.username)
-                        this.$set(this.form, 'longitude', this.user.longitude)
-                        this.$set(this.form, 'latitude', this.user.latitude)
+                        this.$set(this.form, 'locationID', this.user.locationID.name)
                         this.$set(this.form, 'email', this.user.email)
                         this.$set(this.form, 'password', this.user.password)
                     })
@@ -174,18 +123,20 @@
             },
             editAccount() {
                 let token = localStorage.getItem('token')
-                // let userID = localStorage.getItem('userID')
+                this.user = localStorage.getItem('user')
 
                 if (this.$refs.form.validate()) {
+
+                    this.user = JSON.parse(localStorage.getItem('user'))
+
                     axios
-                        .put(`/users/${this.$route.params.id}`, {
+                        .put(`/users/${ this.user._id }`, {
                             first_name: this.form.first_name,
                             last_name: this.form.last_name,
                             username: this.form.username,
-                            longitude: this.form.longitude,
-                            latitude: this.form.latitude,
+                            locationID: this.form.locationID,
                             email: this.form.email,
-                            password: this.form.passward
+                            password: this.form.password
                         }, {
                             headers: {
                                 "Authorization": `Bearer ${token}`
@@ -194,8 +145,10 @@
                         .then(response => {
                             console.log(response.data)
                             this.$router.push({
-                                name: "account"
+                                name: "Dashboard"
                             })
+                            localStorage.setItem('user', JSON.stringify(response.data));
+                            console.log(this.user);
                         })
                         .catch(err => {
                             console.log(err)

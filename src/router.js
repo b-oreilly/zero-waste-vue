@@ -33,7 +33,7 @@ const routes = [{
     component: () => import('./views/users/Dashboard.vue')
   },
   {
-    path: "/account/edit/:id",
+    path: "/account/edit",
     name: "editAccount",
     component: () => import("@/views/users/EditAccount.vue")
   },
@@ -64,30 +64,33 @@ const routes = [{
     component: () => import('./views/items/ViewSingleItem.vue')
   },
   {
-    path: "/items/:id",
-    name: "viewSingleItem",
-    component: () => import('./views/items/ViewSingleItem.vue')
-  },
-  {
     path: "/items/edit/:id",
     name: "editItem",
     component: () => import('./views/items/EditItem.vue')
   },
 
   // Categories
-
+  {
+    path: "/items/category/all",
+    name: "allCategories",
+    component: () => import('./views/categories/AllCategories.vue')
+  },
   {
     path: "/items/category/:id",
-    name: "viewCategory",
-    component: () => import('./views/categories/ViewCategory.vue')
+    name: "viewSingleCategory",
+    component: () => import('./views/categories/ViewSingleCategory.vue')
   },
 
   // Qualities
-
+  {
+    path: "/items/quality/all",
+    name: "allQualities",
+    component: () => import('./views/qualities/AllQualities.vue')
+  },
   {
     path: "/items/quality/:id",
-    name: "viewQuality",
-    component: () => import('./views/qualities/ViewQuality.vue')
+    name: "viewSingleQuality",
+    component: () => import('./views/qualities/ViewSingleQuality.vue')
   },
 
   // 404 Page not found

@@ -58,7 +58,7 @@
                 // error: [],
                 user: [],
                 form: {
-                    email: "admin@zero-waste.com",
+                    email: "admin@zerowaste.ie",
                     password: "secret",
                 },
                 valid: true,

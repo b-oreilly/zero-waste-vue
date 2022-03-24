@@ -58,7 +58,7 @@
     import GoBack from '@/components/GoBack'
 
     export default {
-        name: "ViewCategory",
+        name: "ViewSingleQuality",
         components: {
             GoBack
         },
@@ -70,11 +70,11 @@
             }
         },
         mounted() {
-            this.getItemCategory();
-            this.getCategory();
+            this.getItemQuality();
+            this.getQuality();
         },
         methods: {
-            getItemCategory() {
+            getItemQuality() {
                 axios.get(`/items/quality/${this.$route.params.id}`)
                     .then(response => {
                         console.log(response.data)
@@ -82,7 +82,7 @@
                     })
                     .catch(error => console.log(error))
             },
-            getCategory() {
+            getQuality() {
                 axios.get(`/qualities/${this.$route.params.id}`)
                     .then(response => {
                         console.log(response.data)

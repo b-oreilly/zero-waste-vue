@@ -41,7 +41,7 @@
                     </router-link>
                   </v-card-title>
                   <v-card-text v-if="item.categoryID">
-                    <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
+                    <router-link :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
                       <p> {{ item.categoryID.name }} </p>
                     </router-link>
                   </v-card-text>
