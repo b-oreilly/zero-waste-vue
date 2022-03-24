@@ -32,7 +32,7 @@
                     <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
                     </v-text-field>
 
-                    <v-autocomplete prepend-inner-icon="mdi-map-marker" v-model="form.locationID" :rules="locationRules"
+                    <v-autocomplete prepend-inner-icon="mdi-map-marker" placeholder="Location" spellcheck="false" v-model="form.locationID" :rules="locationRules"
                         :items="locations" item-text="name" item-value="_id"></v-autocomplete>
 
                     <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
@@ -62,6 +62,7 @@
         data() {
             return {
                 user: {},
+                locations: [],
                 form: {
                     first_name: "",
                     last_name: "",
@@ -89,15 +90,12 @@
                 locationRules: [
                     v => !!v || 'Select a location'
                 ],
-                locations: [{
-                    name: 'Sandymount',
-                    _id: "6238cfeec7c53eb903b2dd87"
-                }]
             }
         },
         mounted() {
             this.getUserDetails();
             this.getAccountDetails();
+            this.getLocations();
         },
         methods: {
             getUserDetails() {
@@ -118,6 +116,13 @@
                         this.$set(this.form, 'locationID', this.user.locationID.name)
                         this.$set(this.form, 'email', this.user.email)
                         this.$set(this.form, 'password', this.user.password)
+                    })
+                    .catch(error => console.log(error))
+            },
+            getLocations() {
+                axios.get(`/locations`)
+                    .then(response => {
+                        this.locations = response.data
                     })
                     .catch(error => console.log(error))
             },

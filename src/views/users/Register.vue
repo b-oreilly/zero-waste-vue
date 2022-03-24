@@ -8,23 +8,23 @@
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-row>
                                 <v-col>
-                                    <v-text-field v-model="form.first_name" :rules="nameRules"
-                                        label="First Name" required autocapitalize="on">
+                                    <v-text-field v-model="form.first_name" :rules="nameRules" label="First Name"
+                                        required autocapitalize="on">
                                     </v-text-field>
                                 </v-col>
                                 <v-col>
-                                    <v-text-field v-model="form.last_name" :rules="nameRules"
-                                        label="Last Name" required autocapitalize="on">
+                                    <v-text-field v-model="form.last_name" :rules="nameRules" label="Last Name" required
+                                        autocapitalize="on">
                                     </v-text-field>
                                 </v-col>
                             </v-row>
 
-                            <v-text-field v-model="form.username" :rules="usernameRules" label="Username"
-                                required autocapitalize="none">
+                            <v-text-field v-model="form.username" :rules="usernameRules" label="Username" required
+                                autocapitalize="none">
                             </v-text-field>
 
                             <v-autocomplete prepend-inner-icon="mdi-map-marker" v-model="form.locationID"
-                                :rules="locationRules" :items="locations" item-text="name" item-value="_id"
+                                :rules="locationRules" :items="locations" item-text="name" item-value="_id" placeholder="Location"
                                 spellcheck="false">
                             </v-autocomplete>
 
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+    import axios from '@/config'
     import {
         mapState
     } from 'vuex'
@@ -72,6 +73,7 @@
     export default {
         name: "Home",
         data: () => ({
+            locations: [],
             form: {
                 first_name: "",
                 last_name: "",
@@ -99,14 +101,13 @@
             passwordRules: [
                 v => !!v || 'Password required',
                 v => (v && v.length >= 6) || 'Password must be at least 6 characters',
-            ],
-            locations: [{
-                name: 'Sandymount',
-                _id: "6238cfeec7c53eb903b2dd87"
-            }]
+            ]
         }),
         computed: {
             ...mapState(["loggedIn"])
+        },
+        mounted() {
+            this.getLocations();
         },
         methods: {
             reset() {
@@ -116,7 +117,14 @@
                 if (this.$refs.form.validate()) {
                     this.$store.dispatch('register', this.form)
                 }
-            }
+            },
+            getLocations() {
+                axios.get(`/locations`)
+                    .then(response => {
+                        this.locations = response.data
+                    })
+                    .catch(error => console.log(error))
+            },
         }
     };
 </script>
