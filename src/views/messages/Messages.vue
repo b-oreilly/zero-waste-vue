@@ -7,10 +7,10 @@
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="message in messages" :key="message._id" cols="12" sm="3">
                     <v-card flat class="pt-3 ma-2">
-                        {{ message.message }}
-                        <p> Sent by:
+                        <v-card-title style="word-break: break-word" align="left">{{ message.message }}</v-card-title>
+                        <p class="pl-4"> Sent by:
                         {{ message.senderUserID.username }}</p>
-                        <p> Sent to:
+                        <p class="pl-4"> Sent to:
                         {{ message.receiverUserID.username }}</p>
                         <!-- <v-card-title style="word-break: break-word" align="left">
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">

@@ -16,8 +16,8 @@
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-autocomplete id="receiverUserID" name="receiverUserID" v-model="form.receiverUserID"
-                        :items="receivers" item-text="name" item-value="_id" label="Sent to:" :rules="receiverRules"
-                        required>
+                        :items="receivers" item-text="username" item-value="_id" label="Send to:" :rules="receiverRules"
+                        required spellcheck="false">
                     </v-autocomplete>
                     <br>
                     <v-textarea id="title" name="message" v-model="form.message" :counter="250" :rules="messageRules"
@@ -57,28 +57,7 @@
                 sent: true,
                 seen: false
             },
-            receivers: [{
-                    _id: "620a6299299db14c46a1eb9f",
-                    name: 'marcusfitzs'
-                },
-                {
-                    _id: "6213bbb37a415e232a33774e",
-                    name: 'sireeve'
-                },
-                {
-                    _id: "621607999bf8aca1102185b9",
-                    name: 'sirupert'
-                },
-                {
-                    _id: "62164a8d93bed495ac6dd18a",
-                    name: 'boreilly'
-                },
-                {
-                    _id: "62164c9693bed495ac6dd1b2",
-                    name: 'admin'
-                }
-            ],
-
+            receivers: [],
             valid: true,
             messageRules: [
                 v => !!v || 'Message is required',
@@ -90,6 +69,7 @@
         }),
         mounted() {
             this.getUserDetails();
+            this.getUsers();
         },
         methods: {
             getUserDetails() {
@@ -99,6 +79,13 @@
             },
             reset() {
                 this.$refs.form.reset()
+            },
+            getUsers() {
+                axios.get(`/users`)
+                    .then((response) => {
+                        this.receivers = response.data
+                    })
+                    .catch(error => console.log(error))
             },
             sendMessage() {
                 let token = localStorage.getItem('token')

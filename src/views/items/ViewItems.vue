@@ -21,6 +21,7 @@
                             <router-link :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
                                 <p> {{ item.categoryID.name }} </p>
                             </router-link>
+                        </v-card-text>
                         <p v-if="item.userID" class="pl-4">
                             <router-link :to="{ name: 'viewUser', params: { id:item.userID._id }}">
                                 <p v-if="item.userID.username"> {{ item.userID.username }}</p>
