@@ -73,41 +73,41 @@
                                     {{ new Date(item.updatedAt).toLocaleString() }}</p>
                                 <p v-else></p>
 
-                                <div v-if="item.userID._id !== user._id">
-                                    <v-btn elevation=0 rounded @click="dialog = !dialog" color="pink">Interested?
-                                    </v-btn>
-                                    <v-dialog v-model="dialog" max-width="500px">
-                                        <v-card>
-                                            <v-form ref="form" v-model="valid" lazy-validation>
-                                                <v-card-title style="word-break: break-word" align="left">Register your
-                                                    interest, watch or claim this item.</v-card-title>
-                                                    
-                                                <v-card-text>
-                                                    <v-select v-model="form.interactionID" :items="interactions"
-                                                        :rules="selectRules" item-text="name" item-value="_id" label="Select">
-                                                    </v-select>
-                                                </v-card-text>
+                                <div v-if="$store.state.loggedIn">
 
-                                                <v-card-actions>
-                                                    <v-spacer></v-spacer>
-                                                    <div class="pb-2">
-                                                        <v-btn rounded elevation=0 color="primary" :disabled="!valid"
-                                                            @click="userInteraction(), dialog = false">
-                                                            Submit
-                                                        </v-btn>
-                                                    </div>
-                                                </v-card-actions>
-                                            </v-form>
-                                        </v-card>
-                                    </v-dialog>
+                                    <div v-if="item.userID._id !== user._id">
+                                        <v-btn elevation=0 rounded @click="dialog = !dialog" color="pink">Interested?
+                                        </v-btn>
+                                        <v-dialog v-model="dialog" max-width="500px">
+                                            <v-card>
+                                                <v-form ref="form" v-model="valid" lazy-validation>
+                                                    <v-card-title style="word-break: break-word" align="left">Register
+                                                        your
+                                                        interest, watch or claim this item.</v-card-title>
+
+                                                    <v-card-text>
+                                                        <v-select v-model="form.interactionID" :items="interactions"
+                                                            :rules="selectRules" item-text="interactionName"
+                                                            item-value="_id" label="Select">
+                                                        </v-select>
+                                                    </v-card-text>
+
+                                                    <v-card-actions>
+                                                        <v-spacer></v-spacer>
+                                                        <div class="pb-2">
+                                                            <v-btn rounded elevation=0 color="primary"
+                                                                :disabled="!valid"
+                                                                @click="userInteraction(), dialog = false">
+                                                                Submit
+                                                            </v-btn>
+                                                        </div>
+                                                    </v-card-actions>
+                                                </v-form>
+                                            </v-card>
+                                        </v-dialog>
+                                    </div>
                                 </div>
-
-                                <!-- <p v-if="item.claimed">Claimed</p> -->
-
-
                             </v-card-text>
-
-
                         </div>
                     </v-card>
                 </v-col>
@@ -140,23 +140,7 @@
                     itemID: "",
                     interactionID: ""
                 },
-                interactions: [{
-                        _id: "6213c3086ca2465ab2530533",
-                        name: 'Save'
-                    },
-                    {
-                        _id: "6213c32a6ca2465ab2530536",
-                        name: 'Claim'
-                    },
-                    {
-                        _id: "6213c3306ca2465ab2530538",
-                        name: 'Watch'
-                    },
-                    {
-                        _id: "6213c3446ca2465ab253053a",
-                        name: 'Mark as Interested'
-                    },
-                ],
+                interactions: [],
                 valid: true,
                 selectRules: [
                     v => !!v || 'Selection required',
@@ -166,12 +150,21 @@
         mounted() {
             this.getItemData();
             this.getUserDetails();
+            this.getInteractions();
         },
         methods: {
             getUserDetails() {
                 if (localStorage.getItem("user")) {
                     this.user = JSON.parse(localStorage.getItem("user"))
                 }
+            },
+            getInteractions() {
+                axios.get(`/interactions`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.interactions = response.data
+                    })
+                    .catch(error => console.log(error))
             },
             getItemData() {
                 axios.get(`/items/${this.$route.params.id}`)
@@ -207,7 +200,7 @@
                         .then(response => {
                             console.log(response.data)
                             this.$router.push({
-                                name: "viewsSingleItem"
+                                name: "viewSingleItem"
                             })
                         })
                         .catch(err => {

@@ -42,7 +42,8 @@
                     </div>
                     <v-divider />
                     <v-row no-gutters>
-                        <v-col class="v-card-columns" v-for="item in filteredItems" :key="item._id" cols="12" sm="3">
+                        <v-col class="v-card-columns" v-for="item in filteredItems" :key="item._id" cols="12" lg="3"
+                            md="4" sm="6">
                             <v-card flat class="pt-3 ma-2">
                                 <v-img v-if="item.photo">{{ item.photo }}</v-img>
                                 <span v-else>
@@ -55,7 +56,8 @@
                                     </router-link>
                                 </v-card-title>
                                 <v-card-text v-if="item.categoryID">
-                                    <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
+                                    <router-link
+                                        :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
                                         <p> {{ item.categoryID.name }} </p>
                                     </router-link>
                                 </v-card-text>
@@ -72,13 +74,12 @@
                 </v-col>
             </v-row>
             <v-divider />
-            <v-row no-gutters>
-                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in filteredInteractions"
+           <v-row no-gutters>
+                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in interactions"
                     :key="interaction._id">
 
                     <v-card-text v-if="interaction.interactionID.interactionName == 'Claim'">Claimed</v-card-text>
-                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Watch'">Watching</v-card-text>
-                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Save'">Saved</v-card-text>
+                    <v-card-text v-else-if="interaction.interactionID.interactionName == 'Saved'">Saved</v-card-text>
                     <v-card-text v-else-if="interaction.interactionID.interactionName == 'Interested'">Interested
                     </v-card-text>
 
@@ -101,7 +102,7 @@
                     </v-card>
                 </v-col>
             </v-row>
-            <div v-if="filteredInteractions == 0">
+            <!-- <div v-if="filteredInteractions == 0">
                 <v-row>
                     <v-col>
                         <div class="d-flex justify-center col">
@@ -111,7 +112,7 @@
                         </div>
                     </v-col>
                 </v-row>
-            </div>
+            </div> -->
 
             <!-- Reviews -->
             <v-row>
@@ -122,7 +123,8 @@
                     <v-divider />
                     <div class="footer-offset">
                         <v-row no-gutters>
-                            <v-col class="v-card-columns" v-for="review in reviews" :key="review._id" cols="12" sm="3">
+                            <v-col class="v-card-columns" v-for="review in reviews" :key="review._id" cols="12" lg="3"
+                                md="4" sm="6">
                                 <v-card flat class="pt-3 ma-2">
 
                                     <p v-if="review.score == 1">
@@ -177,7 +179,7 @@
     // import GoBack from '@/components/GoBack.vue'
 
     export default {
-        name: 'Dashboard',
+        name: 'Account',
         components: {
             // GoBack
         },
@@ -188,8 +190,8 @@
                 items: [],
                 review: {},
                 reviews: [],
-                interactions: [],
-                interaction: {}
+                interaction: {},
+                interactions: []
             }
         },
         mounted() {
@@ -239,7 +241,12 @@
             },
             filteredInteractions: function () {
                 return this.interactions.filter(interaction => {
-                    return interaction.userID._id == this.user._id
+                    return interaction.userID._id == localStorage.getItem('userID')
+                })
+            },
+            filteredUserReviews: function () {
+                return this.reviews.filter(review => {
+                    return review.reviewedUserID._id == localStorage.getItem('userID')
                 })
             }
         }

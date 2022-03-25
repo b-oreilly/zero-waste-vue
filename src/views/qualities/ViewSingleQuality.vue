@@ -21,7 +21,7 @@
                 </v-row>
                 <br>
                 <v-row no-gutters>
-                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" lg="3" md="4" sm="6">
                         <v-card class="pt-3 ma-2" flat>
                             <v-img v-if="item.photo">{{ item.photo }}</v-img>
                             <v-else>

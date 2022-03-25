@@ -90,7 +90,7 @@
                 }
             },
             getItems() {
-                axios.get(`/items`)
+                axios.get(`/items/${this.route.params.id}`)
                     .then(response => {
                         this.items = response.data
                     })

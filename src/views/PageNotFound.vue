@@ -1,11 +1,44 @@
 <template>
     <v-container>
-        <div id="notFound">
-            <p id="main">404</p>
-            <p>Page not found</p>
-            <br>
-            <router-link id="return" to="/">Go back home</router-link>
+
+
+        <div class="hidden-sm-and-down" id="background">
+            <v-row>
+                <v-col>
+                    <p id="main">404</p>
+                    <p class="pb-2">Page not found</p>
+                    <v-btn rounded elevation="0" class="mb-8" id="return" to="/">
+                        Go back home
+                    </v-btn>
+                </v-col>
+            </v-row>
         </div>
+
+        <div class="hidden-md-and-up">
+            <v-row no-gutters>
+                <v-col>
+
+                    <v-row>
+                        <v-col>
+                            <div id="background-sm">
+                                <h1 id="main">404</h1>
+                                <h3 class="body-text mb-5">Page not found</h3>
+                                <v-btn flat rounded elevation="0" id="return-sm" to="/">
+                                    Go back home
+                                </v-btn>
+                            </div>
+
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
+        </div>
+
     </v-container>
 </template>
 
@@ -16,14 +49,21 @@
 <style>
     #main {
         font-family: 'Roboto Mono', monospace;
-        font-size: 100px !important;
-        color: #000;
-        margin-bottom: 0px;
-
+        font-weight: 400;
+        font-size: 80px !important;
     }
 
-    #notFound {
-        padding: 6em 17em 7.5em;
+    .body-text {
+        font-family: 'Roboto Mono', monospace;
+        text-transform: uppercase;
+    }
+
+    p {
+        text-align: center !important;
+    }
+
+    #background {
+        padding: 90px 235px 80px;
         border-radius: 900px;
         background-color: #20E25F;
         background-image: linear-gradient(to left, #153AB0, #20E25F);
@@ -32,9 +72,24 @@
     }
 
     #return {
-        margin-top: 10px;
-        width: 80%;
+        /* margin-top: 10px; */
+        width: 175px;
         text-decoration: none;
-        color: #000;
+    }
+
+    #background-sm {
+        padding: 140px 0px 155px;
+        border-radius: 900px;
+        background-color: #20E25F;
+        background-image: linear-gradient(to left, #153AB0, #20E25F);
+        color: #fff;
+        text-transform: uppercase;
+        margin: 25px;
+    }
+
+    #return-sm {
+        /* margin-top: 10px; */
+        width: 50%;
+        text-decoration: none;
     }
 </style>

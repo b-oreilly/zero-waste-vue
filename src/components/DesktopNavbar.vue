@@ -2,7 +2,7 @@
   <div>
     <v-toolbar flat>
       <!-- Left side - Site name/home -->
-      <v-col cols="4">
+      <v-col cols="3">
         <router-link to="/" class="d-flex justify-start">
           <v-toolbar-title id="title">
             Zero Waste
@@ -14,14 +14,35 @@
       <v-col class="d-flex justify-space-around">
         <v-toolbar-items>
           <div>
-            <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/items">Items</v-btn>
+            <v-menu open-on-hover offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/items" v-bind="attrs"
+                  v-on="on">Items</v-btn>
+              </template>
+              <v-list>
+                <v-list-item>
+                  <router-link to="/items/category/all">
+                    <v-list-item-title>Categories</v-list-item-title>
+                  </router-link>
+                  <v-list>
+                    <v-list-item>
+                    </v-list-item>
+                  </v-list>
+                </v-list-item>
+                <v-list-item>
+                  <router-link to="/items/quality/all">
+                    <v-list-item-title>Qualities</v-list-item-title>
+                  </router-link>
+                </v-list-item>
+              </v-list>
+            </v-menu>
             <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/about">About</v-btn>
           </div>
         </v-toolbar-items>
       </v-col>
 
       <!-- Right side - Login / User account options -->
-      <v-col cols="4" class="d-flex justify-end">
+      <v-col cols="3" class="d-flex justify-end">
         <v-toolbar-items>
           <div v-if="!$store.state.loggedIn">
             <v-btn depressed rounded id="signup" to="/register">Sign Up</v-btn>
@@ -29,9 +50,9 @@
           </div>
 
           <div v-if="$store.state.loggedIn">
-            <v-menu flat text offset-y>
+            <v-menu text offset-y class="">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn class="justify-center" text id="user" v-bind="attrs" v-on="on">
+                <v-btn class="justify-center mt-2" text rounded id="user" v-bind="attrs" v-on="on" :ripple="false">
                   User &nbsp; <v-icon>mdi-menu-down</v-icon>
                 </v-btn>
               </template>
@@ -53,7 +74,7 @@
                   </v-list-item-title>
                 </v-list-item>
                 <v-list-item class="justify-center">
-                  <v-btn depressed rounded id="logout" class="mb-3" @click="logout()">Logout</v-btn>
+                  <v-btn depressed rounded id="logout" class="mb-2" @click="logout()">Logout</v-btn>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -131,8 +152,10 @@
   #user {
     /* background-color: rgba(0, 0, 0, 0.06); */
     width: 140px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    /* padding-bottom: 10px; */
+    height: 55px;
+    /* border-top-left-radius: 20px;
+    border-top-right-radius: 20px; */
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
   }
@@ -146,9 +169,9 @@
     border-bottom-left-radius: 30px;
   }
 
-  /* .v-list {
+  .v-list {
     padding: 0px !important;
-  } */
+  }
 
   /* #nav-item:after {
     background: none repeat scroll 0 0 transparent;
@@ -167,7 +190,6 @@
     width: 100%;
     left: 0;
   } */
-
 
   .nav-item {
     border: solid;

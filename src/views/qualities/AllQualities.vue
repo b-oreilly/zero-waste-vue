@@ -5,17 +5,17 @@
             <h1>Item Qualities</h1><br>
             <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
             <v-row no-gutters>
-                <v-col class="v-card-columns" v-for="quality in qualities" :key="quality._id" cols="12" sm="3">
-                    <v-card flat class="pt-3 ma-2">
-                        <v-img v-if="quality.photo">{{ quality.photo }}</v-img>
+                <v-col class="v-card-columns" v-for="quality in qualities" :key="quality._id" cols="12" lg="3" md="4" sm="6">
+                    <v-card flat color="grey lighten-4" class="pt-3 ma-2 pb-3">
+                        <!-- <v-img v-if="category.photo">{{ category.photo }}</v-img>
                         <span v-else>
                             <v-img src="https://picsum.photos/400/300?random" />
-                        </span>
-                        <v-card-title style="word-break: break-word" align="left">
-                            <router-link class="item-title" :to="{ name: 'viewSingleCategory', params: { id: quality._id }}">
+                        </span> -->
+                        <h2 style="word-break: break-word" align="middle">
+                            <router-link class="item-title" :to="{ name: 'viewSingleQuality', params: { id: quality._id }}">
                                 {{ quality.name }}
                             </router-link>
-                        </v-card-title>
+                        </h2>
                         <!-- <v-card-text v-if="item.categoryID">
                             <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
                                 <p> {{ item.categoryID.name }} </p>

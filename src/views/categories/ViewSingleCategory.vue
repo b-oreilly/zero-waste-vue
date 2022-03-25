@@ -6,7 +6,6 @@
                     <h1 class="mainItemTitle">Category</h1>
                 </div>
             </v-row>
-            <v-divider />
             <v-col>
                 <v-row no-gutters>
                     <v-col cols=2>
@@ -22,13 +21,13 @@
                 </v-row>
                 <br>
                 <v-row no-gutters>
-                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" lg="3" md="4" sm="6">
                         <v-card class="pt-3 ma-2" flat>
                             <v-img v-if="item.photo">{{ item.photo }}</v-img>
                             <v-else>
                                 <v-img src="https://picsum.photos/400/300?random" />
                             </v-else>
-                            <v-card-title style="word-break: break-word">
+                            <v-card-title class="item-title" style="word-break: break-word">
                                 <router-link class="item-title"
                                     :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                     {{ item.title }}

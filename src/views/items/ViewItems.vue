@@ -5,7 +5,8 @@
             <h1>Items</h1><br>
             <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
             <v-row no-gutters>
-                <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
+                <v-col class="v-card-columns" v-for="item in filteredClaimedItems" :key="item._id" cols="12" lg="3"
+                    md="4" sm="6">
                     <v-card flat class="pt-3 ma-2">
                         <v-img v-if="item.photo">{{ item.photo }}</v-img>
                         <span v-else>
@@ -47,6 +48,13 @@
                     console.log(response.data)
                 })
                 .catch(error => console.log(error))
+        },
+        computed: {
+            filteredClaimedItems: function () {
+                return this.items.filter(item => {
+                    return item.claimed == false
+                })
+            }
         }
     }
 </script>

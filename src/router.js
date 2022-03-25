@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -29,13 +30,29 @@ const routes = [{
   },
   {
     path: "/account",
-    name: "Dashboard",
-    component: () => import('./views/users/Dashboard.vue')
+    name: "account",
+    component: () => import('./views/users/Account.vue'),
+    beforeEach: (to, from, next) => {
+      if (store.state.loggedIn == false) {
+        next('register');
+      } else {
+        next()
+      }
+    }
   },
   {
     path: "/account/edit",
     name: "editAccount",
-    component: () => import("@/views/users/EditAccount.vue")
+    component: () => import("@/views/users/EditAccount.vue"),
+    /* This checks if the user is logged in - 
+    if they are not, it redirects them to the register page. */
+    beforeEach: (to, from, next) => {
+      if (store.state.loggedIn == false) {
+        next('register');
+      } else {
+        next()
+      }
+    }
   },
   {
     path: "/items/user/:id",
@@ -56,7 +73,14 @@ const routes = [{
   {
     path: "/items/add",
     name: "addItem",
-    component: () => import('./views/items/AddItem.vue')
+    component: () => import('./views/items/AddItem.vue'),
+    beforeEach: (to, from, next) => {
+      if (store.state.loggedIn == false) {
+        next('register');
+      } else {
+        next()
+      }
+    }
   },
   {
     path: "/items/:id",
@@ -66,7 +90,14 @@ const routes = [{
   {
     path: "/items/edit/:id",
     name: "editItem",
-    component: () => import('./views/items/EditItem.vue')
+    component: () => import('./views/items/EditItem.vue'),
+    beforeEach: (to, from, next) => {
+      if (store.state.loggedIn == false) {
+        next('register');
+      } else {
+        next()
+      }
+    }
   },
 
   // Categories
@@ -93,7 +124,9 @@ const routes = [{
     component: () => import('./views/qualities/ViewSingleQuality.vue')
   },
 
-  // 404 Page not found
+  /* Catch-all route -
+     If the user tries to go to a route that doesn't exist, 
+     it will redirect them to the 404 page. */
   {
     path: '*',
     beforeEnter: (to, from, next) => {

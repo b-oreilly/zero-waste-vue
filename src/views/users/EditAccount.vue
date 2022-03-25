@@ -150,7 +150,7 @@
                         .then(response => {
                             console.log(response.data)
                             this.$router.push({
-                                name: "Dashboard"
+                                name: "account"
                             })
                             localStorage.setItem('user', JSON.stringify(response.data));
                             console.log(this.user);
