@@ -63,13 +63,17 @@
                     Account
                   </v-list-item-title>
                 </v-list-item>
-                <!-- <router-link :to="{ name: 'viewUser', params: { id:item.userID._id }}">
-                  <p v-if="item.userID.username"> {{ item.userID.username }}</p>
-                </router-link> -->
                 <v-list-item>
                   <v-list-item-title class="itemTitle">
                     <router-link :to="{ name: 'viewUserItems', params: { id: user._id }}">
                       Your Items
+                    </router-link>
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title class="itemTitle">
+                    <router-link to="/user/messages">
+                      Messages
                     </router-link>
                   </v-list-item-title>
                 </v-list-item>
