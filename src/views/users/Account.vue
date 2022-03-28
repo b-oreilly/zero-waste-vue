@@ -66,16 +66,18 @@
                     </v-row>
                 </v-col>
             </v-row>
+
+            <!-- Saved -->
             <v-row>
                 <v-col>
                     <div class="d-flex justify-center col">
-                        <h3>Your Saved/Watching/Claimed List</h3>
+                        <h3>Your Saved Items</h3>
                     </div>
                 </v-col>
             </v-row>
             <v-divider />
-           <v-row no-gutters>
-                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in interactions"
+            <v-row no-gutters>
+                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in filteredSavedInteractions"
                     :key="interaction._id">
 
                     <v-card-text v-if="interaction.interactionID.interactionName == 'Claim'">Claimed</v-card-text>
@@ -102,17 +104,109 @@
                     </v-card>
                 </v-col>
             </v-row>
-            <!-- <div v-if="filteredInteractions == 0">
+            <div v-if="filteredSavedInteractions == 0">
                 <v-row>
                     <v-col>
                         <div class="d-flex justify-center col">
                             <p>
-                                No item interactions.
+                                You haven't saved any items.
                             </p>
                         </div>
                     </v-col>
                 </v-row>
-            </div> -->
+            </div>
+
+            <!-- Interested -->
+            <v-row>
+                <v-col>
+                    <div class="d-flex justify-center col">
+                        <h3>Your Interest List</h3>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-divider />
+            <v-row no-gutters>
+                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in filteredInterestedInteractions"
+                    :key="interaction._id">
+
+                    <v-card-text>Interested</v-card-text>
+
+                    <v-card flat class="pt-3 ma-2">
+                        <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                        <span v-else>
+                            <v-img src="https://picsum.photos/400/300?random" />
+                        </span>
+                        <router-link class="item-title"
+                            :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
+                            {{ interaction.itemID.title }}
+                        </router-link>
+                        <br>
+                        <v-card-text>
+                            <router-link class="item-title"
+                                :to="{ name: 'viewUser', params: { id: interaction.itemID.userID._id }}">
+                                {{ interaction.itemID.userID.username }}
+                            </router-link>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <div v-if="filteredInterestedInteractions == 0">
+                <v-row>
+                    <v-col>
+                        <div class="d-flex justify-center col">
+                            <p>
+                                You haven't marked any items as interested.
+                            </p>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+
+            <!-- Claimed -->
+            <v-row>
+                <v-col>
+                    <div class="d-flex justify-center col">
+                        <h3>Your Claimed Items</h3>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-divider />
+            <v-row no-gutters>
+                <v-col cols="12" sm="3" class="v-card-columns" v-for="interaction in filteredClaimedInteractions"
+                    :key="interaction._id">
+
+                    <v-card-text>Claimed</v-card-text>
+
+                    <v-card flat class="pt-3 ma-2">
+                        <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                        <span v-else>
+                            <v-img src="https://picsum.photos/400/300?random" />
+                        </span>
+                        <router-link class="item-title"
+                            :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
+                            {{ interaction.itemID.title }}
+                        </router-link>
+                        <br>
+                        <v-card-text>
+                            <router-link class="item-title"
+                                :to="{ name: 'viewUser', params: { id: interaction.itemID.userID._id }}">
+                                {{ interaction.itemID.userID.username }}
+                            </router-link>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <div v-if="filteredClaimedInteractions == 0">
+                <v-row>
+                    <v-col>
+                        <div class="d-flex justify-center col">
+                            <p>
+                                You haven't claimed any items.
+                            </p>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
 
             <!-- Reviews -->
             <v-row>
@@ -123,8 +217,8 @@
                     <v-divider />
                     <div class="footer-offset">
                         <v-row no-gutters>
-                            <v-col class="v-card-columns" v-for="review in reviews" :key="review._id" cols="12" lg="3"
-                                md="4" sm="6">
+                            <v-col class="v-card-columns" v-for="review in filteredUserReviews" :key="review._id"
+                                cols="12" lg="3" md="4" sm="6">
                                 <v-card flat class="pt-3 ma-2">
 
                                     <p v-if="review.score == 1">
@@ -167,6 +261,17 @@
                                 </v-card>
                             </v-col>
                         </v-row>
+                        <div v-if="filteredUserReviews == 0">
+                            <v-row>
+                                <v-col>
+                                    <div class="d-flex justify-center col">
+                                        <p>
+                                            You haven't gotten any reviews.
+                                        </p>
+                                    </div>
+                                </v-col>
+                            </v-row>
+                        </div>
                     </div>
                 </v-col>
             </v-row>
@@ -239,9 +344,22 @@
                     return item.userID._id == localStorage.getItem('userID')
                 })
             },
-            filteredInteractions: function () {
+            filteredInterestedInteractions: function () {
                 return this.interactions.filter(interaction => {
-                    return interaction.userID._id == localStorage.getItem('userID')
+                    return interaction.userID._id == localStorage.getItem('userID') &&
+                        interaction.interactionID.interactionName == 'Interested'
+                })
+            },
+            filteredSavedInteractions: function () {
+                return this.interactions.filter(interaction => {
+                    return interaction.userID._id == localStorage.getItem('userID') &&
+                        interaction.interactionID.interactionName == 'Saved'
+                })
+            },
+            filteredClaimedInteractions: function () {
+                return this.interactions.filter(interaction => {
+                    return interaction.userID._id == localStorage.getItem('userID') &&
+                        interaction.interactionID.interactionName == 'Claim'
                 })
             },
             filteredUserReviews: function () {

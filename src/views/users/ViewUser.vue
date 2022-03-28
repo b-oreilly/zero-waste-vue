@@ -15,7 +15,7 @@
           </div>
         </v-col>
         <div class="d-flex justify-center col">
-          <h2 class="mainItemTitle">{{ user.username }}</h2>
+          <h2 class="mainItemTitle pl-0">{{ user.username }}</h2>
         </div>
         <v-col cols=2>
         </v-col>

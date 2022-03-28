@@ -2,34 +2,72 @@
     <v-container>
         <div class="footer-offset">
             <br>
-            <h1>Messages</h1><br>
-            <v-btn text rounded :to="{ name: 'createMessage'}">Write a Message</v-btn><br>
+            <h1>Messages</h1>
+            <v-btn dark rounded elevation="0" class="ma-3" :to="{ name: 'createMessage'}">Write a Message</v-btn><br>
+            <v-row>
+                <v-col>
+                    <div class="d-flex justify-center col">
+                        <h2>Received Messages</h2><br>
+                    </div>
+                </v-col>
+            </v-row>
             <v-row no-gutters>
-                <v-col class="v-card-columns" v-for="message in messages" :key="message._id" cols="12" sm="3">
+                <v-col class="v-card-columns" v-for="message in receivedMessages" :key="message._id" cols="12" lg="3"
+                    md="4" sm="6">
                     <v-card flat class="pt-3 ma-2">
                         <v-card-title style="word-break: break-word" align="left">{{ message.message }}</v-card-title>
-                        <p class="pl-4"> Sent by:
-                        {{ message.senderUserID.username }}</p>
-                        <p class="pl-4"> Sent to:
-                        {{ message.receiverUserID.username }}</p>
-                        <!-- <v-card-title style="word-break: break-word" align="left">
-                            <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                                {{ item.title }}
-                            </router-link>
-                        </v-card-title>
-                        <p v-if="item.categoryID" class="pl-4">
-                            <router-link :to="{ name: 'viewCategory', params: { id: item.categoryID._id }}">
-                                <p> {{ item.categoryID.name }} </p>
-                            </router-link>
-                        </p>
-                        <p v-if="item.userID" class="pl-4">
-                            <router-link :to="{ name: 'viewUser', params: { id:item.userID._id }}">
-                                <p v-if="item.userID.username"> {{ item.userID.username }}</p>
-                            </router-link> -->
-                        <!-- </p> -->
+                        <p class="pl-4"> From:
+                            {{ message.senderUserID.username }}</p>
+                        <p class="pl-4">Received at:
+                            {{ new Date(message.createdAt).toLocaleString('en-GB', { timeZone: 'GMT' }) }}</p>
+                        <div v-if="receivedMessages == 0">
+                            <v-row>
+                                <v-col>
+                                    <div class="d-flex justify-center col">
+                                        <p>
+                                            You haven't received any messages.
+                                        </p>
+                                    </div>
+                                </v-col>
+                            </v-row>
+                        </div>
                     </v-card>
                 </v-col>
             </v-row>
+
+
+            <v-row>
+                <v-col>
+                    <div class="d-flex justify-center col">
+                        <h2>Sent Messages</h2>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-row no-gutters>
+                <v-col class="v-card-columns" v-for="message in sentMessages" :key="message._id" cols="12" lg="3" md="4"
+                    sm="6">
+                    <v-card flat class="pt-3 ma-2">
+                        <v-card-title style="word-break: break-word" align="left">{{ message.message }}</v-card-title>
+
+                        <p class="pl-4"> To:
+                            {{ message.receiverUserID.username }}</p>
+                        <p class="pl-4">Sent at: {{ new Date(message.createdAt).toLocaleString() }}</p>
+
+                        <div v-if="sentMessages == 0">
+                            <v-row>
+                                <v-col>
+                                    <div class="d-flex justify-center col">
+                                        <p>
+                                            You haven't sent any messages.
+                                        </p>
+                                    </div>
+                                </v-col>
+                            </v-row>
+                        </div>
+                    </v-card>
+                </v-col>
+            </v-row>
+
         </div>
     </v-container>
 </template>
@@ -46,13 +84,30 @@
                 messages: []
             }
         },
-        mounted() {
-            axios.get('/messages')
-                .then(response => {
-                    this.messages = response.data
-                    console.log(response.data)
+        methods: {
+            getMessages() {
+                axios.get(`/messages`)
+                    .then(response => {
+                        this.messages = response.data
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error))
+            }
+        },
+        computed: {
+            receivedMessages: function () {
+                return this.messages.filter(message => {
+                    return message.receiverUserID._id == localStorage.getItem('userID')
                 })
-                .catch(error => console.log(error))
+            },
+            sentMessages: function () {
+                return this.messages.filter(message => {
+                    return message.senderUserID._id == localStorage.getItem('userID')
+                })
+            }
+        },
+        mounted() {
+            this.getMessages();
         }
     }
 </script>

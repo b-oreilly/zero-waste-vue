@@ -16,7 +16,7 @@
                 </v-row>
                 <br>
                 <v-row no-gutters>
-                    <v-col class="v-card-columns" v-for="item in filteredItems" :key="item._id" cols="12" sm="3">
+                    <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" sm="3">
                         <v-card class="pt-3 ma-2" flat>
                             <v-img v-if="item.photo">{{ item.photo }}</v-img>
                             <span v-else>
@@ -27,7 +27,6 @@
                                     :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                     {{ item.title }}
                                 </router-link>
-                                <!-- {{ item.title }} -->
                             </v-card-title>
                             <v-card-text v-if="item.qualityID.name">
                                 <router-link :to="{ name: 'viewQuality', params: { id: item.qualityID._id }}">
@@ -36,21 +35,7 @@
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <!-- 
-                    {{ user._id }}
-                    <p v-if="user._id === item.userID" >
-                        {{ item.title }}
-                    </p> -->
-
-
-
                 </v-row>
-                <!-- <v-row>
-                    <v-btn text rounded :to="{ name: 'editItem', params: { id: this.$route.params.id}}"
-                        variant="warning">Edit</v-btn>
-                    <v-btn text rounded class="delete" @click="deleteData()">Delete</v-btn>
-                </v-row> -->
-
             </v-col>
         </div>
     </v-container>
@@ -73,15 +58,15 @@
             }
         },
         computed: {
-            filteredItems: function () {
-                return this.items.filter(item => {
-                    return item.userID._id == localStorage.getItem('userID')
-                })
-            }
+            // filteredItems: function () {
+            //     return this.items.filter(item => {
+            //         return item.userID._id == localStorage.getItem('userID')
+            //     })
+            // }
         },
         mounted() {
-            this.getItems();
             this.getUserDetails();
+            this.getUserItems();
         },
         methods: {
             getUserDetails() {
@@ -89,8 +74,8 @@
                     this.user = JSON.parse(localStorage.getItem("user"))
                 }
             },
-            getItems() {
-                axios.get(`/items`)
+            getUserItems() {
+                axios.get(`/items/${this.route.params.id}`)
                     .then(response => {
                         this.items = response.data
                     })
