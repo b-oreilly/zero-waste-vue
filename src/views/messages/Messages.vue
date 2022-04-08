@@ -1,13 +1,26 @@
 <template>
     <v-container>
         <div class="footer-offset">
-            <br>
-            <h1>Messages</h1>
-            <v-btn dark rounded elevation="0" class="ma-3" :to="{ name: 'createMessage'}">Write a Message</v-btn><br>
+            <v-row no-gutters class="mt-6">
+                <v-col cols=2>
+                    <div class="d-flex justify-start">
+                        <!-- <GoBack /> -->
+                    </div>
+                </v-col>
+                <div class="d-flex justify-center col">
+                    <h2 class="mb-4">Messages</h2>
+                </div>
+                <v-col cols=2>
+                    <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
+                        <v-icon>mdi-pencil-outline</v-icon>
+                    </v-btn><br>
+                </v-col>
+            </v-row>
+
             <v-row>
                 <v-col>
                     <div class="d-flex justify-center col">
-                        <h2>Received Messages</h2><br>
+                        <h3>Received Messages</h3><br>
                     </div>
                 </v-col>
             </v-row>
@@ -39,7 +52,7 @@
             <v-row>
                 <v-col>
                     <div class="d-flex justify-center col">
-                        <h2>Sent Messages</h2>
+                        <h3>Sent Messages</h3>
                     </div>
                 </v-col>
             </v-row>
@@ -67,7 +80,6 @@
                     </v-card>
                 </v-col>
             </v-row>
-
         </div>
     </v-container>
 </template>

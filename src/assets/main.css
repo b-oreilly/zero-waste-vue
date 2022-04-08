@@ -23,6 +23,12 @@
     margin-right: 10px;
 }
 
+a,
+router-link {
+    text-decoration: none;
+    color: unset;
+}
+
 .edit {
     background-color: rgb(107, 107, 107);
     position: absolute;
@@ -110,12 +116,6 @@
     width: 100%;
     margin-top: 10px;
     margin-right: 10px;
-}
-
-#bottom {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 v-btn {

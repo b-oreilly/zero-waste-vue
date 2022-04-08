@@ -39,7 +39,9 @@
     text-decoration: none;
   }
 
-  .v-navigation-drawer {
-    z-index: 999999 !important;
+  // preventing the extra whitespace of the navigation being displayed outside the app
+  html,
+  body {
+    overflow-x: hidden;
   }
 </style>

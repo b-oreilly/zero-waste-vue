@@ -1,8 +1,6 @@
 <template>
     <v-container>
-
-
-        <div class="hidden-sm-and-down" id="background">
+        <div class="hidden-sm-and-down mt-10" id="background">
             <v-row>
                 <v-col>
                     <p id="main">404</p>
@@ -17,13 +15,12 @@
         <div class="hidden-md-and-up">
             <v-row no-gutters>
                 <v-col>
-
                     <v-row>
                         <v-col>
                             <div id="background-sm">
                                 <h1 id="main">404</h1>
                                 <h3 class="body-text mb-5">Page not found</h3>
-                                <v-btn flat rounded elevation="0" id="return-sm" to="/">
+                                <v-btn flat rounded elevation="0" id="return" to="/">
                                     Go back home
                                 </v-btn>
                             </div>
@@ -87,9 +84,4 @@
         margin: 25px;
     }
 
-    #return-sm {
-        /* margin-top: 10px; */
-        width: 50%;
-        text-decoration: none;
-    }
 </style>

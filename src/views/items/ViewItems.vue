@@ -1,9 +1,18 @@
 <template>
     <v-container>
         <div class="footer-offset">
-            <br>
-            <h1>Items</h1><br>
-            <v-btn text rounded :to="{ name: 'addItem'}">List an Item</v-btn><br>
+            <v-row no-gutters class="mt-6">
+                <v-col cols=2>
+                </v-col>
+                <div class="d-flex justify-center col">
+                    <h1>Items</h1>
+                </div>
+                <v-col cols=2>
+                    <v-btn rounded text elevation="0" :to="{ name: 'addItem'}" class="mt-2">
+                        <v-icon>mdi-plus</v-icon>&nbsp;list an item
+                    </v-btn><br>
+                </v-col>
+            </v-row>
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="item in filteredClaimedItems" :key="item._id" cols="12" lg="3"
                     md="4" sm="6">

@@ -2,7 +2,7 @@
     <v-container>
         <div class="footer-offset">
             <v-col>
-                <v-row no-gutters>
+                <v-row no-gutters class="mt-4">
                     <v-col cols=2>
                         <div class="d-flex justify-start">
                             <GoBack />

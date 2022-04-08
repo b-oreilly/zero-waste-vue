@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-card flat>
-            <v-row no-gutters>
+            <v-row no-gutters class="mt-6">
                 <v-col cols=2>
                     <div class="d-flex justify-start">
                         <!-- <GoBack /> -->
