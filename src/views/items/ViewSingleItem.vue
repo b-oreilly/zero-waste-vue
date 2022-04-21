@@ -27,7 +27,8 @@
             <v-row>
 
                 <v-col md=6 sm=12>
-                    <v-img class="overflow-hidden responsive p-0" v-if="item.photo">{{ item.photo }}</v-img>
+                    <!-- v-bind:src="item.itemImage" -->
+                    <v-img class="overflow-hidden responsive p-0" v-if="item.itemImage" v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
                     <span v-else>
                         <v-img src="https://picsum.photos/400/300?random" />
                     </span>

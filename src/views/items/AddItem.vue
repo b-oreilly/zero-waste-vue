@@ -32,6 +32,19 @@
                         item-text="name" item-value="_id" label="Quality" :rules="qualityRules" required>
                     </v-autocomplete>
 
+                    <v-file-input prepend-icon="mdi-camera" id="itemImage" name="itemImage" v-model="form.itemImage"
+                        label="Item image" :rules="imageRules" required>
+                    </v-file-input>
+
+                    <!-- <form @submit.prevent="onUpload">
+                        <div class="form-group">
+                            <input type="file" name="imagesArray" multiple @change="onChange">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success">Store</button>
+                        </div>
+                    </form> -->
+
                     <v-text-field id="price" name="price" v-model="form.price" :rules="priceRules" label="Price"
                         required prepend-icon="mdi-currency-eur">
                     </v-text-field>
@@ -66,11 +79,12 @@
             categories: [],
             qualities: [],
             form: {
+                user: "",
                 title: "",
                 description: "",
                 category: "",
                 quality: "",
-                user: "",
+                itemImage: "",
                 price: ""
             },
             valid: true,
@@ -90,6 +104,9 @@
                 v => !!v || 'Quality is required',
                 v => (v && v.length >= 4) || 'Quality must be at least 4 characters',
             ],
+            imageRules: [
+                v => !!v || 'Image is required'
+            ],
             priceRules: [
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
@@ -102,7 +119,7 @@
             this.getUserDetails();
             this.getCategories()
             this.getQualities();
-            
+
         },
         methods: {
             getUserDetails() {
@@ -140,6 +157,7 @@
                             categoryID: this.form.categoryID,
                             qualityID: this.form.qualityID,
                             userID: localStorage.getItem('userID'),
+                            itemImage: this.form.itemImage,
                             price: this.form.price
                         }, {
                             headers: {
