@@ -1,10 +1,10 @@
 <template>
     <v-container>
         <v-col>
-            <v-row no-gutters>
+            <v-row no-gutters class="mt-4">
                 <v-col cols=2>
                     <div class="d-flex justify-start">
-                        <GoBack />
+                        <GoBackButton />
                     </div>
                 </v-col>
                 <div class="d-flex justify-center col">
@@ -53,14 +53,14 @@
 </template>
 
 <script>
-    import GoBack from '@/components/GoBack'
+    import GoBackButton from '@/components/GoBackButton'
     import axios from '@/config'
 
 
     export default {
         name: "addItem",
         components: {
-            GoBack
+            GoBackButton
         },
         data: () => ({
             categories: [],

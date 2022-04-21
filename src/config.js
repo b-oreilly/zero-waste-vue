@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://wecycle-backend.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:8080';
 
 export default axios.create({
-    baseURL: "https://wecycle-backend.herokuapp.com/",
+    baseURL: "http://localhost:8080",
      headers: {
          Authorization: `Bearer ${localStorage.getItem('token')}`
      }

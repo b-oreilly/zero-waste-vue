@@ -4,7 +4,7 @@
             <v-row no-gutters>
                 <v-col cols=2>
                     <div class="d-flex justify-start">
-                        <GoBack />
+                        <GoBackButton />
                     </div>
                 </v-col>
                 <div class="d-flex justify-center col">
@@ -53,11 +53,11 @@
 
 <script>
     import axios from '@/config'
-    import GoBack from '@/components/GoBack.vue'
+    import GoBackButton from '@/components/GoBackButton.vue'
 
     export default {
         components: {
-            GoBack
+            GoBackButton
         },
         data() {
             return {

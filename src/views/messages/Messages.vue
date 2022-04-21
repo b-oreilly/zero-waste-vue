@@ -4,7 +4,7 @@
             <v-row no-gutters class="mt-6">
                 <v-col cols=2>
                     <div class="d-flex justify-start">
-                        <!-- <GoBack /> -->
+                        <!-- <GoBackButton /> -->
                     </div>
                 </v-col>
                 <div class="d-flex justify-center col">

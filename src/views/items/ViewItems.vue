@@ -1,16 +1,14 @@
 <template>
     <v-container>
         <div class="footer-offset">
-            <v-row no-gutters class="mt-6">
+            <v-row no-gutters align="center" class="mt-6">
                 <v-col cols=2>
                 </v-col>
                 <div class="d-flex justify-center col">
                     <h1>Items</h1>
                 </div>
-                <v-col cols=2>
-                    <v-btn rounded text elevation="0" :to="{ name: 'addItem'}" class="mt-2">
-                        <v-icon>mdi-plus</v-icon>&nbsp;list an item
-                    </v-btn><br>
+                <v-col cols=2 class="d-flex mb-4">
+                    <AddButton />
                 </v-col>
             </v-row>
             <v-row no-gutters>
@@ -45,10 +43,13 @@
 
 <script>
     import axios from '@/config'
+    import AddButton from '@/components/AddButton'
 
     export default {
         name: 'viewItems',
-        components: {},
+        components: {
+            AddButton
+        },
         data() {
             return {
                 item: {},

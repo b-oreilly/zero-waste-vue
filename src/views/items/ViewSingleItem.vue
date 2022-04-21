@@ -1,23 +1,28 @@
 <template>
     <v-container>
         <v-col>
-            <v-row no-gutters>
+            <v-row no-gutters class="mt-6">
                 <v-col cols=2>
-                    <div class="d-flex justify-start">
-                        <GoBack />
+                    <div class="d-flex justify-start mt-2">
+                        <GoBackButton />
                     </div>
                 </v-col>
                 <div class="d-flex justify-center col">
-                    <h2 class="mainItemTitle">Item</h2>
+                    <h1 class="mainItemTitle">Item</h1>
                 </div>
                 <v-col cols=2>
                     <div v-if="item.userID._id == user._id">
-                        <v-btn text rounded :to="{ name: 'editItem', params: { id: this.$route.params.id }}">
-                            Edit
-                        </v-btn>
+                        <EditItemButton />
                     </div>
                 </v-col>
             </v-row>
+            <v-col>
+                <v-row no-gutters class="mt-4">
+                    <div class="d-flex justify-center col">
+                        <h2 class="mainItemTitle item-title">{{ item.title }}</h2>
+                    </div>
+                </v-row>
+            </v-col>
             <br>
             <v-row>
 
@@ -31,9 +36,9 @@
                     <v-card flat class="overflow-hidden footer-offset">
                         <div class="itemBody">
 
-                            <v-card-title class="pt-0">
+                            <!-- <v-card-title class="pt-0">
                                 <h2> {{ item.title }} </h2>
-                            </v-card-title>
+                            </v-card-title> -->
 
                             <v-card-text>
 
@@ -76,12 +81,14 @@
                                 <div v-if="$store.state.loggedIn">
 
                                     <div v-if="item.userID._id !== user._id">
-                                        <v-btn elevation=0 rounded @click="dialog = !dialog" color="pink">Interested?
+                                        <v-btn elevation=0 rounded @click="dialog = !dialog" color="pink">
+                                            Interested?
                                         </v-btn>
                                         <v-dialog v-model="dialog" max-width="500px">
                                             <v-card>
                                                 <v-form ref="form" v-model="valid" lazy-validation>
-                                                    <v-card-title style="word-break: break-word" align="left">Register
+                                                    <v-card-title style="word-break: break-word" align="left">
+                                                        Register
                                                         your
                                                         interest, watch or claim this item.</v-card-title>
 
@@ -123,12 +130,14 @@
 
 <script>
     import axios from '@/config'
-    import GoBack from '@/components/GoBack'
+    import GoBackButton from '@/components/GoBackButton'
+    import EditItemButton from '@/components/EditItemButton'
 
     export default {
         name: "viewSingleItem",
         components: {
-            GoBack
+            GoBackButton,
+            EditItemButton
         },
         data() {
             return {

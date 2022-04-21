@@ -10,7 +10,7 @@
                 <v-row no-gutters>
                     <v-col cols=2>
                         <div class="d-flex justify-start">
-                            <GoBack />
+                            <GoBackButton />
                         </div>
                     </v-col>
                     <div class="d-flex justify-center col">
@@ -55,12 +55,12 @@
 
 <script>
     import axios from '@/config'
-    import GoBack from '@/components/GoBack'
+    import GoBackButton from '@/components/GoBackButton'
 
     export default {
         name: "ViewSingleQuality",
         components: {
-            GoBack
+            GoBackButton
         },
         data() {
             return {

@@ -5,7 +5,7 @@
                 <v-row no-gutters class="mt-4">
                     <v-col cols=2>
                         <div class="d-flex justify-start">
-                            <GoBack />
+                            <GoBackButton />
                         </div>
                     </v-col>
                     <div class="d-flex justify-center col">
@@ -43,12 +43,12 @@
 
 <script>
     import axios from '@/config'
-    import GoBack from '@/components/GoBack'
+    import GoBackButton from '@/components/GoBackButton'
 
     export default {
         name: "UserItems",
         components: {
-            GoBack
+            GoBackButton
         },
         data() {
             return {

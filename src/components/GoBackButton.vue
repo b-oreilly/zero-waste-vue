@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-btn text rounded @click="goBack()" class="go-back hidden-sm-and-down pl-4 pr-4">
+        <v-btn text rounded @click="goBack()" class="hidden-sm-and-down pl-4 pr-4">
             <v-icon>mdi-arrow-left</v-icon>
             &nbsp; Back
         </v-btn>
         <span class="hidden-md-and-up">
-            <v-btn text rounded @click="goBack()" class="go-back">
+            <v-btn icon rounded @click="goBack()">
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
         </span>
