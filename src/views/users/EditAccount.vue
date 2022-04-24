@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-col>
-            <v-row no-gutters>
+        <v-card flat class="footer-offset">
+            <v-row no-gutters class="mt-6">
                 <v-col cols=2>
                     <div class="d-flex justify-start">
                         <GoBackButton />
@@ -13,41 +13,41 @@
                 <v-col cols=2>
                 </v-col>
             </v-row>
-            <v-card flat class="footer-offset">
-                <v-form ref="form" v-model="valid" lazy-validation>
-                    <div class="pt-4">
-                        <v-row>
 
-                            <v-col>
-                                <v-text-field v-model="form.first_name" :rules="nameRules" label="First Name" required>
-                                </v-text-field>
-                            </v-col>
-                            <v-col>
-                                <v-text-field v-model="form.last_name" :rules="nameRules" label="Last Name" required>
-                                </v-text-field>
-                            </v-col>
-                        </v-row>
-                    </div>
+            <v-form ref="form" v-model="valid" lazy-validation>
+                <div class="pt-4">
+                    <v-row>
 
-                    <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
-                    </v-text-field>
+                        <v-col>
+                            <v-text-field v-model="form.first_name" :rules="nameRules" label="First Name" required>
+                            </v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field v-model="form.last_name" :rules="nameRules" label="Last Name" required>
+                            </v-text-field>
+                        </v-col>
+                    </v-row>
+                </div>
 
-                    <v-autocomplete prepend-inner-icon="mdi-map-marker" placeholder="Location" spellcheck="false" v-model="form.locationID" :rules="locationRules"
-                        :items="locations" item-text="name" item-value="_id"></v-autocomplete>
+                <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
+                </v-text-field>
 
-                    <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
-                    </v-text-field>
+                <v-autocomplete prepend-inner-icon="mdi-map-marker" placeholder="Location" spellcheck="false"
+                    v-model="form.locationID" :rules="locationRules" :items="locations" item-text="name"
+                    item-value="_id"></v-autocomplete>
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
-                        Edit
-                    </v-btn>
+                <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
+                </v-text-field>
 
-                    <v-btn rounded text class="mr-4 reset" @click="reset">
-                        Reset
-                    </v-btn>
-                </v-form>
-            </v-card>
-        </v-col>
+                <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
+                    Edit
+                </v-btn>
+
+                <v-btn rounded text class="mr-4 reset" @click="reset">
+                    Reset
+                </v-btn>
+            </v-form>
+        </v-card>
     </v-container>
 </template>
 

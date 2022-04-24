@@ -55,6 +55,13 @@ const routes = [{
     }
   },
 
+  // Search 
+  {
+    path: "/search",
+    name: "search",
+    component: () => import('./views/Search.vue')
+  },
+
   // Messages
 
   {
@@ -67,13 +74,18 @@ const routes = [{
     name: "createMessage",
     component: () => import('./views/messages/CreateMessage.vue')
   },
+  {
+    path: "/user/messages/:id",
+    name: "viewSingleMessage",
+    component: () => import('./views/messages/ViewSingleMessage.vue')
+  },
 
   // User Items
 
   {
     path: "/items/user/:id",
     name: "viewUserItems",
-    component: () => import('./views/users/UserItems.vue')
+    component: () => import('./views/users/ViewUserItems.vue')
   },
   {
     path: "/user/:id",

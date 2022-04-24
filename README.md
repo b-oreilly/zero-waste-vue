@@ -1,4 +1,4 @@
-# zw-front
+# Zero Waste web application front-end
 
 ## Project setup
 ```

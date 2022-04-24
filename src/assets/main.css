@@ -1,13 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@600&family=Roboto+Mono&family=Roboto:wght@300;400;700;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Roboto+Mono&display=swap');
 /* Login/Register */
-/* 
-.v-messages__message{
-    color: #e71430;
-} */
+
+.site-green {
+    background-color: #659F41 !important;
+}
+
+.green {
+    color: #659F41 !important;
+}
+
+.interaction {
+    font-weight: 500;
+}
+
+#site-name {
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    color: #659F41 !important;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#site-content {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.titles {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.interaction {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 900;
+}
 
 .footer-offset {
-    padding-bottom: 50px;
+    padding-bottom: 300px;
 }
 
 .v-input__slot,
@@ -29,15 +65,6 @@ router-link {
     color: unset;
 }
 
-.edit {
-    background-color: rgb(107, 107, 107);
-    position: absolute;
-    color: #fff !important;
-    height: 45px !important;
-    margin-top: 10px;
-    width: 10%;
-}
-
 .reset {
     background-color: #000;
     color: #fff !important;
@@ -47,19 +74,19 @@ router-link {
     background-color: #EBEBEB;
     font-size: 14px;
     border-radius: 25px;
-    height: 40px !important;
-    width: 100px !important;
+    width: 85px !important;
+    padding: 20px;
 }
 
 #signup {
-    background-color: #20E25F;
+    background-color: #528235;
     color: #fff !important;
     border-radius: 25px;
-    height: 40px !important;
+    padding: 20px;
 }
 
 #logout {
-    background-color: #153AB0;
+    background-color: #26547C;
     color: #fff !important;
     border-radius: 25px;
     height: 40px !important;
@@ -68,6 +95,11 @@ router-link {
 .delete {
     background-color: #b31825;
     color: #fff !important;
+    height: 45px !important;
+    justify-content: flex-end !important;
+}
+
+.cancel {
     height: 45px !important;
     justify-content: flex-end !important;
 }
@@ -99,7 +131,7 @@ router-link {
 }
 
 #signup-sm {
-    background-color: #20E25F;
+    background-color: #528235;
     color: #fff !important;
     border-radius: 25px;
     height: 45px !important;
@@ -109,7 +141,7 @@ router-link {
 }
 
 #logout-sm {
-    background-color: #153AB0;
+    background-color: #26547C;
     color: #fff !important;
     border-radius: 25px;
     height: 45px !important;
@@ -128,6 +160,12 @@ v-btn {
     /* background-color: currentColor; */
 }
 
+.gradient {
+    color: #fff;
+    background-color: #528235;
+    background-image: linear-gradient(to left, #82A6B1, #528235);
+}
+
 /* Item */
 
 .v-card {
@@ -139,9 +177,9 @@ v-btn {
     border: #000;
 }
 
-.item-title,
-.item-body {
+.item-title {
     text-transform: capitalize;
+    color: #0B090A !important;
 }
 
 .item-title {

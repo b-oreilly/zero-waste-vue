@@ -2,18 +2,18 @@
   <div>
     <v-toolbar flat>
       <v-col cols="3">
-        <!-- Desktop - Site title/home -->
+        <!-- Mobile - left - Site title/home -->
         <div class="hidden-sm-and-down">
           <router-link to="/" class="d-flex justify-start">
             <v-toolbar-title id="site-name">
-              Zero Waste
+              Wastenot
             </v-toolbar-title>
           </router-link>
         </div>
 
         <!-- Mobile - Search bar -->
         <div class="hidden-md-and-up">
-          <v-btn icon>
+          <v-btn icon to="/search">
             <v-icon> mdi-magnify </v-icon>
           </v-btn>
         </div>
@@ -26,23 +26,14 @@
             <div>
               <v-menu open-on-hover offset-y>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn text plain :ripple="false" id="nav-item" active-class="nav-item" to="/items" v-bind="attrs"
+                  <v-btn text plain active-class="nav-item" :ripple="false" id="nav-item" to="/items" v-bind="attrs"
                     v-on="on">Items</v-btn>
                 </template>
                 <v-list>
-                  <v-list-item>
-                    <router-link to="/items/category/all">
-                      <v-list-item-title>Categories</v-list-item-title>
-                    </router-link>
-                    <v-list>
-                      <v-list-item>
-                      </v-list-item>
-                    </v-list>
-                  </v-list-item>
-                  <v-list-item>
-                    <router-link to="/items/quality/all">
-                      <v-list-item-title>Qualities</v-list-item-title>
-                    </router-link>
+                  <v-list-item to="/items/category/all">
+                    Categories</v-list-item>                 
+                  <v-list-item to="/items/quality/all">
+                     Qualities
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -55,7 +46,7 @@
         <div class="hidden-md-and-up">
           <router-link to="/" id="site-name">
             <v-toolbar-title>
-              Zero Waste
+              WasteNot
             </v-toolbar-title>
           </router-link>
         </div>
@@ -63,15 +54,15 @@
       <v-col cols="3" class="d-flex justify-end">
         <!-- mobile menu button -->
         <span class="hidden-md-and-up">
-          <v-btn text rounded @click.stop="drawer = !drawer">
+          <v-btn icon @click.stop="drawer = !drawer">
             <v-icon>mdi-menu</v-icon>
           </v-btn>
         </span>
         <!-- Desktop menu -->
         <v-toolbar-items class="hidden-sm-and-down">
-          <div v-if="!$store.state.loggedIn" class="mr-4">
+          <div v-if="!$store.state.loggedIn">
+            <v-btn depressed rounded class="mr-2" id="signup" to="register">Sign Up</v-btn>
             <v-btn depressed rounded id="login" to="login">Log in</v-btn>
-            <v-btn depressed rounded id="signup" to="register">Sign Up</v-btn>
           </div>
 
           <div v-if="$store.state.loggedIn">
@@ -86,20 +77,14 @@
                 <v-list-item to="/account">
                   Account
                 </v-list-item>
-                <v-list-item>
-                  <router-link :to="{ name: 'viewUserItems', params: { id: user._id }}">
-                    Your Items
-                  </router-link>
+                <v-list-item :to="{ name: 'viewUserItems', params: { id: user._id }}">
+                  Your Items
                 </v-list-item>
-                <v-list-item>
-                  <v-list-item-title class="itemTitle" id="nav">
-                    <router-link to="/user/messages">
-                      Messages
-                    </router-link>
-                  </v-list-item-title>
+                <v-list-item to="/user/messages">
+                  Messages
                 </v-list-item>
                 <v-list-item class="justify-center">
-                  <v-btn depressed rounded id="logout" class="mb-2" @click="logout()">Logout</v-btn>
+                  <v-btn depressed rounded id="logout" @click="logout()">Logout</v-btn>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -112,9 +97,9 @@
     <v-row cols=10>
       <v-navigation-drawer v-model="drawer" absolute temporary right>
         <v-list>
-            <v-list-item to="/">
-              Home
-            </v-list-item>
+          <v-list-item to="/">
+            Home
+          </v-list-item>
           <v-list-item to="/about">
             About
           </v-list-item>
@@ -123,29 +108,27 @@
           </v-list-item>
           <!-- Mobile menu - logged in user -->
           <div v-if="$store.state.loggedIn">
+            <hr>
             <v-list-item to="/account">
               Account
             </v-list-item>
-            <v-list-item>
-              <v-list-item-title class="itemTitle" :to="{ name: 'viewUserItems', params: { id: this.userID }}">
-                Your Items
-              </v-list-item-title>
+            <v-list-item class="itemTitle" :to="{ name: 'viewUserItems', params: { id: user._id }}">
+              Your Items
             </v-list-item>
-            <v-list-item>
-              <v-list-item-title class="itemTitle" to="/user/messages">
-                Messages
-              </v-list-item-title>
+            <v-list-item class="itemTitle" to="/user/messages">
+              Messages
             </v-list-item>
           </div>
+
 
           <v-list-item id="bottom">
             <v-list-item-content>
               <div v-if="!$store.state.loggedIn">
                 <v-list-item-title>
-                  <v-btn depressed rounded id="login-sm" to="/login">Login</v-btn>
+                  <v-btn depressed rounded id="signup-sm" to="/register">Sign Up</v-btn>
                 </v-list-item-title>
                 <v-list-item-title>
-                  <v-btn depressed rounded id="signup-sm" to="/register">Sign Up</v-btn>
+                  <v-btn depressed rounded id="login-sm" to="/login">Login</v-btn>
                 </v-list-item-title>
               </div>
               <v-list-item-title>
@@ -170,7 +153,6 @@
     data() {
       return {
         user: {},
-        userID: '',
         drawer: false,
       }
     },
@@ -179,18 +161,12 @@
     },
     mounted() {
       this.getUserDetails();
-      this.getUserID();
     },
     methods: {
       ...mapActions(['logout']),
       getUserDetails() {
         if (localStorage.getItem("user")) {
           this.user = JSON.parse(localStorage.getItem("user"))
-        }
-      },
-      getUserID() {
-        if (localStorage.getItem("userID")) {
-          this.userID = JSON.parse(localStorage.getItem("userID"))
         }
       }
     }
@@ -199,13 +175,6 @@
 
 
 <style scoped>
-  #site-name {
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-    color: #000 !important;
-    text-transform: uppercase;
-  }
-
   #nav {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
@@ -234,7 +203,7 @@
 
   #user {
     width: 140px;
-    height: 55px;
+    height: 40px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
   }

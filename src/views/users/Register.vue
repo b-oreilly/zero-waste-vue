@@ -2,7 +2,7 @@
     <v-container>
         <v-col>
             <template>
-                <v-card flat class="pt-2 pb-2">
+                <v-card flat class="pt-7 pb-2">
                     <div v-if="!$store.state.loggedIn">
                         <h1>Signup</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
@@ -24,8 +24,8 @@
                             </v-text-field>
 
                             <v-autocomplete prepend-inner-icon="mdi-map-marker" v-model="form.locationID"
-                                :rules="locationRules" :items="locations" item-text="name" item-value="_id" placeholder="Location"
-                                spellcheck="false">
+                                :rules="locationRules" :items="locations" item-text="name" item-value="_id"
+                                placeholder="Location" spellcheck="false">
                             </v-autocomplete>
 
                             <v-text-field v-model="form.email" :rules="emailRules" label="Email" required
@@ -35,7 +35,8 @@
                             <v-text-field type="password" v-model="form.password" :rules="passwordRules"
                                 label="Password" autocomplete="on" required></v-text-field>
 
-                            <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="register()">
+
+                            <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 signup" @click="register()">
                                 Sign up
                             </v-btn>
 

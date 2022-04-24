@@ -1,23 +1,23 @@
 <template>
     <v-container>
         <div class="footer-offset">
-            <v-row no-gutters>
+            <v-row no-gutters align="center" class="mt-6 mb-4">
+                <v-col cols=2>
+                    <div class="d-flex justify-start">
+                        <GoBackButton />
+                    </div>
+                </v-col>
                 <div class="d-flex justify-center col">
                     <h1 class="mainItemTitle">Quality</h1>
                 </div>
+                <v-col cols=2>
+                </v-col>
             </v-row>
             <v-col>
                 <v-row no-gutters>
-                    <v-col cols=2>
-                        <div class="d-flex justify-start">
-                            <GoBackButton />
-                        </div>
-                    </v-col>
                     <div class="d-flex justify-center col">
                         <h2 class="mainItemTitle">{{ quality.name }}</h2>
                     </div>
-                    <v-col cols=2>
-                    </v-col>
                 </v-row>
                 <br>
                 <v-row no-gutters>

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <div class="hidden-sm-and-down mt-10" id="background">
+        <div class="hidden-sm-and-down gradient mt-10" id="background">
             <v-row>
                 <v-col>
                     <p id="main">404</p>
@@ -55,17 +55,14 @@
         text-transform: uppercase;
     }
 
-    p {
-        text-align: center !important;
-    }
-
     #background {
         padding: 90px 235px 80px;
         border-radius: 900px;
-        background-color: #20E25F;
-        background-image: linear-gradient(to left, #153AB0, #20E25F);
-        color: #fff;
         text-transform: uppercase;
+    }
+
+    p {
+        text-align: center !important;
     }
 
     #return {

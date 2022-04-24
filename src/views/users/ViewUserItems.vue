@@ -22,20 +22,47 @@
                             <span v-else>
                                 <v-img src="https://picsum.photos/400/300?random" />
                             </span>
-                            <v-card-title style="word-break: break-word">
-                                <router-link class="item-title"
-                                    :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                                    {{ item.title }}
-                                </router-link>
-                            </v-card-title>
-                            <v-card-text v-if="item.qualityID.name">
-                                <router-link :to="{ name: 'viewQuality', params: { id: item.qualityID._id }}">
-                                    <p> {{ item.qualityID.name }} </p>
-                                </router-link>
-                            </v-card-text>
+                            <div>
+                                <v-row align="center">
+                                    <v-card-title style="word-break: break-word" align="left" class="mt-2 pb-0">
+                                        <router-link class="item-title"
+                                            :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                                            {{ item.title }}
+                                        </router-link>
+                                    </v-card-title>
+                                </v-row>
+                                <v-row class="pt-0">
+                                    <v-col class="pt-0">
+                                        <v-card-text v-if="item.categoryID" class="pa-0 pl-1">
+                                            <router-link style="color: grey"
+                                                :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
+                                                <p> {{ item.categoryID.name }} </p>
+                                            </router-link>
+                                        </v-card-text>
+                                    </v-col>
+                                    <div class="justify-end">
+                                        <v-card-text class="pt-0" v-if="item.price">€{{ item.price }}</v-card-text>
+                                        <v-card-text class="pt-0" v-else>Free</v-card-text>
+                                    </div>
+                                </v-row>
+                            </div>
                         </v-card>
                     </v-col>
                 </v-row>
+                <div v-if="items == 0">
+                    <v-row>
+                        <v-col>
+                            <div class="d-flex justify-center col pb-0">
+                                <p>
+                                    You haven't listed any items.
+                                </p>
+                            </div>
+                            <div>
+                                <AddButton />
+                            </div>
+                        </v-col>
+                    </v-row>
+                </div>
             </v-col>
         </div>
     </v-container>
@@ -44,11 +71,13 @@
 <script>
     import axios from '@/config'
     import GoBackButton from '@/components/GoBackButton'
+    import AddButton from '@/components/AddButton'
 
     export default {
-        name: "UserItems",
+        name: "ViewUserItems",
         components: {
-            GoBackButton
+            GoBackButton,
+            AddButton
         },
         data() {
             return {
@@ -56,13 +85,6 @@
                 item: {},
                 items: []
             }
-        },
-        computed: {
-            // filteredItems: function () {
-            //     return this.items.filter(item => {
-            //         return item.userID._id == localStorage.getItem('userID')
-            //     })
-            // }
         },
         mounted() {
             this.getUserDetails();
@@ -75,7 +97,7 @@
                 }
             },
             getUserItems() {
-                axios.get(`/items/${this.route.params.id}`)
+                axios.get(`/items/user/${this.user._id}`)
                     .then(response => {
                         this.items = response.data
                     })

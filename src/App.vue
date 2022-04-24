@@ -26,17 +26,11 @@
 
 <style lang="scss">
   #app {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #252525;
-  }
-
-  a {
-    font-weight: bold;
-    color: #252525;
-    text-decoration: none;
   }
 
   // preventing the extra whitespace of the navigation being displayed outside the app

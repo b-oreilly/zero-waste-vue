@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedIn: false
+    loggedIn: false,
+    loginError: false
   },
   mutations: {
     SET_STATUS(state, loggedIn) {
@@ -35,10 +36,10 @@ export default new Vuex.Store({
         })
         /* This is catching any errors that occur when posting the login information to the server. */
         .catch(error => {
-          console.log(error)
+          // console.log(error)
           console.log(error.response.data)
           if (error.response.status == 401) {
-            this.passwordError = 'Incorrect email/password.'
+            this.loginError = true
             alert('Incorrect email/password.')
           }
         })

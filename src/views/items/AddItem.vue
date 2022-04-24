@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-col>
-            <v-row no-gutters class="mt-4">
+        <div class="footer-offset mt-6">
+            <v-row no-gutters align="center">
                 <v-col cols=2>
                     <div class="d-flex justify-start">
                         <GoBackButton />
@@ -48,7 +48,7 @@
                     </v-btn>
                 </v-form>
             </v-card>
-        </v-col>
+        </div>
     </v-container>
 </template>
 
@@ -102,7 +102,7 @@
             this.getUserDetails();
             this.getCategories()
             this.getQualities();
-            
+
         },
         methods: {
             getUserDetails() {
@@ -140,7 +140,8 @@
                             categoryID: this.form.categoryID,
                             qualityID: this.form.qualityID,
                             userID: localStorage.getItem('userID'),
-                            price: this.form.price
+                            price: this.form.price,
+                            claimed: false
                         }, {
                             headers: {
                                 "Authorization": `Bearer ${token}`
