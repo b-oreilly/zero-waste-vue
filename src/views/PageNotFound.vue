@@ -43,7 +43,7 @@
 
 </script>
 
-<style>
+<style scoped>
     #main {
         font-family: 'Roboto Mono', monospace;
         font-weight: 400;

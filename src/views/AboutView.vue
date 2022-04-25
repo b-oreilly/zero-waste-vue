@@ -6,10 +6,10 @@
           <div class="d-flex justify-center col">
             <v-card flat>
               <h1>About</h1>
-              <v-card-text class="about">
-                Too often are good items of food, clothing, furniture, etc. thrown away as they're deemed as waste.<br>
+              <v-card-text class="d-flex about">
+                Too often are good items of food, clothing, furniture, etc. thrown away as they're deemed as waste.
                 The purpose of the application is to enable users to share their unwanted items with other users in
-                their area, <br> also for businesses to share their items no longer fit for sale that would otherwise be disposed
+                their area,  also for businesses to share their items no longer fit for sale that would otherwise be disposed
                 of.
               </v-card-text>
             </v-card>
