@@ -12,12 +12,12 @@
             </v-row>
         </div>
 
-        <div class="hidden-md-and-up">
+        <div class="hidden-md-and-up footer-offset">
             <v-row no-gutters>
                 <v-col>
                     <v-row>
                         <v-col>
-                            <div id="background-sm">
+                            <div id="background-sm" class="gradient">
                                 <h1 id="main">404</h1>
                                 <h3 class="body-text mb-5">Page not found</h3>
                                 <v-btn flat rounded elevation="0" id="return" to="/">
@@ -74,8 +74,6 @@
     #background-sm {
         padding: 140px 0px 155px;
         border-radius: 900px;
-        background-color: #20E25F;
-        background-image: linear-gradient(to left, #153AB0, #20E25F);
         color: #fff;
         text-transform: uppercase;
         margin: 25px;

@@ -7,17 +7,18 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'home',
+    /* route level code-splitting
+    this generates a separate chunk (home.[hash].js) for this route
+    which is lazy - loaded when the route is visited.*/
     component: () => import('@/views/HomeView.vue')
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '@/views/AboutView.vue')
+    component: () => import('@/views/AboutView.vue')
   },
   // User routes
+  /* The code below is importing the Login and Register components from the users folder. */
   {
     path: "/login",
     name: "login",
@@ -29,8 +30,11 @@ const routes = [{
     component: () => import("@/views/users/Register")
   },
   {
+
     path: "/account",
     name: "account",
+    /* This is a route guard. It checks if the user is logged in. 
+    If they are not, it redirects them to the register page. */
     component: () => import('./views/users/Account.vue'),
     beforeEach: (to, from, next) => {
       if (store.state.loggedIn == false) {
@@ -64,6 +68,7 @@ const routes = [{
 
   // Messages
 
+ /* The code below is importing the message components from the messages folder. */
   {
     path: "/user/messages",
     name: "messages",
@@ -104,6 +109,8 @@ const routes = [{
     path: "/items/add",
     name: "addItem",
     component: () => import('./views/items/AddItem.vue'),
+    /* This is a route guard. It checks if the user is logged in. 
+    If they are not, it redirects them to the register page. */
     beforeEach: (to, from, next) => {
       if (store.state.loggedIn == false) {
         next('register');
@@ -157,6 +164,7 @@ const routes = [{
   /* Catch-all route -
      If the user tries to go to a route that doesn't exist, 
      it will redirect them to the 404 page. */
+
   {
     path: '*',
     beforeEnter: (to, from, next) => {

@@ -1,53 +1,55 @@
 <template>
     <v-container>
-        <v-card flat class="footer-offset">
-            <v-row no-gutters class="mt-6">
-                <v-col cols=2>
-                    <div class="d-flex justify-start">
-                        <GoBackButton />
+        <div class="footer-offset">
+            <v-card flat>
+                <v-row no-gutters class="mt-6">
+                    <v-col cols=2>
+                        <div class="d-flex justify-start">
+                            <GoBackButton />
+                        </div>
+                    </v-col>
+                    <div class="d-flex justify-center col">
+                        <h2>Edit Account</h2><br>
                     </div>
-                </v-col>
-                <div class="d-flex justify-center col">
-                    <h2>Edit Account</h2><br>
-                </div>
-                <v-col cols=2>
-                </v-col>
-            </v-row>
+                    <v-col cols=2>
+                    </v-col>
+                </v-row>
 
-            <v-form ref="form" v-model="valid" lazy-validation>
-                <div class="pt-4">
-                    <v-row>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                    <div class="pt-4">
+                        <v-row>
 
-                        <v-col>
-                            <v-text-field v-model="form.first_name" :rules="nameRules" label="First Name" required>
-                            </v-text-field>
-                        </v-col>
-                        <v-col>
-                            <v-text-field v-model="form.last_name" :rules="nameRules" label="Last Name" required>
-                            </v-text-field>
-                        </v-col>
-                    </v-row>
-                </div>
+                            <v-col>
+                                <v-text-field v-model="form.first_name" :rules="nameRules" label="First Name" required>
+                                </v-text-field>
+                            </v-col>
+                            <v-col>
+                                <v-text-field v-model="form.last_name" :rules="nameRules" label="Last Name" required>
+                                </v-text-field>
+                            </v-col>
+                        </v-row>
+                    </div>
 
-                <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
-                </v-text-field>
+                    <v-text-field v-model="form.username" :counter="25" :rules="nameRules" label="Username" required>
+                    </v-text-field>
 
-                <v-autocomplete prepend-inner-icon="mdi-map-marker" placeholder="Location" spellcheck="false"
-                    v-model="form.locationID" :rules="locationRules" :items="locations" item-text="name"
-                    item-value="_id"></v-autocomplete>
+                    <v-autocomplete prepend-inner-icon="mdi-map-marker" placeholder="Location" spellcheck="false"
+                        v-model="form.locationID" :rules="locationRules" :items="locations" item-text="name"
+                        item-value="_id"></v-autocomplete>
 
-                <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
-                </v-text-field>
+                    <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
+                    </v-text-field>
 
-                <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
-                    Edit
-                </v-btn>
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
+                        Edit
+                    </v-btn>
 
-                <v-btn rounded text class="mr-4 reset" @click="reset">
-                    Reset
-                </v-btn>
-            </v-form>
-        </v-card>
+                    <v-btn rounded text class="mr-4 reset" @click="reset">
+                        Reset
+                    </v-btn>
+                </v-form>
+            </v-card>
+        </div>
     </v-container>
 </template>
 

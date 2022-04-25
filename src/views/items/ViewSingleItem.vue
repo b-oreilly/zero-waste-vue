@@ -46,8 +46,8 @@
                                         <p class="item-description">{{ item.description }}</p>
                                     </v-col>
                                     <div class="mr-4 item-description">
-                                    <h4 v-if="item.price">€{{ item.price }}</h4>
-                                    <h4 v-else>Free</h4>
+                                        <h4 v-if="item.price">€{{ item.price }}</h4>
+                                        <h4 v-else>Free</h4>
                                     </div>
                                 </v-row>
 
@@ -108,7 +108,7 @@
                                                     <v-card-actions>
                                                         <v-spacer></v-spacer>
                                                         <div class="pb-2">
-                                                            <v-btn rounded elevation=0 color="primary"
+                                                            <v-btn rounded dark elevation=0 class="site-green"
                                                                 :disabled="!valid"
                                                                 @click="userInteraction(), dialog = false">
                                                                 Submit
@@ -119,26 +119,27 @@
                                             </v-card>
                                         </v-dialog>
                                     </div>
+
+                                    <div v-else align="right">
+                                        <v-btn text rounded class="delete" variant="warning" 
+                                            @click="interactionDialog = !interactionDialog">Delete</v-btn>
+
+                                        <v-dialog v-model="interactionDialog" max-width="500px">
+                                            <v-card>
+                                                <h3 class="pa-6">Are you sure you want to delete this item?</h3>
+                                                <v-btn text rounded class="cancel mb-6"
+                                                    @click="interactionDialog = !interactionDialog">
+                                                    Cancel</v-btn>
+                                                <v-btn text rounded class="delete mb-6" @click="deleteItem()">Delete
+                                                </v-btn>
+                                            </v-card>
+                                        </v-dialog>
+                                    </div>
                                 </div>
                             </v-card-text>
                         </div>
                     </v-card>
                 </v-col>
-            </v-row>
-            <v-row class="d-flex justify-end col">
-                <div v-if="item.userID._id == user._id">
-                    <v-btn text rounded class="delete" variant="warning"
-                        @click="interactionDialog = !interactionDialog">Delete</v-btn>
-
-                    <v-dialog v-model="interactionDialog" max-width="500px">
-                        <v-card>
-                            <h3 class="pa-6">Are you sure you want to delete this item?</h3>
-                            <v-btn text rounded class="cancel mb-6" @click="interactionDialog = !interactionDialog">
-                                Cancel</v-btn>
-                            <v-btn text rounded class="delete mb-6" @click="deleteItem()">Delete</v-btn>
-                        </v-card>
-                    </v-dialog>
-                </div>
             </v-row>
         </div>
     </v-container>
@@ -205,7 +206,7 @@
                     .then(response => {
                         console.log(response.data)
                         this.$router.push({
-                            name: "viewItems",
+                            name: "viewUserItems",
                             params: {}
                         })
                     })
@@ -226,7 +227,7 @@
                         .then(response => {
                             console.log(response.data)
                             this.$router.push({
-                                name: "viewSingleItem"
+                                name: "account"
                             })
                         })
                         .catch(err => {

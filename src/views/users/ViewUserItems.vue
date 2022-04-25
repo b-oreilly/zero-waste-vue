@@ -2,7 +2,7 @@
     <v-container>
         <div class="footer-offset">
             <v-col>
-                <v-row no-gutters class="mt-4">
+                <v-row no-gutters class="mt-4" align="center">
                     <v-col cols=2>
                         <div class="d-flex justify-start">
                             <GoBackButton />
@@ -12,6 +12,7 @@
                         <h2 class="mainItemTitle">Your Items</h2>
                     </div>
                     <v-col cols=2>
+                            <AddButton />
                     </v-col>
                 </v-row>
                 <br>
@@ -54,11 +55,8 @@
                         <v-col>
                             <div class="d-flex justify-center col pb-0">
                                 <p>
-                                    You haven't listed any items.
+                                    You haven't listed any items!
                                 </p>
-                            </div>
-                            <div>
-                                <AddButton />
                             </div>
                         </v-col>
                     </v-row>

@@ -47,9 +47,9 @@
                         </v-form>
                         <br>
                         <div class="footer-offset">
-                            <h3>Already have an account?<br>
+                            <h4>Already have an account?<br>
                                 <router-link to="/login">Login</router-link>
-                            </h3>
+                            </h4>
                         </div>
                     </div>
                     <div v-else>

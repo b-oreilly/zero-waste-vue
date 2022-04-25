@@ -43,7 +43,7 @@
 }
 
 .footer-offset {
-    padding-bottom: 300px;
+    margin-bottom: 320px !important;
 }
 
 .v-input__slot,

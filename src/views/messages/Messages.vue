@@ -11,9 +11,16 @@
                     <h2 class="mb-4">Messages</h2>
                 </div>
                 <v-col cols=2>
-                    <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
-                        <v-icon>mdi-pencil-outline</v-icon>&nbsp;Compose
-                    </v-btn><br>
+                    <div class="hidden-sm-and-down">
+                        <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
+                            <v-icon>mdi-pencil-outline</v-icon>&nbsp;Compose
+                        </v-btn>
+                    </div>
+                    <div class="hidden-md-and-up">
+                        <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
+                            <v-icon>mdi-pencil-outline</v-icon>
+                        </v-btn>
+                    </div>
                 </v-col>
             </v-row>
 
@@ -29,7 +36,8 @@
                     md="4" sm="6">
                     <v-card flat class="pt-3 ma-2">
                         <v-card-title style="word-break: break-word" align="left">
-                            <router-link :to="{ name: 'viewSingleMessage', params: { id: message._id }}" style="color: grey">
+                            <router-link :to="{ name: 'viewSingleMessage', params: { id: message._id }}"
+                                style="color: grey">
                                 {{ message.message }}
                             </router-link>
                         </v-card-title>
@@ -66,7 +74,8 @@
                     sm="6">
                     <v-card flat class="pt-3 ma-2">
                         <v-card-title style="word-break: break-word" align="left">
-                            <router-link :to="{ name: 'viewSingleMessage', params: { id: message._id }}" style="color: grey">
+                            <router-link :to="{ name: 'viewSingleMessage', params: { id: message._id }}"
+                                style="color: grey">
                                 <p> {{ message.message }} </p>
                             </router-link>
                         </v-card-title>
