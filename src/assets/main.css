@@ -29,6 +29,15 @@
     font-weight: 500;
 }
 
+#site-name-home {
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    color: #659F41 !important;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 600;
+}
+
 .titles {
     text-decoration: none;
     color: #000;

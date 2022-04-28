@@ -108,6 +108,13 @@
             reset() {
                 this.$refs.form.reset()
             },
+            getLocations() {
+                axios.get(`/locations`)
+                    .then(response => {
+                        this.locations = response.data
+                    })
+                    .catch(error => console.log(error))
+            },
             getAccountDetails() {
                 axios.get(`/users/${ this.user._id }`)
                     .then(response => {
@@ -118,13 +125,6 @@
                         this.$set(this.form, 'locationID', this.user.locationID.name)
                         this.$set(this.form, 'email', this.user.email)
                         this.$set(this.form, 'password', this.user.password)
-                    })
-                    .catch(error => console.log(error))
-            },
-            getLocations() {
-                axios.get(`/locations`)
-                    .then(response => {
-                        this.locations = response.data
                     })
                     .catch(error => console.log(error))
             },

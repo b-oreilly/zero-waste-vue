@@ -33,6 +33,7 @@ export default new Vuex.Store({
           this.user = console.log(response.data.user)
           context.commit('SET_STATUS', true)
           router.push('/account');
+          router.go();
         })
         /* This is catching any errors that occur when posting the login information to the server. */
         .catch(error => {
@@ -66,18 +67,19 @@ export default new Vuex.Store({
         /* This is setting the token, userID, and user in localStorage 
         and triggering a mutation of the loggedIn state. */
         .then(response => {
-          console.log(response.token)
           console.log(response.data)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('userID', response.data.userID)
           localStorage.setItem('user', JSON.stringify(response.data.user))
-          context.commit('SET_STATUS', true)
+          this.user = console.log(response.data.user)
+          router.push('/login').catch(() => {});
         })
         /* This is catching any errors that occur when posting the register information to the server. */
         .catch(error => {
           console.log(error)
           console.log(error.response.data.message)
           router.push('/register').catch(() => {});
+          alert('An error occured, please try again.')
         })
     }
   },

@@ -68,7 +68,7 @@ const routes = [{
 
   // Messages
 
- /* The code below is importing the message components from the messages folder. */
+  /* The code below is importing the message components from the messages folder. */
   {
     path: "/user/messages",
     name: "messages",
@@ -106,11 +106,11 @@ const routes = [{
     component: () => import('./views/items/ViewItems.vue')
   },
   {
+    /* This is a route guard. It checks if the user is logged in. 
+    If they are not, it redirects them to the register page. */
     path: "/items/add",
     name: "addItem",
     component: () => import('./views/items/AddItem.vue'),
-    /* This is a route guard. It checks if the user is logged in. 
-    If they are not, it redirects them to the register page. */
     beforeEach: (to, from, next) => {
       if (store.state.loggedIn == false) {
         next('register');

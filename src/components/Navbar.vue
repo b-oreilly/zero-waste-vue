@@ -61,8 +61,8 @@
         <!-- Desktop menu -->
         <v-toolbar-items class="hidden-sm-and-down">
           <div v-if="!$store.state.loggedIn">
-            <v-btn depressed rounded class="mr-2" id="signup" to="register">Sign Up</v-btn>
-            <v-btn depressed rounded id="login" to="login">Log in</v-btn>
+            <v-btn depressed rounded class="mr-2" id="signup" to="/register">Sign Up</v-btn>
+            <v-btn depressed rounded id="login" to="/login">Log in</v-btn>
           </div>
 
           <div v-if="$store.state.loggedIn">
