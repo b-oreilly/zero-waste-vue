@@ -3,7 +3,7 @@
         <v-col>
             <v-row no-gutters class="mt-4">
                 <v-col cols=2>
-                    <div class="d-flex justify-start">
+                    <div class="d-flex justify-center">
                         <GoBackButton />
                     </div>
                 </v-col>
@@ -16,7 +16,7 @@
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-autocomplete id="receiverUserID" name="receiverUserID" v-model="form.receiverUserID"
-                        :items="receivers" item-text="username" item-value="_id" label="Send to:" :rules="receiverRules"
+                        :items="receivers in recipientUsers" item-text="username" item-value="_id" label="Send to:" :rules="receiverRules"
                         required spellcheck="false">
                     </v-autocomplete>
                     <br>
@@ -60,16 +60,23 @@
             receivers: [],
             valid: true,
             messageRules: [
-                v => !!v || 'Message is required',
+                v => !!v || 'Message text is required',
                 v => (v && v.length >= 1) || 'Message must be at least 1 character',
             ],
             receiverRules: [
-                v => !!v || 'Receiver is required',
+                v => !!v || 'Message recipient is required'
             ]
         }),
         mounted() {
             this.getUserDetails();
             this.getUsers();
+        },
+        computed: {
+            recipientUsers: function () {
+                return this.users.filter(user => {
+                    return user.receiverUserID._id !== localStorage.getItem('userID')
+                })
+            }
         },
         methods: {
             getUserDetails() {
@@ -80,7 +87,7 @@
             reset() {
                 this.$refs.form.reset()
             },
-            getUsers() {
+            getFilteredUsers() {
                 axios.get(`/users`)
                     .then((response) => {
                         this.receivers = response.data

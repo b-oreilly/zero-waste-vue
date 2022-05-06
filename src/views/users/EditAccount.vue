@@ -1,20 +1,19 @@
 <template>
     <v-container>
         <div class="footer-offset">
-            <v-card flat>
-                <v-row no-gutters class="mt-6">
-                    <v-col cols=2>
-                        <div class="d-flex justify-start">
-                            <GoBackButton />
-                        </div>
-                    </v-col>
-                    <div class="d-flex justify-center col">
-                        <h2>Edit Account</h2><br>
+            <v-row no-gutters class="mt-10">
+                <v-col cols=2>
+                    <div class="d-flex justify-center">
+                        <GoBackButton />
                     </div>
-                    <v-col cols=2>
-                    </v-col>
-                </v-row>
-
+                </v-col>
+                <div class="d-flex justify-center col">
+                    <h2>Edit Account</h2><br>
+                </div>
+                <v-col cols=2>
+                </v-col>
+            </v-row>
+            <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <div class="pt-4">
                         <v-row>

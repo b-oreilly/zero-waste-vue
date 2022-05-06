@@ -13,9 +13,11 @@
 
         <!-- Mobile - Search bar -->
         <div class="hidden-md-and-up">
-          <v-btn icon to="/search">
-            <v-icon> mdi-magnify </v-icon>
-          </v-btn>
+          <div class="d-flex justify-start">
+            <v-btn icon to="/search">
+              <v-icon> mdi-magnify </v-icon>
+            </v-btn>
+          </div>
         </div>
       </v-col>
       <v-col class="d-flex justify-space-around">
@@ -27,13 +29,13 @@
               <v-menu open-on-hover offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn text plain active-class="nav-item" :ripple="false" id="nav-item" to="/items" v-bind="attrs"
-                    v-on="on">Items</v-btn>
+                    v-on="on">Items &nbsp; <v-icon>mdi-menu-down</v-icon> </v-btn>
                 </template>
                 <v-list>
                   <v-list-item to="/items/category/all">
-                    Categories</v-list-item>                 
+                    Categories</v-list-item>
                   <v-list-item to="/items/quality/all">
-                     Qualities
+                    Qualities
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -53,7 +55,7 @@
       </v-col>
       <v-col cols="3" class="d-flex justify-end">
         <!-- mobile menu button -->
-        <span class="hidden-md-and-up">
+        <span class="hidden-md-and-up justify-center">
           <v-btn icon @click.stop="drawer = !drawer">
             <v-icon>mdi-menu</v-icon>
           </v-btn>
@@ -61,12 +63,12 @@
         <!-- Desktop menu -->
         <v-toolbar-items class="hidden-sm-and-down">
           <div v-if="!$store.state.loggedIn">
-            <v-btn depressed rounded class="mr-2" id="signup" to="/register">Sign Up</v-btn>
-            <v-btn depressed rounded id="login" to="/login">Log in</v-btn>
+            <v-btn depressed rounded class="mr-2" id="login" to="/login">Log in</v-btn>
+            <v-btn depressed rounded id="signup" to="/register">Sign Up</v-btn>
           </div>
 
           <div v-if="$store.state.loggedIn">
-            <v-menu text offset-y class="">
+            <v-menu text offset-y open-on-hover class="">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="justify-center mt-2" text rounded id="user" v-bind="attrs" v-on="on" :ripple="false">
                   User &nbsp; <v-icon>mdi-menu-down</v-icon>
@@ -106,6 +108,12 @@
           <v-list-item to="/items">
             Items
           </v-list-item>
+          <v-list-item to="/items/category/all" class="pl-10">
+            Categories
+          </v-list-item>
+          <v-list-item to="/items/quality/all" class="pl-10">
+            Qualities
+          </v-list-item>
           <!-- Mobile menu - logged in user -->
           <div v-if="$store.state.loggedIn">
             <hr>
@@ -125,10 +133,10 @@
             <v-list-item-content>
               <div v-if="!$store.state.loggedIn">
                 <v-list-item-title>
-                  <v-btn depressed rounded id="signup-sm" to="/register">Sign Up</v-btn>
+                  <v-btn depressed rounded id="login-sm" to="/login">Login</v-btn>
                 </v-list-item-title>
                 <v-list-item-title>
-                  <v-btn depressed rounded id="login-sm" to="/login">Login</v-btn>
+                  <v-btn depressed rounded id="signup-sm" to="/register">Sign Up</v-btn>
                 </v-list-item-title>
               </div>
               <v-list-item-title>
@@ -210,11 +218,15 @@
 
   .v-menu__content {
     box-shadow: none;
-    /* background-color: #c0c0c0; */
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
+  }
+
+  .v-list {
+    background-color: #f0f0f0 !important;
+    opacity: 0.95;
   }
 
   .nav-item {

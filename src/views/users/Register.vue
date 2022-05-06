@@ -36,14 +36,13 @@
                                 label="Password" autocomplete="on" required></v-text-field>
 
 
-                            <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 signup" @click="register()">
+                            <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 signup form" @click="register()">
                                 Sign up
                             </v-btn>
 
                             <v-btn rounded text class="mr-4 reset" @click="reset">
-                                Reset Form
+                                Clear
                             </v-btn>
-
                         </v-form>
                         <br>
                         <div class="footer-offset">
@@ -133,7 +132,7 @@
 <style scoped>
     a {
         text-decoration: none;
-        color: #153AB0 !important;
+        color: #659F41 !important;
         font-weight: bold;
     }
 

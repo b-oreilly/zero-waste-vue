@@ -74,8 +74,8 @@ router-link {
     color: unset;
 }
 
-.reset {
-    background-color: #000;
+.form {
+    background-color: #528235 !important;
     color: #fff !important;
 }
 

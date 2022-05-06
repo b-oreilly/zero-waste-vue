@@ -22,7 +22,10 @@ const routes = [{
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/users/Login")
+    component: () => import("@/views/users/Login"),
+    meta: {
+      requiresAuth: false,
+    }
   },
   {
     path: "/register",
@@ -36,11 +39,18 @@ const routes = [{
     /* This is a route guard. It checks if the user is logged in. 
     If they are not, it redirects them to the register page. */
     component: () => import('./views/users/Account.vue'),
-    beforeEach: (to, from, next) => {
-      if (store.state.loggedIn == false) {
-        next('register');
+    meta: {
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (store.state.loggedIn == false) {
+          router.push({
+            name: 'login'
+          })
+        }
       } else {
-        next()
+        next();
       }
     }
   },
@@ -50,9 +60,16 @@ const routes = [{
     component: () => import("@/views/users/EditAccount.vue"),
     /* This checks if the user is logged in - 
     if they are not, it redirects them to the register page. */
-    beforeEach: (to, from, next) => {
-      if (store.state.loggedIn == false) {
-        next('register');
+    meta: {
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (!(store.state.loggedIn())) {
+          router.push({
+            name: 'login'
+          })
+        }
       } else {
         next()
       }
@@ -72,20 +89,30 @@ const routes = [{
   {
     path: "/user/messages",
     name: "messages",
-    component: () => import('./views/messages/Messages.vue')
+    component: () => import('./views/messages/Messages.vue'),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/user/messages/create",
     name: "createMessage",
-    component: () => import('./views/messages/CreateMessage.vue')
+    component: () => import('./views/messages/CreateMessage.vue'),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/user/messages/:id",
     name: "viewSingleMessage",
-    component: () => import('./views/messages/ViewSingleMessage.vue')
+    component: () => import('./views/messages/ViewSingleMessage.vue'),
+    meta: {
+      requiresAuth: true,
+    }
   },
 
   // User Items
+
 
   {
     path: "/items/user/:id",
@@ -111,12 +138,8 @@ const routes = [{
     path: "/items/add",
     name: "addItem",
     component: () => import('./views/items/AddItem.vue'),
-    beforeEach: (to, from, next) => {
-      if (store.state.loggedIn == false) {
-        next('register');
-      } else {
-        next()
-      }
+    meta: {
+      requiresAuth: true,
     }
   },
   {
@@ -128,13 +151,7 @@ const routes = [{
     path: "/items/edit/:id",
     name: "editItem",
     component: () => import('./views/items/EditItem.vue'),
-    beforeEach: (to, from, next) => {
-      if (store.state.loggedIn == false) {
-        next('register');
-      } else {
-        next()
-      }
-    }
+
   },
 
   // Categories
@@ -177,6 +194,17 @@ const routes = [{
   }
 ]
 
+// routes.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (!(auth.loggedIn())) {
+//       router.push({
+//         name: 'login'
+//       })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 const router = new VueRouter({
   mode: 'history',

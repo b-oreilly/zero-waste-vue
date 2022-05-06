@@ -13,12 +13,12 @@
                 <v-col cols=2>
                     <div class="hidden-sm-and-down">
                         <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
-                            <v-icon>mdi-pencil-outline</v-icon>&nbsp;Compose
+                            <v-icon>mdi-message-plus-outline</v-icon>&nbsp;Compose
                         </v-btn>
                     </div>
                     <div class="hidden-md-and-up">
-                        <v-btn text rounded elevation="0" :to="{ name: 'createMessage'}">
-                            <v-icon>mdi-pencil-outline</v-icon>
+                        <v-btn icon rounded elevation="0" :to="{ name: 'createMessage'}">
+                            <v-icon>mdi-message-plus-outline</v-icon>
                         </v-btn>
                     </div>
                 </v-col>

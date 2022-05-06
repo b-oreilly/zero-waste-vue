@@ -8,14 +8,15 @@
             </v-row>
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="category in categories" :key="category._id" cols="12" lg="3" md="3"
-                    sm="6">
+                    sm="4" xs="2">
                     <v-card flat class="pt-3 pb-3">
-                        <v-icon large> mdi-{{ category.icon }} </v-icon>
-                        <v-card-title style="word-break: break-word" align="center" class="titles justify-center">
-                            <router-link :to="{ name: 'viewSingleCategory', params: { id: category._id }}" style="color: grey">
+                        <router-link :to="{ name: 'viewSingleCategory', params: { id: category._id }}"
+                            style="color: grey">
+                            <v-icon large> mdi-{{ category.icon }} </v-icon>
+                            <v-card-title style="word-break: break-word" align="center" class="titles justify-center">
                                 {{ category.name }}
-                            </router-link>
-                        </v-card-title>
+                            </v-card-title>
+                        </router-link>
                     </v-card>
                 </v-col>
             </v-row>

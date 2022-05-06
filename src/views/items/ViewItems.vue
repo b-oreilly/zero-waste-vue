@@ -1,18 +1,18 @@
 <template>
     <v-container>
-            <v-row no-gutters class="mt-6">
-                <div class="d-flex col" align="center">
-                    <v-col cols=2>
-                    </v-col>
-                    <div class="d-flex justify-center col">
-                        <h1>Items</h1>
-                    </div>
-                    <v-col class="d-flex justify-center height: 10px" align="center" cols=2>
-                        <AddButton />
-                    </v-col>
+        <div class="footer-offset">
+            <v-row no-gutters class="mt-6" align="center">
+                <v-col cols=2>
+                </v-col>
+                <div class="d-flex justify-center col">
+                    <h1>Items</h1>
                 </div>
+                <v-col class="d-flex justify-center mt-2" cols=2>
+                    <div class="d-flex justify-center col">
+                        <AddButton />
+                    </div>
+                </v-col>
             </v-row>
-            <div class="footer-offset">
             <v-row no-gutters>
                 <v-col class="v-card-columns" v-for="item in filteredClaimedItems" :key="item._id" cols="12" lg="3"
                     md="4" sm="6">
@@ -40,8 +40,8 @@
                                     </v-card-text>
                                 </v-col>
                                 <div class="justify-end">
-                                    <v-card-text class="pt-0" v-if="item.price">€{{ item.price }}</v-card-text>
-                                    <v-card-text class="pt-0" v-else>Free</v-card-text>
+                                    <p class="pt-0 pr-4" v-if="item.price">€{{ item.price }}</p>
+                                    <p class="pt-0 pr-4" v-else>Free</p>
                                 </div>
                             </v-row>
                         </div>
@@ -71,7 +71,6 @@
             axios.get('/items')
                 .then(response => {
                     this.items = response.data
-                    console.log(response.data)
                 })
                 .catch(error => console.log(error))
         },

@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <v-col>
-      <v-row no-gutters align="center">
+    <div class="footer-offset">
+      <v-row no-gutters align="center" class="mt-8">
         <v-col cols=2>
-          <div class="d-flex justify-start">
+          <div class="d-flex justify-center">
             <GoBackButton />
           </div>
         </v-col>
@@ -13,7 +13,6 @@
         <v-col cols=2>
         </v-col>
       </v-row>
-    </v-col>
     <v-col>
       <v-row no-gutters>
         <div class="d-flex justify-center col">
@@ -81,6 +80,7 @@
         </v-col>
       </v-row>
     </v-col>
+    </div>
   </v-container>
 </template>
 

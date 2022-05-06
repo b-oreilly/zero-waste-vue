@@ -20,12 +20,12 @@
                                 </p>
                                 <!-- <p variant="warning">You have entered an invalid username or password.</p> -->
                             </div>
-                            <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 login" @click="login()">
+                            <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 login form" @click="login()">
                                 Log in
                             </v-btn>
 
                             <v-btn rounded text class="mr-4 reset" @click="reset()">
-                                Reset Form
+                                Clear
                             </v-btn>
                         </v-form>
                         <div class="footer-offset mt-10">
@@ -34,12 +34,12 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="hidden-sm-and-down loggedin gradient">
+                        <div class="loggedin gradient">
                             <v-row class="mt-8">
                                 <v-col class="mb-10">
                                     <h2>Welcome back, {{ user.first_name }}.</h2>
-                                    <h2>You are logged in.</h2>
-                                    <v-btn rounded elevation="0" class="mb-8" to="/account">
+                                    <h2>You are logged in!</h2>
+                                    <v-btn rounded elevation="0" class="mb-8 mt-4" to="/account">
                                         View your account
                                     </v-btn>
                                 </v-col>
@@ -122,7 +122,7 @@
     }
 
     .loggedin {
-        border-radius: 40px;
+        border-radius: 100px;
         padding-top: 20px;
     }
 </style>

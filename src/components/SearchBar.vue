@@ -13,7 +13,7 @@
                     <v-card flat  v-for="item in filteredItems" :key="item._id" cols="12" lg="3" md="4"
                     sm="6">
                         <h5 style="word-break: break-word" align="center">
-                            <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                            <router-link class="item-title" style="color: grey" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                 {{ item.title }}
                             </router-link>
                         </h5>

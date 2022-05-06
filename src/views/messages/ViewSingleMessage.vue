@@ -3,7 +3,7 @@
         <div class="footer-offset">
             <v-row no-gutters align="center" class="mt-6">
                 <v-col cols=2>
-                    <div class="d-flex justify-start mt-2">
+                    <div class="d-flex justify-center mt-2">
                         <GoBackButton />
                     </div>
                 </v-col>
