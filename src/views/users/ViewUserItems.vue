@@ -16,8 +16,7 @@
             </v-row>
             <br>
             <v-row no-gutters>
-                <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" lg="3"
-                    md="4" sm="6">
+                <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" lg="3" md="4" sm="6">
                     <v-card class="pt-3 ma-2" flat>
                         <v-img v-if="item.photo">{{ item.photo }}</v-img>
                         <span v-else>
@@ -42,8 +41,8 @@
                                     </v-card-text>
                                 </v-col>
                                 <div class="justify-end">
-                                    <v-card-text class="pt-0" v-if="item.price">€{{ item.price }}</v-card-text>
-                                    <v-card-text class="pt-0" v-else>Free</v-card-text>
+                                    <p class="pt-0 pr-4" v-if="item.price">€{{ item.price }}</p>
+                                    <p class="pt-0 pr-4" v-else>Free</p>
                                 </div>
                             </v-row>
                         </div>

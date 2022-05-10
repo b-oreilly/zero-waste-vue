@@ -72,52 +72,8 @@
                 user: "",
                 price: ""
             },
-            categories: [{
-                    _id: "620a6acaff3f5cebc8370121",
-                    name: 'Food'
-                },
-                {
-                    _id: "620a6ae3ff3f5cebc8370123",
-                    name: 'Clothes'
-                },
-                {
-                    _id: "620a6af1ff3f5cebc8370125",
-                    name: 'Furniture'
-                },
-                {
-                    _id: "620a6b04ff3f5cebc8370127",
-                    name: 'Electronics'
-                },
-                {
-                    _id: "620a7a0fded499a220f386d1",
-                    name: 'Tools'
-                },
-                {
-                    _id: "620a7ca7178dada11844dbad",
-                    name: 'Toys'
-                }
-            ],
-            qualities: [{
-                    _id: "620a7695289821c7777850f1",
-                    name: 'Brand New/Unused'
-                },
-                {
-                    _id: "620a768b289821c7777850ef",
-                    name: 'Like new'
-                },
-                {
-                    _id: "620a765a289821c7777850ed",
-                    name: 'Lightly used'
-                },
-                {
-                    _id: "620a763b289821c7777850eb",
-                    name: 'Used'
-                },
-                {
-                    _id: "620a762b289821c7777850e9",
-                    name: 'Heavily Used'
-                }
-            ],
+            categories: [],
+            qualities: [],
 
             valid: true,
             titleRules: [
@@ -146,6 +102,8 @@
         }),
         mounted() {
             this.getUserDetails();
+            this.getCategories()
+            this.getQualities();
             this.getItem();
         },
         methods: {
@@ -156,6 +114,22 @@
             },
             reset() {
                 this.$refs.form.reset()
+            },
+            getCategories() {
+                axios.get(`/categories`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.categories = response.data
+                    })
+                    .catch(error => console.log(error))
+            },
+            getQualities() {
+                axios.get(`/qualities`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.qualities = response.data
+                    })
+                    .catch(error => console.log(error))
             },
             getItem() {
                 axios.get(`/items/${this.$route.params.id}`)
@@ -190,9 +164,7 @@
                         })
                         .then(response => {
                             console.log(response.data)
-                            this.$router.push({
-                                name: "viewItems"
-                            })
+                            this.$router.push(`/items/${this.$route.params.id}`)
                         })
                         .catch(err => {
                             console.log(err)

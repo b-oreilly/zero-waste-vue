@@ -121,17 +121,18 @@
                                     </div>
 
                                     <div v-else align="right">
-                                        <v-btn text rounded class="delete" variant="warning" 
+                                        <v-btn text rounded class="delete" variant="warning"
                                             @click="interactionDialog = !interactionDialog">Delete</v-btn>
 
                                         <v-dialog v-model="interactionDialog" max-width="500px">
                                             <v-card>
                                                 <h3 class="pa-6">Are you sure you want to delete this item?</h3>
-                                                <v-btn text rounded class="cancel mb-6"
+                                                <v-btn text rounded class="delete mb-6 mr-2" @click="deleteItem()">Delete
+                                                </v-btn>
+                                                <v-btn text rounded class="cancel mb-6 ml-2"
                                                     @click="interactionDialog = !interactionDialog">
                                                     Cancel</v-btn>
-                                                <v-btn text rounded class="delete mb-6" @click="deleteItem()">Delete
-                                                </v-btn>
+
                                             </v-card>
                                         </v-dialog>
                                     </div>
@@ -214,7 +215,6 @@
                         console.log(error)
                         console.log(error.response.data)
                     })
-
             },
             userInteraction() {
                 if (this.$refs.form.validate()) {
@@ -250,8 +250,7 @@
         /* height: 100px !important; */
     }
 
-    .itemTitle,
-    .itemBody {
+    .itemTitle {
         text-transform: capitalize;
     }
 

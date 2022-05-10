@@ -31,6 +31,24 @@
                         {{ new Date(message.updatedAt).toLocaleString('en-GB', { timeZone: 'GMT' }) }}</p>
                 </v-col>
             </v-row>
+            <v-row class="d-flex justify-end">
+                <div v-if="senderUserID == user.id">
+                    <v-btn text rounded class="delete" variant="warning"
+                        @click="deleteDialog = !deleteDialog">
+                        Delete</v-btn>
+
+                    <v-dialog v-model="deleteDialog" max-width="500px">
+                        <v-card>
+                            <h3 class="pa-6">Are you sure you want to delete this message?</h3>
+                            <v-btn text rounded class="delete mb-6 mr-2" @click="deleteMessage()">Delete
+                            </v-btn>
+                            <v-btn text rounded class="cancel mb-6 ml-2"
+                                @click="deleteDialog = !deleteDialog">
+                                Cancel</v-btn>
+                        </v-card>
+                    </v-dialog>
+                </div>
+            </v-row>
         </div>
     </v-container>
 </template>
@@ -47,15 +65,27 @@
         data() {
             return {
                 message: {},
-                messages: []
+                messages: [],
+                deleteDialog: false
             }
         },
+        mounted() {
+            this.getUserDetails();
+            this.getMessages();
+            this.getSingleMessage();
+            this.getInteractions();
+        },
         methods: {
+            getUserDetails() {
+                if (localStorage.getItem("user")) {
+                    this.user = JSON.parse(localStorage.getItem("user"))
+                }
+            },
             getMessages() {
                 axios.get(`/messages`)
                     .then(response => {
                         this.messages = response.data
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(error => console.log(error))
             },
@@ -63,10 +93,26 @@
                 axios.get(`/messages/${this.$route.params.id}`)
                     .then(response => {
                         this.message = response.data
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(error => console.log(error))
-            }
+            },
+            deleteMessage() {
+                axios.delete(`/messages/${this.$route.params.id}`)
+                    .then(response => {
+                        console.log(response.data)
+                        this.$router.push({
+                            name: "messages",
+                            params: {}
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        console.log(error.response.data)
+                    })
+
+            },
+
         },
         computed: {
             receivedMessages: function () {
@@ -79,10 +125,6 @@
                     return message.senderUserID._id == localStorage.getItem('userID')
                 })
             }
-        },
-        mounted() {
-            this.getMessages();
-            this.getSingleMessage();
         }
     }
 </script>

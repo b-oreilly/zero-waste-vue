@@ -21,7 +21,8 @@
 
                     <!-- Validation colour not working on label -->
                     <v-textarea id="description" name="description" v-model="form.description" :counter="250"
-                        :rules="descriptionRules" label="Description" full-width rows="2" row-height="20" required>
+                        :rules="descriptionRules" label="Description" full-width rows="3" row-height="20" no-resize
+                        required>
                     </v-textarea>
 
                     <v-autocomplete id="categoryID" name="categoryID" v-model="form.categoryID" :items="categories"
@@ -39,7 +40,7 @@
                     <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
                     </v-file-input> -->
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
+                    <v-btn rounded text :disabled="!valid" class="mr-4 login form" @click="addItem()">
                         Add
                     </v-btn>
 
@@ -117,7 +118,7 @@
                 axios.get(`/categories`)
                     .then(response => {
                         console.log(response.data)
-                        this.categories = response.data
+                        // this.categories = response.data
                     })
                     .catch(error => console.log(error))
             },
@@ -125,7 +126,7 @@
                 axios.get(`/qualities`)
                     .then(response => {
                         console.log(response.data)
-                        this.qualities = response.data
+                        // this.qualities = response.data
                     })
                     .catch(error => console.log(error))
             },

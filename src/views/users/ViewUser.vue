@@ -13,15 +13,28 @@
         <v-col cols=2>
         </v-col>
       </v-row>
-    <v-col>
-      <v-row no-gutters>
-        <div class="d-flex justify-center col">
-          <h2 class="mainItemTitle pl-0">{{ user.username }}</h2>
-        </div>
-      </v-row>
-      <v-row no-gutters class="d-flex justify-center col">
-        <h4 class="mainItemTitle pl-0">Location: {{ user.locationID.name }}</h4>
-      </v-row>
+      <v-card flat>
+        <v-row class="mt-4">
+          <v-col class="d-flex justify-center">
+            <v-avatar size="150">
+              <v-img
+                src="https://repository-images.githubusercontent.com/130118224/a2c75780-e0a9-11eb-8494-3581a0b1c93b">
+              </v-img>
+            </v-avatar>
+          </v-col>
+          <v-col class="d-flex justify-start">
+            <v-list-item color="rgba(0, 0, 0, .4)">
+              <v-list-item-content align="left">
+                <v-list-item-title class="title">{{ user.first_name }} {{ user.last_name }}
+                </v-list-item-title>
+                <h5 class="pt-2">{{ user.locationID.name }}</h5>
+                <v-list-item-subtitle class="pt-1">Member since: {{ new Date(user.createdAt).toLocaleString() }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
+      </v-card>
 
       <v-row>
         <v-col>
@@ -30,35 +43,36 @@
           </div>
           <div class="footer-offset">
             <v-row no-gutters>
-              <v-col class="v-card-columns" v-for="item in filteredItems" :key="item._id" cols="12" sm="3">
+              <v-col class="v-card-columns" v-for="item in filteredItems" :key="item._id" cols="12" lg="3" md="4"
+                sm="6">
                 <v-card flat class="pt-3 ma-2">
-                  <v-img v-if="item.photo">{{ item.photo }}</v-img>
-                  <span v-else>
-                    <v-img src="https://picsum.photos/400/300?random" />
-                  </span>
-                  <div>
-                    <v-row align="center">
-                      <v-card-title style="word-break: break-word" align="left" class="mt-2 pb-0">
-                        <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                  <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
+                    <v-img v-if="item.photo">{{ item.photo }}</v-img>
+                    <span v-else>
+                      <v-img src="https://picsum.photos/400/300?random" />
+                    </span>
+                    <div>
+                      <v-row align="center">
+                        <v-card-title style="word-break: break-word" align="left" class="mt-2 pb-0">
                           {{ item.title }}
-                        </router-link>
-                      </v-card-title>
-                    </v-row>
-                    <v-row class="pt-0">
-                      <v-col class="pt-0">
-                        <v-card-text v-if="item.categoryID" class="pa-0 pl-1">
-                          <router-link style="color: grey"
-                            :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
-                            <p> {{ item.categoryID.name }} </p>
-                          </router-link>
-                        </v-card-text>
-                      </v-col>
-                      <div class="justify-end">
-                        <v-card-text class="pt-0" v-if="item.price">€{{ item.price }}</v-card-text>
-                        <v-card-text class="pt-0" v-else>Free</v-card-text>
-                      </div>
-                    </v-row>
-                  </div>
+                        </v-card-title>
+                      </v-row>
+                      <v-row class="pt-0">
+                        <v-col class="pt-0">
+                          <v-card-text v-if="item.categoryID" class="pa-0 pl-1">
+                            <router-link style="color: grey"
+                              :to="{ name: 'viewSingleCategory', params: { id: item.categoryID._id }}">
+                              <p> {{ item.categoryID.name }} </p>
+                            </router-link>
+                          </v-card-text>
+                        </v-col>
+                        <div class="justify-end">
+                          <p class="pt-0 pr-4" v-if="item.price">€{{ item.price }}</p>
+                          <p class="pt-0 pr-4" v-else>Free</p>
+                        </div>
+                      </v-row>
+                    </div>
+                  </router-link>
                 </v-card>
               </v-col>
             </v-row>
@@ -79,7 +93,6 @@
           </div>
         </v-col>
       </v-row>
-    </v-col>
     </div>
   </v-container>
 </template>

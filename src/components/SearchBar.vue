@@ -4,13 +4,9 @@
             <v-text-field placeholder="Search" prepend-inner-icon="mdi-magnify" v-model="searchTerm" class="search" flat
                 rounded filled dense>
             </v-text-field>
-            <!-- :items="items" item-text="title" -->
-            <!-- @click="searchItems" -->
-            <!-- <v-btn rounded dark elevation="0">Search</v-btn> -->
-
             <span v-if="searchTerm != ''">
                 <v-col class="v-card-columns">
-                    <v-card flat  v-for="item in filteredItems" :key="item._id" cols="12" lg="3" md="4"
+                    <v-card flat v-for="item in filteredItems" :key="item._id" cols="12" lg="3" md="4"
                     sm="6">
                         <h5 style="word-break: break-word" align="center">
                             <router-link class="item-title" style="color: grey" :to="{ name: 'viewSingleItem', params: { id:item._id }}">

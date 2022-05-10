@@ -45,21 +45,22 @@
                         <p class="pl-4"> From:
                             {{ message.senderUserID.username }}</p>
                         <p class="pl-4">Received at:
-                            {{ new Date(message.createdAt).toLocaleString('en-GB', { timeZone: 'GMT' }) }}</p>
-                        <div v-if="receivedMessages == 0">
-                            <v-row>
-                                <v-col>
-                                    <div class="d-flex justify-center col">
-                                        <p>
-                                            You haven't received any messages.
-                                        </p>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                        </div>
+                            {{ new Date(message.createdAt).toLocaleString() }}</p>
+
                     </v-card>
                 </v-col>
             </v-row>
+            <div v-if="receivedMessages == 0">
+                <v-row>
+                    <v-col>
+                        <div class="d-flex justify-center col pb-0">
+                            <p>
+                                You haven't received any messages.
+                            </p>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
 
 
             <v-row>
@@ -84,20 +85,20 @@
                             {{ message.receiverUserID.username }}</p>
                         <p class="pl-4">Sent at: {{ new Date(message.createdAt).toLocaleString() }}</p>
 
-                        <div v-if="sentMessages == 0">
-                            <v-row>
-                                <v-col>
-                                    <div class="d-flex justify-center col">
-                                        <p>
-                                            You haven't sent any messages.
-                                        </p>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                        </div>
                     </v-card>
                 </v-col>
             </v-row>
+            <div v-if="sentMessages == 0">
+                <v-row>
+                    <v-col>
+                        <div class="d-flex justify-center col pb-0">
+                            <p>
+                                You haven't sent any messages.
+                            </p>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
         </div>
     </v-container>
 </template>
@@ -119,7 +120,7 @@
                 axios.get(`/messages`)
                     .then(response => {
                         this.messages = response.data
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(error => console.log(error))
             }

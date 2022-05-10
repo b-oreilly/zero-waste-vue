@@ -39,9 +39,6 @@ const routes = [{
     /* This is a route guard. It checks if the user is logged in. 
     If they are not, it redirects them to the register page. */
     component: () => import('./views/users/Account.vue'),
-    meta: {
-      requiresAuth: true,
-    },
     beforeEnter: (to, from, next) => {
       if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (store.state.loggedIn == false) {

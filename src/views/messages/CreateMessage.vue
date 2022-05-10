@@ -16,17 +16,14 @@
             <v-card flat>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-autocomplete id="receiverUserID" name="receiverUserID" v-model="form.receiverUserID"
-                        :items="receivers in recipientUsers" item-text="username" item-value="_id" label="Send to:" :rules="receiverRules"
+                        :items="receivers" item-text="username" item-value="_id" label="Send to" :rules="receiverRules"
                         required spellcheck="false">
                     </v-autocomplete>
-                    <br>
                     <v-textarea id="title" name="message" v-model="form.message" :counter="250" :rules="messageRules"
-                        label="Message Body" required class="pt-10">
+                        label="Message Body" required class="pt-10 mb-6" no-resize rows="4">
                     </v-textarea>
-                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input> -->
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="sendMessage()">
+                    <v-btn rounded elevation="0" :disabled="!valid" class="mr-4 login form" @click="sendMessage()">
                         Send
                     </v-btn>
 
@@ -45,7 +42,7 @@
 
 
     export default {
-        name: "addItem",
+        name: "createMessage",
         components: {
             GoBackButton
         },
@@ -60,16 +57,16 @@
             receivers: [],
             valid: true,
             messageRules: [
-                v => !!v || 'Message text is required',
+                v => !!v || 'Message required',
                 v => (v && v.length >= 1) || 'Message must be at least 1 character',
             ],
             receiverRules: [
-                v => !!v || 'Message recipient is required'
+                v => !!v || 'Message recipient required'
             ]
         }),
         mounted() {
             this.getUserDetails();
-            this.getUsers();
+            this.getFilteredUsers();
         },
         computed: {
             recipientUsers: function () {
@@ -91,6 +88,7 @@
                 axios.get(`/users`)
                     .then((response) => {
                         this.receivers = response.data
+                        // console.log(this.receivers)
                     })
                     .catch(error => console.log(error))
             },
