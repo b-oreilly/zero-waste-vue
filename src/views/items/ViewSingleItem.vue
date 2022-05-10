@@ -27,10 +27,11 @@
             <v-row>
 
                 <v-col md=6 sm=12>
-                    <v-img class="overflow-hidden responsive p-0" v-if="item.photo">{{ item.photo }}</v-img>
-                    <span v-else>
-                        <v-img src="https://picsum.photos/400/300?random" />
-                    </span>
+                    <!-- v-bind:src="item.itemImage" -->
+                    <v-img contain class="overflow-hidden responsive p-0 item-image" v-if="item.itemImage != null"
+                        v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
+                    <v-img v-else class="item-image" 
+                        src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                 </v-col>
                 <v-col md=6 sm=12>
                     <v-card flat class="overflow-hidden">
@@ -96,7 +97,7 @@
                                                     <v-card-title style="word-break: break-word" align="left">
                                                         Register
                                                         your
-                                                        interest, watch or claim this item.</v-card-title>
+                                                        interest, save or claim this item.</v-card-title>
 
                                                     <v-card-text>
                                                         <v-select v-model="form.interactionID" :items="interactions"
@@ -245,9 +246,8 @@
         margin-right: 10px;
     }
 
-    v-img {
-        max-width: auto;
-        /* height: 100px !important; */
+    .item-image {
+        max-height: 400px;
     }
 
     .itemTitle {

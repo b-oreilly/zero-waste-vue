@@ -14,12 +14,11 @@
                 </v-col>
             </v-row>
             <v-card flat>
-                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-form ref="form" v-model="valid" enctype="multipart/form-data" lazy-validation>
                     <v-text-field id="title" name="title" v-model="form.title" :counter="25" :rules="titleRules"
                         label="Item Title" required>
                     </v-text-field>
 
-                    <!-- Validation colour not working on label -->
                     <v-textarea id="description" name="description" v-model="form.description" :counter="250"
                         :rules="descriptionRules" label="Description" full-width rows="3" row-height="20" no-resize
                         required>
@@ -33,14 +32,15 @@
                         item-text="name" item-value="_id" label="Quality" :rules="qualityRules" required>
                     </v-autocomplete>
 
+                    <v-file-input prepend-icon="mdi-camera" id="itemImage" name="itemImage" v-model="form.itemImage"
+                        label="Item image" :rules="imageRules" type="file" required>
+                    </v-file-input>
+
                     <v-text-field id="price" name="price" v-model="form.price" :rules="priceRules" label="Price"
                         required prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
-                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input> -->
-
-                    <v-btn rounded text :disabled="!valid" class="mr-4 login form" @click="addItem()">
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
                         Add
                     </v-btn>
 
@@ -67,11 +67,12 @@
             categories: [],
             qualities: [],
             form: {
+                user: "",
                 title: "",
                 description: "",
                 category: "",
                 quality: "",
-                user: "",
+                itemImage: "",
                 price: ""
             },
             valid: true,
@@ -91,13 +92,16 @@
                 v => !!v || 'Quality is required',
                 v => (v && v.length >= 4) || 'Quality must be at least 4 characters',
             ],
+            imageRules: [
+                v => !!v || 'Image is required'
+            ],
             priceRules: [
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
             ],
-            // photoRules: [
-            //     v => !!v || 'Item photo is required'
-            // ]
+            imageRules: [
+                v => !!v || 'Item image is required'
+            ]
         }),
         mounted() {
             this.getUserDetails();
@@ -141,10 +145,12 @@
                             categoryID: this.form.categoryID,
                             qualityID: this.form.qualityID,
                             userID: localStorage.getItem('userID'),
+                            itemImage: this.form.itemImage,
                             price: this.form.price,
                             claimed: false
                         }, {
                             headers: {
+                                'Content-Type': 'multipart/form-data',
                                 "Authorization": `Bearer ${token}`
                             }
                         })
