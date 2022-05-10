@@ -15,10 +15,10 @@
                 <v-col class="v-card-columns" v-for="item in filteredClaimedItems" :key="item._id" cols="12" lg="3"
                     md="4" sm="6">
                     <v-card flat class="pt-3 ma-2">
-                            <v-img contain class="overflow-hidden p-0 card-image" v-if="item.itemImage != null"
-                                v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
-                            <v-img contain v-else class="card-image"
-                                src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
+                        <v-img contain class="overflow-hidden p-0 card-image" v-if="item.itemImage != null"
+                            v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
+                        <v-img contain v-else class="card-image"
+                            src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                         <v-card-title style="word-break: break-word" align="left">
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
                                 {{ item.title }}
@@ -89,7 +89,7 @@
     }
 
     .card-image {
-        max-height: 175px;
+        height: 250px;
+        max-height: 250px;
     }
-
 </style>

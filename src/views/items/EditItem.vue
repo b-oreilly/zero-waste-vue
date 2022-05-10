@@ -35,9 +35,6 @@
                         required prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
-                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input> -->
-
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editItem()">
                         Edit
                     </v-btn>
@@ -138,9 +135,9 @@
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
             ],
-            // photoRules: [
-            //     v => !!v || 'Item photo is required'
-            // ]
+            imageRules: [
+                v => !!v || 'Image is required'
+            ]
         }),
         mounted() {
             this.getUserDetails();

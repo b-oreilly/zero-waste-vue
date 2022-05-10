@@ -14,7 +14,7 @@
                 </v-col>
             </v-row>
             <v-card flat>
-                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-form ref="form" v-model="valid" enctype="multipart/form-data" lazy-validation>
                     <v-text-field id="title" name="title" v-model="form.title" :counter="25" :rules="titleRules"
                         label="Item Title" required>
                     </v-text-field>
@@ -33,24 +33,12 @@
                     </v-autocomplete>
 
                     <v-file-input prepend-icon="mdi-camera" id="itemImage" name="itemImage" v-model="form.itemImage"
-                        label="Item image" :rules="imageRules" required>
+                        label="Item image" :rules="imageRules" type="file" required>
                     </v-file-input>
-
-                    <!-- <form @submit.prevent="onUpload">
-                        <div class="form-group">
-                            <input type="file" name="imagesArray" multiple @change="onChange">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success">Store</button>
-                        </div>
-                    </form> -->
 
                     <v-text-field id="price" name="price" v-model="form.price" :rules="priceRules" label="Price"
                         required prepend-icon="mdi-currency-eur">
                     </v-text-field>
-
-                    <!-- <v-file-input name="photo" v-model="form.photo" :rules="photoRules" multiple label="Item photo(s)">
-                    </v-file-input> -->
 
                     <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
                         Add
@@ -158,9 +146,11 @@
                             qualityID: this.form.qualityID,
                             userID: localStorage.getItem('userID'),
                             itemImage: this.form.itemImage,
-                            price: this.form.price
+                            price: this.form.price,
+                            claimed: false
                         }, {
                             headers: {
+                                'Content-Type': 'multipart/form-data',
                                 "Authorization": `Bearer ${token}`
                             }
                         })
