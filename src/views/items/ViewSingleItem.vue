@@ -30,26 +30,23 @@
                     <!-- v-bind:src="item.itemImage" -->
                     <v-img contain class="overflow-hidden responsive p-0 item-image" v-if="item.itemImage != null"
                         v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
-                    <v-img v-else class="item-image" 
+                    <v-img v-else class="item-image"
                         src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                 </v-col>
                 <v-col md=6 sm=12>
                     <v-card flat class="overflow-hidden">
                         <div class="itemBody">
-
-                            <!-- <v-card-title class="pt-0">
-                                <h2> {{ item.title }} </h2>
-                            </v-card-title> -->
-
                             <v-card-text>
                                 <v-row class="pt-0">
                                     <v-col class="pt-0">
-                                        <p class="item-description">{{ item.description }}</p>
+                                        <div class="d-flex justify-end mr-4 mb-4 item-description">
+                                            <h3 v-if="item.price">€{{ item.price }}</h3>
+                                            <h3 v-else>Free</h3>
+                                        </div>
                                     </v-col>
-                                    <div class="mr-4 item-description">
-                                        <h4 v-if="item.price">€{{ item.price }}</h4>
-                                        <h4 v-else>Free</h4>
-                                    </div>
+                                </v-row>
+                                <v-row>
+                                    <p class="pb-4 ml-4 item-description">{{ item.description }}</p>
                                 </v-row>
 
                                 <v-divider /><br>
@@ -73,8 +70,8 @@
                                 <p v-else></p>
 
                                 <div v-if="!$store.state.loggedIn">
-                                    <p>Please <router-link to="/login">Login</router-link>
-                                        or <router-link to="/register">Signup</router-link>
+                                    <p>Please <router-link to="/login" class="link-green">Login</router-link>
+                                        or <router-link to="/register" class="link-green">Signup</router-link>
                                         to contact this user.</p>
                                 </div>
                                 <div v-else class="d-flex pb-0">
@@ -128,12 +125,12 @@
                                         <v-dialog v-model="interactionDialog" max-width="500px">
                                             <v-card>
                                                 <h3 class="pa-6">Are you sure you want to delete this item?</h3>
-                                                <v-btn text rounded class="delete mb-6 mr-2" @click="deleteItem()">Delete
+                                                <v-btn text rounded class="delete mb-6 mr-2" @click="deleteItem()">
+                                                    Delete
                                                 </v-btn>
                                                 <v-btn text rounded class="cancel mb-6 ml-2"
                                                     @click="interactionDialog = !interactionDialog">
                                                     Cancel</v-btn>
-
                                             </v-card>
                                         </v-dialog>
                                     </div>
@@ -228,15 +225,31 @@
                         .then(response => {
                             console.log(response.data)
                             this.$router.push({
-                                name: "account"
-                            })
+                                    name: "account"
+                                })
                         })
                         .catch(err => {
                             console.log(err)
                             console.log(err.response.data)
-                        })
+                        }) 
+                    // if (this.form.interactionID.name == "Claim") {
+                    //     axios
+                    //         .post(`/items/${this.$route.params.id}`, {
+                    //             claimed: true 
+                    //         })
+                    //         .then(response => {
+                    //             console.log(response.data)
+                    //             this.$router.push({
+                    //                 name: "account"
+                    //             })
+                    //         })
+                    //         .catch(err => {
+                    //             console.log(err)
+                    //             console.log(err.response.data)
+                    //         })
+                    // }
                 }
-            },
+            }
         }
     };
 </script>
@@ -248,10 +261,6 @@
 
     .item-image {
         max-height: 400px;
-    }
-
-    .itemTitle {
-        text-transform: capitalize;
     }
 
     p {

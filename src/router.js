@@ -57,12 +57,9 @@ const routes = [{
     component: () => import("@/views/users/EditAccount.vue"),
     /* This checks if the user is logged in - 
     if they are not, it redirects them to the register page. */
-    meta: {
-      requiresAuth: true,
-    },
     beforeEnter: (to, from, next) => {
       if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (!(store.state.loggedIn())) {
+        if (store.state.loggedIn == false) {
           router.push({
             name: 'login'
           })

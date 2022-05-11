@@ -83,7 +83,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     a {
         text-decoration: none;
         color: black;
@@ -97,8 +97,4 @@
         height: 30px;
     }
 
-    .card-image {
-        height: 250px;
-        max-height: 250px;
-    }
 </style>

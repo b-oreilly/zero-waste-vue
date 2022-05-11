@@ -40,7 +40,7 @@
                         required prepend-icon="mdi-currency-eur">
                     </v-text-field>
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="addItem()">
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup form" @click="addItem()">
                         Add
                     </v-btn>
 
@@ -82,7 +82,7 @@
             ],
             descriptionRules: [
                 v => !!v || 'Description is required',
-                v => (v && v.length >= 10) || 'Description must be at least 10 characters',
+                v => (v && v.length >= 3) || 'Description must be at least 3 characters',
             ],
             categoryRules: [
                 v => !!v || 'Category is required',
@@ -98,9 +98,6 @@
             priceRules: [
                 v => !!v || 'Price is required',
                 v => /^\d*\.?\d*$/.test(v) || 'Price must be valid',
-            ],
-            imageRules: [
-                v => !!v || 'Item image is required'
             ]
         }),
         mounted() {
@@ -121,16 +118,16 @@
             getCategories() {
                 axios.get(`/categories`)
                     .then(response => {
-                        console.log(response.data)
-                        // this.categories = response.data
+                        // console.log(response.data)
+                        this.categories = response.data
                     })
                     .catch(error => console.log(error))
             },
             getQualities() {
                 axios.get(`/qualities`)
                     .then(response => {
-                        console.log(response.data)
-                        // this.qualities = response.data
+                        // console.log(response.data)
+                        this.qualities = response.data
                     })
                     .catch(error => console.log(error))
             },

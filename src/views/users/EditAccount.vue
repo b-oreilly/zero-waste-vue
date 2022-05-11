@@ -39,7 +39,7 @@
                     <v-text-field v-model="form.email" :rules="emailRules" label="E-mail" required autocomplete="email">
                     </v-text-field>
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editAccount()">
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup form" @click="editAccount()">
                         Edit
                     </v-btn>
 
@@ -121,7 +121,7 @@
                         this.$set(this.form, 'first_name', this.user.first_name)
                         this.$set(this.form, 'last_name', this.user.last_name)
                         this.$set(this.form, 'username', this.user.username)
-                        this.$set(this.form, 'locationID', this.user.locationID.name)
+                        this.$set(this.form, 'locationID', this.user.locationID._id)
                         this.$set(this.form, 'email', this.user.email)
                         this.$set(this.form, 'password', this.user.password)
                     })

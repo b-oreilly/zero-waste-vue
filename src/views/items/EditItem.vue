@@ -36,7 +36,7 @@
                             required prepend-icon="mdi-currency-eur">
                         </v-text-field>
 
-                    <v-btn rounded text :disabled="!valid" class="mr-4 signup" @click="editItem()">
+                    <v-btn rounded text :disabled="!valid" class="mr-4 signup form" @click="editItem()">
                         Edit
                     </v-btn>
 

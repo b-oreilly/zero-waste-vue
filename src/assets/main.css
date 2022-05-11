@@ -9,6 +9,16 @@
     color: #659F41 !important;
 }
 
+.link-green {
+    color: #659F41 !important;
+    background-color: transparent !important;
+}
+
+.card-image {
+    height: 250px;
+    max-height: 250px;
+}
+
 .interaction {
     font-weight: 500;
 }

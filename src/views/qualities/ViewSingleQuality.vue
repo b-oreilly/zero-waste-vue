@@ -24,10 +24,10 @@
                     <v-col class="v-card-columns" v-for="item in items" :key="item._id" cols="12" lg="3" md="4" sm="6">
                         <v-card class="pt-3 ma-2" flat>
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                                <v-img v-if="item.photo">{{ item.photo }}</v-img>
-                                <span v-else>
-                                    <v-img src="https://picsum.photos/400/300?random" />
-                                </span>
+                                <v-img contain class="overflow-hidden p-0 card-image" v-if="item.itemImage != null"
+                                    v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
+                                <v-img contain v-else class="card-image"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                 <div>
                                     <v-row align="center">
                                         <v-card-title style="word-break: break-word" align="left" class="mt-2 pb-0">

@@ -28,7 +28,7 @@
                             <v-list-item-content align="left">
                                 <v-list-item-title class="title">{{ user.first_name }} {{ user.last_name }}
                                 </v-list-item-title>
-                                <v-list-item-subtitle>{{ user.locationID.name }}</v-list-item-subtitle>
+                                <h5 class="pt-2">{{ this.user.locationID.name }}</h5>
                                 <v-list-item-subtitle>Member since: {{ new Date(user.createdAt).toLocaleString() }}
                                 </v-list-item-subtitle>
                                 <v-btn rounded elevation="0" class="mt-4"
@@ -52,11 +52,11 @@
                         sm="6">
                         <v-card flat class="pt-3 ma-2">
                             <router-link class="item-title" :to="{ name: 'viewSingleItem', params: { id:item._id }}">
-                                <v-img contain class="overflow-hidden responsive p-0 item-image"
+                                <v-img contain class="overflow-hidden responsive p-0 card-image"
                                     v-if="item.itemImage != null"
                                     v-bind:src="`http://localhost:8000/${item.itemImage}`">
                                 </v-img>
-                                <v-img v-else class="item-image"
+                                <v-img v-else class="card-image"
                                     src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                 <div>
                                     <v-row align="center">
@@ -117,11 +117,11 @@
                             </h4>
                             <router-link class="item-title"
                                 :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
-                                <v-img contain class="overflow-hidden responsive p-0 item-image"
-                                    v-if="item.itemImage != null"
-                                    v-bind:src="`http://localhost:8000/${item.itemImage}`">
+                                <v-img contain class="overflow-hidden responsive p-0 card-image"
+                                    v-if="interaction.itemID.itemImage != null"
+                                    v-bind:src="`http://localhost:8000/${interaction.itemID.itemImage}`">
                                 </v-img>
-                                <v-img v-else class="item-image"
+                                <v-img v-else class="card-image"
                                     src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                 <div>
                                     <v-row align="center">
@@ -136,7 +136,8 @@
                                         <v-col class="pt-0">
                                         </v-col>
                                         <div class="justify-end">
-                                            <p class="pt-0 pr-4" v-if="interaction.itemID.price">€{{ interaction.itemID.price }}</p>
+                                            <p class="pt-0 pr-4" v-if="interaction.itemID.price">
+                                                €{{ interaction.itemID.price }}</p>
                                             <p class="pt-0 pr-4" v-else>Free</p>
                                         </div>
                                     </v-row>
@@ -175,11 +176,11 @@
                             </h4>
                             <router-link class="item-title"
                                 :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
-                                <v-img contain class="overflow-hidden responsive p-0 item-image"
-                                    v-if="item.itemImage != null"
-                                    v-bind:src="`http://localhost:8000/${item.itemImage}`">
+                                <v-img contain class="overflow-hidden responsive p-0 card-image"
+                                    v-if="interaction.itemID.itemImage != null"
+                                    v-bind:src="`http://localhost:8000/${interaction.itemID.itemImage}`">
                                 </v-img>
-                                <v-img v-else class="item-image"
+                                <v-img v-else class="card-image"
                                     src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                 <div>
                                     <v-row align="center">
@@ -197,7 +198,8 @@
                                             </v-card-text>
                                         </v-col>
                                         <div class="justify-end">
-                                            <p class="pt-0 pr-4" v-if="interaction.itemID.price">€{{ interaction.itemID.price }}</p>
+                                            <p class="pt-0 pr-4" v-if="interaction.itemID.price">
+                                                €{{ interaction.itemID.price }}</p>
                                             <p class="pt-0 pr-4" v-else>Free</p>
                                         </div>
                                     </v-row>
@@ -234,10 +236,10 @@
                                     </h4>
                                     <router-link class="item-title"
                                         :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
-                                        <v-img contain class="overflow-hidden responsive p-0 item-image"
-                                            v-if="item.itemImage != null"
-                                            v-bind:src="`http://localhost:8000/${item.itemImage}`"></v-img>
-                                        <v-img v-else class="item-image"
+                                        <v-img contain class="overflow-hidden responsive p-0 card-image"
+                                            v-if="interaction.itemID.itemImage != null"
+                                            v-bind:src="`http://localhost:8000/${interaction.itemID.itemImage}`"></v-img>
+                                        <v-img v-else class="card-image"
                                             src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                         <div>
                                             <v-row align="center">
@@ -259,7 +261,8 @@
                                                     </v-card-text>
                                                 </v-col>
                                                 <div class="justify-end">
-                                                    <p class="pt-0 pr-4" v-if="interaction.itemID.price">€{{ interaction.itemID.price }}</p>
+                                                    <p class="pt-0 pr-4" v-if="interaction.itemID.price">
+                                                        €{{ interaction.itemID.price }}</p>
                                                     <p class="pt-0 pr-4" v-else>Free</p>
                                                 </div>
                                             </v-row>
@@ -397,6 +400,7 @@
                     .get(`/user_interactions`)
                     .then(response => {
                         this.interactions = response.data
+                        console.log(this.interactions)
                     })
                     .catch(err => {
                         console.log(err)
