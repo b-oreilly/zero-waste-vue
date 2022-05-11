@@ -190,12 +190,12 @@
                                     </v-row>
                                     <v-row class="pt-0">
                                         <v-col class="pt-0">
-                                            <v-card-text v-if="item.categoryID" class="pa-0 pl-1">
+                                            <!-- <v-card-text v-if="item.categoryID" class="pa-0 pl-1">
                                                 <router-link class="item-title"
                                                     :to="{ name: 'viewUser', params: { id: interaction.itemID.userID._id }}">
                                                     {{ interaction.itemID.categoryID.name }}
                                                 </router-link>
-                                            </v-card-text>
+                                            </v-card-text> -->
                                         </v-col>
                                         <div class="justify-end">
                                             <p class="pt-0 pr-4" v-if="interaction.itemID.price">
@@ -238,7 +238,8 @@
                                         :to="{ name: 'viewSingleItem', params: { id: interaction.itemID._id }}">
                                         <v-img contain class="overflow-hidden responsive p-0 card-image"
                                             v-if="interaction.itemID.itemImage != null"
-                                            v-bind:src="`http://localhost:8000/${interaction.itemID.itemImage}`"></v-img>
+                                            v-bind:src="`http://localhost:8000/${interaction.itemID.itemImage}`">
+                                        </v-img>
                                         <v-img v-else class="card-image"
                                             src="https://upload.wikimedia.org/wikipedia/commons/f/f8/No-image-available-4X3.png?20190523201847" />
                                         <div>

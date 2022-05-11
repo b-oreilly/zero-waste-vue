@@ -29,7 +29,8 @@
               <v-menu open-on-hover offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn text plain active-class="nav-item" :ripple="false" id="nav-item" to="/items" v-bind="attrs"
-                    v-on="on">Items &nbsp; <v-icon>mdi-menu-down</v-icon> </v-btn>
+                    v-on="on">Items &nbsp; <v-icon>mdi-menu-down</v-icon>
+                  </v-btn>
                 </template>
                 <v-list>
                   <v-list-item to="/items/category/all">
@@ -62,6 +63,11 @@
         </span>
         <!-- Desktop menu -->
         <v-toolbar-items class="hidden-sm-and-down">
+          <div class="d-flex justify-start">
+            <v-btn icon to="/search">
+              <v-icon> mdi-magnify </v-icon>
+            </v-btn>
+          </div>
           <div v-if="!$store.state.loggedIn">
             <v-btn depressed rounded class="mr-2" id="login" to="/login">Log in</v-btn>
             <v-btn depressed rounded id="signup" to="/register">Sign Up</v-btn>
@@ -70,8 +76,14 @@
           <div v-if="$store.state.loggedIn">
             <v-menu text offset-y open-on-hover class="">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn class="justify-center mt-2" text rounded id="user" v-bind="attrs" v-on="on" :ripple="false">
-                  User &nbsp; <v-icon>mdi-menu-down</v-icon>
+                <v-btn icon id="user" v-bind="attrs" v-on="on" :ripple="false">
+                  <!-- <div class="d-flex justify-start"> -->
+                    <v-avatar size="40">
+                      <v-img
+                        src="https://repository-images.githubusercontent.com/130118224/a2c75780-e0a9-11eb-8494-3581a0b1c93b">
+                      </v-img>
+                    </v-avatar>
+                  <!-- </div>  &nbsp;-->
                 </v-btn>
               </template>
 
@@ -210,10 +222,8 @@
   }
 
   #user {
-    width: 140px;
-    height: 40px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
   }
 
   .v-menu__content {
